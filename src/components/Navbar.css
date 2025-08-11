@@ -171,6 +171,12 @@
   z-index: 1090;
 }
 
+/* Safe-area padding for notched devices */
+.navbar, .navbar-container { padding-left: max(2rem, env(safe-area-inset-left)); padding-right: max(2rem, env(safe-area-inset-right)); }
+@media (max-width: 1024px) { .navbar-container { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); } }
+@media (max-width: 768px) { .navbar-container { padding-left: max(0.75rem, env(safe-area-inset-left)); padding-right: max(0.75rem, env(safe-area-inset-right)); } }
+@media (max-width: 420px) { .navbar-container { padding-left: max(0.5rem, env(safe-area-inset-left)); padding-right: max(0.5rem, env(safe-area-inset-right)); } .mobile-menu { width: 88%; } }
+
 /* Responsive */
 @media (max-width: 1024px) {
   .navbar-container { padding: 0 1rem; }

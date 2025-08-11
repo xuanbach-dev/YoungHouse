@@ -344,19 +344,7 @@ const Home: React.FC = () => {
               <span>Cây xanh</span>
             </div>
             
-            <div className="amenity-item">
-              <div className="amenity-icon">
-                <Lightbulb size={24} />
-              </div>
-              <span>Toilet</span>
-            </div>
-            
-            <div className="amenity-item">
-              <div className="amenity-icon">
-                <Utensils size={24} />
-              </div>
-              <span>Phòng tắm</span>
-            </div>
+           
             
             <div className="amenity-item">
               <div className="amenity-icon">
@@ -379,19 +367,6 @@ const Home: React.FC = () => {
               <span>Bếp nấu ăn</span>
             </div>
             
-            <div className="amenity-item">
-              <div className="amenity-icon">
-                <Sofa size={24} />
-              </div>
-              <span>Kê ti vi</span>
-            </div>
-            
-            <div className="amenity-item">
-              <div className="amenity-icon">
-                <Briefcase size={24} />
-              </div>
-              <span>Bàn làm việc</span>
-            </div>
             
             <div className="amenity-item">
               <div className="amenity-icon">

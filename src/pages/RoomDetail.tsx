@@ -3,20 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, 
   MapPin, 
-  Calendar, 
-  Users, 
-  Wifi, 
-  AirVent, 
-  Fingerprint, 
-  Droplets,
   ChevronLeft,
   ChevronRight,
-  X,
   Phone as PhoneIcon,
-  Mail,
   Star,
-  Heart,
-  MessageCircle
+  Heart
 } from 'lucide-react';
 // import { roomsAPI } from '../services/api';
 import { Room } from '../types';
@@ -578,28 +569,129 @@ const RoomDetail: React.FC = () => {
             </div>
           </div>
 
-          {/* Amenities */}
-          <div className="room-amenities">
-            <h3>Tiện nghi</h3>
-            <div className="amenities-grid">
-              <div className="amenity-item">
-                <Wifi size={20} />
-                <span>WiFi từng phòng</span>
-              </div>
-              <div className="amenity-item">
-                <AirVent size={20} />
-                <span>Điều hòa</span>
-              </div>
-              <div className="amenity-item">
-                <Fingerprint size={20} />
-                <span>Vân tay toà nhà</span>
-              </div>
-              <div className="amenity-item">
-                <Droplets size={20} />
-                <span>Nóng lạnh</span>
-              </div>
-            </div>
+          {/* Offers */}
+          <div className="room-offers">
+            <h3>Ưu đãi</h3>
+            <ul className="offers-list">
+              <li>Hỗ trợ vận chuyển đồ miễn phí</li>
+              <li>Ưu đãi giảm tiền phòng 4–8% cho khách hàng</li>
+            </ul>
           </div>
+
+        
+          {room.BranchID === 1 && (
+            <div className="branch-intro">
+              <h3>Giới thiệu Young House 1</h3>
+              <ul>
+                <li>Vị trí rất thuận lợi cách trường FPT 3km, chỉ 7p di chuyển tới trường.</li>
+                <li>Tòa nhà 6 tầng với 69 phòng rộng thoáng, tất cả các phòng đều có ban công siêu rộng.</li>
+                <li>Chỗ để xe rộng 400m2, cửa khóa vân tay công nghệ cao – siêu an toàn.</li>
+                <li>Phòng rộng 25m² dạng gác xép, trang bị đầy đủ thiết bị nội thất giường tủ, bàn học, điều hòa, nóng lạnh, tủ lạnh, thiết bị vệ sinh cao cấp, tủ bếp nấu ăn,…</li>
+                <li>Internet tốc độ cao tới từng phòng.</li>
+                <li>Tiện ích tòa nhà: thang máy, khóa vân tay.</li>
+                <li>Hệ thống an ninh ra vào cửa bằng khóa vân tay. Hệ thống phòng cháy chữa cháy theo tiêu chuẩn và camera an ninh full tòa nhà.</li>
+              </ul>
+            </div>
+          )}
+
+        
+          {room.BranchID === 2 && (
+            <div className="branch-intro">
+              <h3>Giới thiệu Young House 2</h3>
+              <ul>
+                <li>Vị trí rất thuận lợi cách trường FPT 2km, chỉ 5p di chuyển tới trường.</li>
+                <li>Tòa nhà có 65 với nhiều dạng phòng cho khách hàng lựa chọn: Phòng 2 ngủ 1 khách, phòng Studio, Phòng đôi, phòng đơn. Chỗ để xe 2 tầng siêu rộng, mỗi tầng 150m2 với cửa khóa vân tay công nghệ cao – siêu an toàn.</li>
+                <li>Phòng rộng 20m-40m2 trang bị đầy đủ thiết bị nội thất giường tủ, bàn học, điều hòa, nóng lạnh,  thiết bị vs cao cấp, tủ bếp nấu ăn,…</li>
+                <li>Hệ thống phòng đều có ban công hoặc cửa sổ rất thoáng và hành lang cây xanh.</li>
+                <li>Internet tốc độ cao tới từng phòng.</li>
+                <li>Tiện ích tòa nhà: 2 thang máy, khóa vân tay, máy giặt free.</li>
+                <li>Hệ thống an ninh ra vào cửa bằng khóa vân tay. Hệ thống phòng cháy chữa cháy theo tiêu chuẩn và camera an ninh full tòa nhà.</li>
+                <li>Tiện ích xung quanh: có 2 sân chơi thể thao cỏ nhân tạo cạnh tòa nhà, khu tập thể thao công cộng, nhà thuốc, siêu thị.</li>
+              </ul>
+            </div>
+          )}
+
+          
+          {room.BranchID === 4 && (
+            <div className="branch-intro">
+              <h3>Giới thiệu Young House 4</h3>
+              <ul>
+                <li>Vị trí rất thuận lợi cách trường FPT 3,5km, thuận lợi tới trường bằng đường nội bộ khu công nghệ cao; nằm ngay gần hồ Tân Xã.</li>
+                <li>Tòa nhà có 3 tầng với 18 phòng cửa sổ thoáng mát. Chỗ để xe tầng 1 với cửa khóa vân tay an toàn và khu giặt phơi trên tầng 4.</li>
+                <li>Diện tích sử dụng phòng 16–20m². Nội thất gỗ đẹp và cao cấp, trang bị đầy đủ: giường tủ, bàn học, điều hòa, nóng lạnh, thiết bị vệ sinh cao cấp, tủ bếp nấu ăn,…</li>
+                <li>Hệ thống phòng đều có cửa sổ rất thoáng, view cửa sổ đẹp, hành lang cây xanh mát mẻ.</li>
+                <li>Internet tốc độ cao tới từng phòng.</li>
+                <li>Tiện ích tòa nhà: khóa vân tay, máy giặt free, để xe trong sân.</li>
+                <li>Hệ thống an ninh ra vào cửa bằng khóa vân tay. Hệ thống phòng cháy chữa cháy theo tiêu chuẩn và camera an ninh full tòa nhà.</li>
+                <li>Lợi ích: Vị trí giao thông đi lại thuận tiện, cách hồ Tân Xã 50m, phù hợp chạy bộ, thể thao, hóng gió…</li>
+                <li>Nhà xây mới tinh với trang thiết bị cao cấp.</li>
+              </ul>
+            </div>
+          )}
+
+          
+          {room.BranchID === 9 && (
+            <div className="branch-intro">
+              <h3>Giới thiệu Young House 9</h3>
+              <ul>
+                <li>Vị trí rất thuận lợi cách trường FPT 3,5km, chỉ 7p di chuyển tới trường.</li>
+                <li>Tòa nhà có 6 tầng với 39 phòng, đặc biệt tất cả các phòng đều có ban công rộng và thoáng. Có 2 tầng để xe siêu rộng, mỗi tầng 200m², có cửa khóa vân tay an toàn và khu giặt phơi trên tầng 6.</li>
+                <li>Phòng rộng 20–25m², trang bị đầy đủ thiết bị nội thất giường tủ, bàn học, điều hòa nóng lạnh, thiết bị vệ sinh cao cấp, tủ bếp nấu ăn,…</li>
+                <li>Internet tốc độ cao tới từng phòng.</li>
+                <li>Tiện ích tòa nhà: thang máy, khóa vân tay, máy giặt free.</li>
+                <li>Hệ thống an ninh ra vào cửa bằng khóa vân tay. Hệ thống phòng cháy chữa cháy theo tiêu chuẩn và camera an ninh full tòa nhà.</li>
+                <li>Tiện ích xung quanh: Cách điểm xe bus 200m, cách siêu thị Đức Thành 500m, gần quán ăn, nhà thuốc, cây xăng,…</li>
+              </ul>
+            </div>
+          )}
+
+         
+          {room.BranchID === 10 && (
+            <div className="branch-intro">
+              <h3>Giới thiệu Young House 10</h3>
+              <ul>
+                <li>Vị trí rất thuận lợi cách trường FPT 3km, chỉ 7p di chuyển tới trường.</li>
+                <li>Tòa nhà có 4 tầng với 29 phòng rộng thoáng.</li>
+                <li>Phòng rộng 20–25m², trang bị đầy đủ thiết bị nội thất giường tủ, bàn học, điều hòa, nóng lạnh, tủ bếp nấu ăn, thiết bị vệ sinh,…</li>
+                <li>Internet tốc độ cao tới từng phòng.</li>
+                <li>Tiện ích tòa nhà: khóa vân tay, máy giặt free.</li>
+                <li>Hệ thống an ninh ra vào cửa bằng khóa vân tay. Hệ thống phòng cháy chữa cháy theo tiêu chuẩn và camera an ninh full tòa nhà.</li>
+                <li>Tiện ích xung quanh: Khu thể thao công cộng, nhà thuốc, quán ăn, chợ.</li>
+              </ul>
+            </div>
+          )}
+
+          
+          {room.BranchID === 11 && (
+            <div className="branch-intro">
+              <h3>Giới thiệu Young House 11</h3>
+              <ul>
+                <li>Vị trí rất thuận lợi cách trường FPT 2km, chỉ 5p di chuyển tới trường.</li>
+                <li>Tòa nhà có 6 tầng với 34 phòng rộng thoáng.</li>
+                <li>Phòng rộng 25–30m², trang bị đầy đủ thiết bị nội thất: giường tủ, sofa, tủ lạnh, bàn học, điều hòa, nóng lạnh, thiết bị vệ sinh, bàn bếp nấu ăn.</li>
+                <li>Tiện ích tòa nhà: khóa vân tay, máy giặt free.</li>
+                <li>Hệ thống an ninh ra vào cửa bằng khóa vân tay. Hệ thống phòng cháy chữa cháy theo tiêu chuẩn và camera an ninh full tòa nhà.</li>
+                <li>Tiện ích xung quanh: khu thể thao công cộng, nhà thuốc, quán ăn, chợ.</li>
+              </ul>
+            </div>
+          )}
+
+          
+          {room.BranchID === 12 && (
+            <div className="branch-intro">
+              <h3>Giới thiệu Young House 12</h3>
+              <ul>
+                <li>Vị trí rất thuận lợi cách trường FPT 3km, chỉ 7p di chuyển tới trường.</li>
+                <li>Tòa nhà 6 tầng với 80 phòng rộng thoáng, tất cả các phòng đều có ban công siêu rộng.</li>
+                <li>Chỗ để xe rộng 400m², cửa khóa vân tay công nghệ cao – siêu an toàn.</li>
+                <li>Phòng rộng 30–40m² dạng gác xép, trang bị đầy đủ thiết bị nội thất: giường tủ, bàn học, điều hòa, nóng lạnh, tủ lạnh, thiết bị vệ sinh cao cấp, tủ bếp nấu ăn,…</li>
+                <li>Internet tốc độ cao tới từng phòng.</li>
+                <li>Tiện ích tòa nhà: thang máy, khóa vân tay.</li>
+                <li>Hệ thống an ninh ra vào cửa bằng khóa vân tay. Hệ thống phòng cháy chữa cháy theo tiêu chuẩn và camera an ninh full tòa nhà.</li>
+                <li>Tiện ích xung quanh: có 2 sân chơi thể thao cỏ nhân tạo cạnh tòa nhà, khu tập thể thao công cộng, nhà thuốc, siêu thị.</li>
+              </ul>
+            </div>
+          )}
 
           {/* Contact Methods moved to sidebar */}
         </div>
@@ -607,12 +699,9 @@ const RoomDetail: React.FC = () => {
         {/* Right sidebar: Contact card */}
         <aside className="contact-sidebar">
           <div className="contact-card-side">
-            <h3>Liên hệ</h3>
+            <h3>Liên hệ Xem phòng trực tiếp</h3>
             <div className="contact-actions">
-              <a className="contact-btn messenger" href="https://www.facebook.com/profile.php?id=100043274418628" target="_blank" rel="noreferrer">
-                <MessageCircle size={20} />
-                Messenger
-              </a>
+              
               <a className="contact-btn phone" href="tel:0372858098">
                 <PhoneIcon size={20} />
                 Gọi: 0372858098

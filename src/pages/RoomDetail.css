@@ -313,10 +313,34 @@
   }
   
   /* Room Details */
-  .room-details, .room-amenities, .contact-info {
+  .room-details, .room-amenities, .contact-info, .room-offers {
     margin-bottom: 32px;
   }
   
+.branch-intro {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 32px;
+}
+
+.branch-intro h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.branch-intro ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #444;
+}
+
+.branch-intro li { margin-bottom: 8px; line-height: 1.6; }
+
   .room-details h3, .room-amenities h3, .contact-info h3 {
     font-size: 20px;
     font-weight: 600;
@@ -335,21 +359,18 @@
   }
   
   /* Amenities */
-  .amenities-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-  }
-  
-  .amenity-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    color: #333;
-  }
+/* Offers */
+.offers-list {
+  margin: 0;
+  padding-left: 18px;
+  color: #333;
+  line-height: 1.6;
+}
+
+@media (max-width: 480px) {
+  .amenities-grid { gap: 8px; }
+  .amenity-item { padding: 6px 10px; gap: 6px; }
+}
   
   /* Contact */
   .contact-item {
@@ -461,6 +482,19 @@
   }
   
   @media (max-width: 768px) {
+    /* Make branch-intro full-bleed inside the card on tablet/mobile */
+    .branch-intro {
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+      border-left: 0;
+      border-right: 0;
+      border-radius: 0;
+      max-width: none;
+      width: auto;
+      overflow-x: hidden;
+    }
     .room-detail {
       padding: 16px;
     }
@@ -509,9 +543,29 @@
       width: 36px;
       height: 36px;
     }
+
+    /* Stack contact actions to single column for comfort */
+    .contact-actions { grid-template-columns: 1fr; }
+    .contact-sidebar { position: static; }
+    .contact-card-side { border-radius: 10px; }
   }
   
   @media (max-width: 480px) {
+    /* Adjust full-bleed offsets to match smaller card padding */
+    .branch-intro {
+      margin-left: -16px;
+      margin-right: -16px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .room-detail { padding: 12px; }
+    .room-info-container { gap: 16px; }
+    .room-main-info { padding: 16px; }
+    .room-header { gap: 12px; }
+    .room-title h1 { font-size: 20px; }
+    .room-location { font-size: 14px; }
+    .room-price .price { font-size: 24px; }
+    .main-image { height: 220px; }
     .thumbnail-gallery {
       grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
       gap: 8px;

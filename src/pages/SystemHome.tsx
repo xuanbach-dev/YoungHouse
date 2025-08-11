@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, MapPin, Calendar, Filter, Grid, List, ChevronDown } from 'lucide-react';
+import { Search, MapPin, Calendar, Filter, Grid, List, ChevronDown, X } from 'lucide-react';
 import { roomsAPI, branchesAPI } from '../services/api';
 import { Room, Branch } from '../types';
 import './SystemHome.css';
@@ -605,18 +605,18 @@ const SystemHome: React.FC = () => {
           <aside className={`filters-sidebar ${showFilters ? 'show' : ''}`}>
             <div className="filters-header">
               <h3>Tìm phòng trống</h3>
+              <button
+                type="button"
+                className="filters-close"
+                aria-label="Đóng bộ lọc"
+                onClick={() => setShowFilters(false)}
+              >
+                <X size={20} />
+              </button>
             </div>
 
             {/* Date Picker */}
-            <div className="filter-section">
-              <input
-                type="date"
-                value={checkInDate}
-                onChange={(e) => setCheckInDate(e.target.value)}
-                className="date-input"
-                placeholder="mm/dd/yyyy"
-              />
-            </div>
+            
 
             {/* Main Filter Section */}
             <div className="filter-section">
@@ -711,9 +711,13 @@ const SystemHome: React.FC = () => {
               </div>
             </div>
 
-            <button className="clear-filters" onClick={clearFilters}>
+            <button className="clear-filters desktop-only" onClick={clearFilters}>
               Xóa bỏ lọc
             </button>
+            <div className="filters-footer">
+              <button className="filters-footer__clear" onClick={clearFilters}>Xóa bỏ lọc</button>
+              <button className="filters-footer__apply" onClick={() => setShowFilters(false)}>Áp dụng</button>
+            </div>
           </aside>
 
           {/* Main Content */}
@@ -721,17 +725,11 @@ const SystemHome: React.FC = () => {
             <div className="results-header">
               <div className="results-info">
                 <h2>Tìm phòng trống</h2>
-                <p>Tổng cộng <strong>{filteredRooms.length}</strong> phòng trống</p>
+                <p>Còn <strong>{filteredRooms.length}</strong> dạng phòng trống</p>
               </div>
               
               <div className="view-controls">
-                <div className="sort-options">
-                  <span>Sắp xếp theo:</span>
-                  <button className="sort-btn active">Phòng trống</button>
-                  <button className="sort-btn">Danh sách</button>
-                  <button className="sort-btn">Lướt</button>
-                  <button className="sort-btn">Bản đồ</button>
-                </div>
+                
                 
                 <div className="view-mode">
                   <button 

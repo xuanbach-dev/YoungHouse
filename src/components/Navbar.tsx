@@ -15,6 +15,17 @@ const Navbar: React.FC = () => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      const previous = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = previous;
+      };
+    }
+  }, [isMenuOpen]);
+
   const handleLogout = () => {
     localStorage.removeItem('yh_admin_auth');
     setIsAdminAuthed(false);

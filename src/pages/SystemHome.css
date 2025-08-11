@@ -98,11 +98,40 @@
   overflow-y: auto;
 }
 
+.filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
 .filters-header h3 {
   font-size: 1.3rem;
   font-weight: 600;
   color: #333;
-  margin-bottom: 1.5rem;
+}
+
+.filters-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  color: #666;
+  cursor: pointer;
+}
+
+.filters-close:active {
+  background: #f3f4f6;
 }
 
 .filter-section {
@@ -289,6 +318,11 @@
   cursor: pointer;
   transition: background 0.3s ease;
 }
+.desktop-only { display: block; }
+
+.filters-footer {
+  display: none;
+}
 
 .clear-filters:hover {
   background: #555;
@@ -398,7 +432,7 @@
 /* Room Grid */
 .rooms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
 }
 
@@ -606,7 +640,7 @@
     border-radius: 0;
     max-height: none;
     overflow-y: auto;
-    padding: 2rem;
+    padding: 1rem 1rem 80px; /* leave space for sticky clear button */
   }
   
   .filters-sidebar.show {
@@ -616,6 +650,41 @@
   .mobile-filter-btn {
     display: flex;
   }
+
+  .desktop-only { display: none; }
+
+  .filters-footer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    background: white;
+    padding: 12px 8px 8px;
+    border-top: 1px solid #eee;
+  }
+
+  .filters-footer__clear {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+
+  .filters-footer__apply {
+    background: #2d7dd2;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+
+  .filters-close { display: inline-flex; }
   
   .results-header {
     flex-direction: column;
@@ -739,6 +808,10 @@
   .sort-options span {
     display: none;
   }
+
+  /* tighten spacing on very small devices */
+  .rooms-grid { gap: 0.75rem; }
+  .room-image { height: 180px; }
 }
 
   .branch-details {
