@@ -1,0 +1,695 @@
+.room-detail {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+  }
+  
+  .room-detail-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    color: #666;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .room-detail-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+  }
+  
+  .error-content {
+    text-align: center;
+    color: #666;
+  }
+  
+  .error-content h2 {
+    color: #dc3545;
+    margin-bottom: 16px;
+  }
+  
+  /* Header */
+  .room-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .back-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .back-button:hover {
+    background: #f8f9fa;
+    border-color: #007bff;
+    color: #007bff;
+  }
+  
+  .header-actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .favorite-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .favorite-button:hover {
+    border-color: #dc3545;
+    color: #dc3545;
+  }
+  
+  .favorite-button.active {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+  }
+  
+  /* Images */
+  .room-images {
+    max-width: 1200px;
+    margin: 0 auto 32px;
+  }
+  
+  .main-image-container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background: #f0f0f0;
+  }
+  
+  .main-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    cursor: pointer;
+    display: block;
+  }
+  
+  .image-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .image-nav:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  .image-nav.prev {
+    left: 16px;
+  }
+  
+  .image-nav.next {
+    right: 16px;
+  }
+  
+  .image-indicators {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+  }
+  
+  .indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .indicator.active {
+    background: white;
+  }
+  
+  .image-count {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+  }
+  
+  .thumbnail-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .thumbnail {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+  }
+  
+  .thumbnail:hover {
+    border-color: #007bff;
+  }
+  
+  .thumbnail.active {
+    border-color: #007bff;
+  }
+  
+  /* Room Info Container */
+  .room-info-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 32px;
+    align-items: start;
+  }
+  
+  .room-main-info {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .room-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    gap: 24px;
+  }
+  
+  .room-title h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+  }
+  
+  .room-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #ffc107;
+    font-size: 14px;
+  }
+  
+  .room-price {
+    text-align: right;
+  }
+  
+  .room-price .price {
+    font-size: 32px;
+    font-weight: 700;
+    color: #007bff;
+  }
+  
+  .room-price .period {
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .room-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+  
+  .room-status {
+    margin-bottom: 32px;
+  }
+  
+  .status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .status-badge.available {
+    background: #d4edda;
+    color: #155724;
+  }
+  
+  .status-badge.occupied {
+    background: #f8d7da;
+    color: #721c24;
+  }
+  
+  .status-badge.reserved {
+    background: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-badge.maintenance {
+    background: #e2e3e5;
+    color: #383d41;
+  }
+  
+  /* Room Details */
+  .room-details, .room-amenities, .contact-info {
+    margin-bottom: 32px;
+  }
+  
+  .room-details h3, .room-amenities h3, .contact-info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  .detail-item {
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  
+  .detail-item strong {
+    color: #333;
+    margin-right: 8px;
+  }
+  
+  /* Amenities */
+  .amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  
+  .amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    color: #333;
+  }
+  
+  /* Contact */
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+  
+
+  
+  /* Image Modal */
+  .image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  
+  .modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  
+  .modal-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .modal-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .modal-nav.prev {
+    left: -80px;
+  }
+  
+  .modal-nav.next {
+    right: -80px;
+  }
+  
+  .modal-counter {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .room-info-container {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    
+
+  }
+  
+  @media (max-width: 768px) {
+    .room-detail {
+      padding: 16px;
+    }
+    
+    .room-main-info {
+      padding: 20px;
+    }
+    
+    .room-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    
+    .room-title h1 {
+      font-size: 24px;
+    }
+    
+    .room-price .price {
+      font-size: 28px;
+    }
+    
+    .main-image {
+      height: 250px;
+    }
+    
+    .amenities-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .date-inputs {
+      gap: 12px;
+    }
+    
+    .modal-nav.prev {
+      left: -60px;
+    }
+    
+    .modal-nav.next {
+      right: -60px;
+    }
+    
+    .modal-close {
+      top: -40px;
+      right: -40px;
+      width: 36px;
+      height: 36px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .thumbnail-gallery {
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 8px;
+    }
+    
+    .thumbnail {
+      height: 60px;
+    }
+    
+    .modal-nav {
+      width: 44px;
+      height: 44px;
+    }
+    
+    .modal-nav.prev {
+      left: 10px;
+    }
+    
+    .modal-nav.next {
+      right: 10px;
+    }
+    
+    .modal-close {
+      top: 10px;
+      right: 10px;
+    }
+  }
+
+
+
+  /* Fee Period Styling */
+  .fee-period {
+    color: #666;
+    font-weight: normal;
+    font-size: 0.9em;
+    margin-left: 4px;
+  }
+
+  /* Viewing Appointment Section */
+  .viewing-appointment-section {
+    margin-top: 1.5rem;
+  }
+
+  .viewing-appointment-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+  }
+
+  .viewing-appointment-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .viewing-appointment-header h3 {
+    color: #333;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .viewing-appointment-header p {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .viewing-appointment-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .appointment-benefits {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .benefit-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    text-align: center;
+  }
+
+  .benefit-item svg {
+    color: #28a745;
+    background: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .benefit-item span {
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .viewing-appointment-button {
+    width: 100%;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+  }
+
+  .viewing-appointment-button:hover {
+    background: linear-gradient(135deg, #218838, #1db584);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+  }
+
+  .viewing-appointment-button:active {
+    transform: translateY(0);
+  }
+
+  .appointment-note {
+    text-align: center;
+    color: #666;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .appointment-note small {
+    display: block;
+  }
+
+  /* Mobile responsiveness for viewing appointment */
+  @media (max-width: 768px) {
+    .appointment-benefits {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .benefit-item {
+      flex-direction: row;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .benefit-item svg {
+      width: 32px;
+      height: 32px;
+      padding: 0.4rem;
+    }
+
+    .viewing-appointment-card {
+      padding: 1rem;
+    }
+  }
+
+.contact-section { margin-top: 24px; }
+.contact-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+.contact-btn { display: flex; align-items: center; gap: 8px; justify-content: center; background: #f3f4f6; color: #111; text-decoration: none; padding: 12px; border-radius: 10px; border: 1px solid #eee; font-weight: 600; transition: transform .15s ease, box-shadow .15s ease; }
+.contact-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 12px rgba(0,0,0,.06); }
+.contact-btn.messenger { background: #eef3ff; color: #1b4fc9; }
+.contact-btn.phone { background: #eefaf3; color: #0f7a3a; }
+.contact-btn.zalo { background: #e6f2ff; color: #0b64d4; }
+
+.contact-sidebar { position: sticky; top: 80px; }
+.contact-card-side { background: #fff; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.06); padding: 16px; }
+.contact-card-side h3 { margin-top: 0; margin-bottom: 10px; }
+.contact-note { margin-top: 8px; color: #666; font-size: 0.9rem; }
+
+@media (max-width: 1024px) {
+  .contact-sidebar { position: static; }
+}
