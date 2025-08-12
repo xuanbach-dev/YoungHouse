@@ -367,7 +367,7 @@ const RoomDetail: React.FC = () => {
 
     if (branchId === 5) {
       // Available images: 1-10, 12, 13 (no 11)
-      const available = [1,2,3,4,5,6,7,8,9,10,12,13];
+      const available = [1,2,8,9,10,12,13];
       for (const i of available) {
         images.push(`/rooms/branch-5/Type15/branch5-${i}.jpg`);
       }
@@ -686,7 +686,7 @@ const RoomDetail: React.FC = () => {
               </div>
             )}
             <div className="detail-item">
-              <strong>Giá dịch vụ:</strong> {formatPrice(getServiceFee(room))}<span className="fee-period">/tháng</span>
+              <strong>Giá dịch vụ:</strong> {formatPrice(getServiceFee(room))}<span className="fee-period">/người/tháng</span>
             </div>
             <div className="detail-item">
               <strong>Giá điện:</strong> {formatPrice(getElectricityFee(room))}<span className="fee-period">/số</span>
@@ -699,6 +699,7 @@ const RoomDetail: React.FC = () => {
             <ul className="offers-list">
               <li>Hỗ trợ vận chuyển đồ miễn phí</li>
               <li>Ưu đãi giảm tiền phòng 4–8% cho khách hàng</li>
+              <li>Tặng 10 suất ăn miễn phí tại Young Food and Drink (các món Á , Âu và Pizza)</li>
             </ul>
           </div>
 
