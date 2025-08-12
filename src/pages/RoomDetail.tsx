@@ -231,6 +231,66 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
       RoomTypeID: 13,
       roomTypeId: 13
+    },{
+      RoomID: 11,
+      roomId: 11,
+      RoomNumber: 'Young House 5',
+      roomNumber: 'Young House 5',
+      BranchID: 5,
+      branchId: 5,
+      BranchName: 'Young House 5',
+      branchName: 'Young House 14',
+      TypeName: 'Giường đôi có ban công thoáng',
+      typeName: 'Giường đôi có ban công thoáng',
+      Price: 2000000,
+      price: 2000000,
+      Status: 'Available',
+      isAvailable: true,
+      Address: '23 Mục Uyên – Công nghệ - Tân Xã',
+      City: 'Hà Nội',
+      Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+      RoomTypeID: 15,
+      roomTypeId: 15
+    },{
+      RoomID: 12,
+      roomId: 12,
+      RoomNumber: 'Young House 7',
+      roomNumber: 'Young House 7',
+      BranchID: 7,
+      branchId: 7,
+      BranchName: 'Young House 7',
+      branchName: 'Young House 7',
+      TypeName: 'Giường đôi có ban công thoáng',
+      typeName: 'Giường đôi có ban công thoáng',
+      Price: 2400000,
+      price: 2400000,
+      Status: 'Available',
+      isAvailable: true,
+      Address: 'Đối diện THPT Hai Bà Trưng - Tân Xã',
+      City: 'Hà Nội',
+      Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+      RoomTypeID: 16,
+      roomTypeId: 16
+    },{
+      RoomID: 13,
+      roomId: 13,
+      RoomNumber: 'Young House 8',
+      roomNumber: 'Young House 8',
+      BranchID: 8,
+      branchId: 8,
+      BranchName: 'Young House 8',
+      branchName: 'Young House 8',
+      TypeName: 'Giường gác xép có ban công thoáng',
+      typeName: 'Giường gác xép có ban công thoáng',
+      Price: 2200000,
+      price: 2200000,
+      Status: 'Available',
+      isAvailable: true,
+      Address: ' 41 Mục Uyên 1, xã Tân Xã',
+      City: 'Hà Nội',
+      Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+      RoomTypeID: 17,
+      roomTypeId: 17
     }
   ];
   
@@ -269,6 +329,20 @@ const RoomDetail: React.FC = () => {
       return images;
     }
 
+    if (branchId === 7) {
+      for (let i = 1; i <= 6; i++) {
+        images.push(`/rooms/branch-7/Type16/branch7-${i}.png`);
+      }
+      return images;
+    }
+
+    if (branchId === 8) {
+      for (let i = 1; i <= 6; i++) {
+        images.push(`/rooms/branch-8/Type17/branch8-${i}.jpg`);
+      }
+      return images;
+    }
+
     if (branchId === 9) {
       // 9 images, last two are .JPG; start with .jpg
       for (let i = 1; i <= 9; i++) {
@@ -288,6 +362,15 @@ const RoomDetail: React.FC = () => {
       images.push(`/rooms/branch-10/Type11/branch10-6.jpg`);
       // alt underscore variant for index 2 as fallback via onError
       images.splice(2, 0, `/rooms/branch-10/Type11/branch10_2.jpg`);
+      return images;
+    }
+
+    if (branchId === 5) {
+      // Available images: 1-10, 12, 13 (no 11)
+      const available = [1,2,3,4,5,6,7,8,9,10,12,13];
+      for (const i of available) {
+        images.push(`/rooms/branch-5/Type15/branch5-${i}.jpg`);
+      }
       return images;
     }
 
@@ -312,8 +395,8 @@ const RoomDetail: React.FC = () => {
       return images;
     }
 
-    // Fallback
-    images.push('/placeholder.png');
+    // Fallback to a known valid image (avoid placeholder)
+    images.push('/rooms/branch-1/Type1/branch1-1.jpg');
     return images;
   };
 
@@ -399,8 +482,28 @@ const RoomDetail: React.FC = () => {
       setImageAttempts(prev => ({ ...prev, [index]: attempt }));
       setImages(prev => prev.map((s, i) => (i === index ? nextSrc : s)));
     } else {
-      // Give up: set to a simple placeholder
-      setImages(prev => prev.map((s, i) => (i === index ? '/placeholder.png' : s)));
+      // Give up: set to a safe known image per branch (avoid placeholder)
+      const branchId = room?.BranchID || (room as any)?.branchId;
+      const safeSrc = branchId === 10
+        ? '/rooms/branch-10/Type11/branch10-1.jpg'
+        : branchId === 1
+          ? '/rooms/branch-1/Type1/branch1-1.jpg'
+          : branchId === 4
+            ? '/rooms/branch-4/Type12/branch4-1.jpg'
+            : branchId === 7
+              ? '/rooms/branch-7/Type16/branch7-1.png'
+              : branchId === 8
+                ? '/rooms/branch-8/Type17/branch8-1.jpg'
+                : branchId === 9
+                  ? '/rooms/branch-9/Type10/branch9-1.jpg'
+                  : branchId === 11
+                    ? '/rooms/branch-11/Type8/branch11-1.jpg'
+                    : branchId === 12
+                      ? '/rooms/branch-12/Type7/branch12-1.jpg'
+                      : branchId === 14
+                        ? '/rooms/branch-14/Type13/branch14-1.png'
+                        : '/rooms/branch-1/Type1/branch1-1.jpg';
+      setImages(prev => prev.map((s, i) => (i === index ? safeSrc : s)));
     }
   };
 
@@ -450,13 +553,34 @@ const RoomDetail: React.FC = () => {
       {/* Image Gallery */}
       <div className="room-images">
         <div className="main-image-container">
-          <img 
-            src={images[currentImageIndex]} 
-            alt={`${room.BranchName} - Phòng ${room.RoomNumber}`}
-            className="main-image"
-            onClick={() => setShowImageModal(true)}
-            onError={handleImageError(currentImageIndex)}
-          />
+          {((room.BranchID || (room as any).branchId) === 5) ? (
+            (() => {
+              const current = images[currentImageIndex] || '';
+              const webp = current.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.webp';
+              return (
+                <picture>
+                  <source srcSet={webp} type="image/webp" />
+                  <img 
+                    src={current}
+                    alt={`${room.BranchName} - Phòng ${room.RoomNumber}`}
+                    className="main-image"
+                    loading="eager"
+                    decoding="async"
+                    onClick={() => setShowImageModal(true)}
+                    onError={handleImageError(currentImageIndex)}
+                  />
+                </picture>
+              );
+            })()
+          ) : (
+            <img 
+              src={images[currentImageIndex]} 
+              alt={`${room.BranchName} - Phòng ${room.RoomNumber}`}
+              className="main-image"
+              onClick={() => setShowImageModal(true)}
+              onError={handleImageError(currentImageIndex)}
+            />
+          )}
           
           {images.length > 1 && (
             <>
@@ -625,6 +749,37 @@ const RoomDetail: React.FC = () => {
                 <li>Hệ thống an ninh ra vào cửa bằng khóa vân tay. Hệ thống phòng cháy chữa cháy theo tiêu chuẩn và camera an ninh full tòa nhà.</li>
                 <li>Lợi ích: Vị trí giao thông đi lại thuận tiện, cách hồ Tân Xã 50m, phù hợp chạy bộ, thể thao, hóng gió…</li>
                 <li>Nhà xây mới tinh với trang thiết bị cao cấp.</li>
+              </ul>
+            </div>
+          )}
+
+          {room.BranchID === 8 && (
+            <div className="branch-intro">
+              <h3>Giới thiệu Young House 8</h3>
+              <ul>
+                <li>Vị trí rất thuận lợi cách trường FPT 3km, chỉ 7p di chuyển tới trường.</li>
+                <li>Tòa nhà 6 tầng với 69 phòng rộng thoáng, tất cả các phòng đều có ban công siêu rộng.</li>
+                <li>Chỗ để xe rộng 400m2, cửa khóa vân tay công nghệ cao – siêu an toàn.</li>
+                <li>Phòng rộng 25m dạng gác xép, trang bị đầy đủ thiết bị nội thất giường tủ, bàn học, điều hòa, nóng lạnh, tủ lạnh, thiết bị vệ sinh cao cấp, tủ bếp nấu ăn,…</li>
+                <li>Internet tốc độ cao tới từng phòng.</li>
+                <li>Tiện ích tòa nhà: thang máy, khóa vân tay.</li>
+                <li>Hệ thống an ninh ra vào cửa bằng khóa vân tay. Hệ thống phòng cháy chữa cháy theo tiêu chuẩn và camera an ninh full tòa nhà.</li>
+                <li>Tiện ích xung quanh: Khu tập thể thao công cộng, nhà thuốc, siêu thị.</li>
+              </ul>
+            </div>
+          )}
+
+          {room.BranchID === 5 && (
+            <div className="branch-intro">
+              <h3>Giới thiệu Young House 5</h3>
+              <ul>
+                <li>Vị trí rất thuận lợi cách trường FPT 3km, chỉ 5p có thể tới trường bằng đường nội bộ khu công nghệ cao rộng thoáng an toàn.</li>
+                <li>Tòa nhà có 8 tầng với 46 phòng rộng thoáng. Chỗ để xe tầng 1 siêu rộng với cửa khóa vân tay an toàn và khu giặt phơi trên tầng 7.</li>
+                <li>Phòng rộng 18m-30m với nhiều dạng phòng: Giường đơn, giường đôi, phòng cho nhóm bạn 3-4 người, phòng gác xép (trang bị đầy đủ thiết tủ lạnh, bếp từ, bàn học, điều hòa, nóng lạnh, thiết bị vệ sinh cao cấp, tủ bếp nấu ăn).</li>
+                <li>Hệ thống phòng đều có cửa sổ rất thoáng và hành lang cây xanh.</li>
+                <li>Internet tốc độ cao tới từng phòng.</li>
+                <li>Tiện ích tòa nhà: thang máy, khóa vân tay, máy giặt free.</li>
+                <li>Hệ thống an ninh ra vào cửa bằng khóa vân tay. Hệ thống phòng cháy chữa cháy theo tiêu chuẩn và camera an ninh full tòa nhà.</li>
               </ul>
             </div>
           )}

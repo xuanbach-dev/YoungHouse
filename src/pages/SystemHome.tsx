@@ -42,7 +42,7 @@ const SystemHome: React.FC = () => {
 
   // Available areas and their corresponding branch IDs
   const availableAreas = [
-    { name: 'Tân Xã', branchIds: [1,4] }, // Young House 1, Young House 2
+    { name: 'Tân Xã', branchIds: [1,4,5,7,8] }, // Young House 1, Young House 2
     { name: 'Phú Hữu', branchIds: [2,11, 12, 14] }, // Young House 4, Young House 9, Young House 10
     { name: 'Bình Yên', branchIds: [9,10] } // Young House 11, Young House 12, Young House 14
   ];
@@ -373,6 +373,66 @@ const SystemHome: React.FC = () => {
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
           RoomTypeID: 13,
           roomTypeId: 13
+        },{
+          RoomID: 11,
+          roomId: 11,
+          RoomNumber: 'Young House 5',
+          roomNumber: 'Young House 5',
+          BranchID: 5,
+          branchId: 5,
+          BranchName: 'Young House 5',
+          branchName: 'Young House 5',
+          TypeName: 'Giường đôi có ban công thoáng',
+          typeName: 'Giường đôi có ban công thoáng',
+          Price: 2000000,
+          price: 2000000,
+          Status: 'Available',
+          isAvailable: true,
+          Address: '23 Mục Uyên – Công nghệ - Tân Xã',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+          RoomTypeID: 15,
+          roomTypeId: 15
+        },{
+          RoomID: 12,
+          roomId: 12,
+          RoomNumber: 'Young House 7',
+          roomNumber: 'Young House 7',
+          BranchID: 7,
+          branchId: 7,
+          BranchName: 'Young House 7',
+          branchName: 'Young House 7',
+          TypeName: 'Giường đôi có ban công thoáng',
+          typeName: 'Giường đôi có ban công thoáng',
+          Price: 2400000,
+          price: 2400000,
+          Status: 'Available',
+          isAvailable: true,
+          Address: 'Đối diện THPT Hai Bà Trưng - Tân Xã',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+          RoomTypeID: 16,
+          roomTypeId: 16
+        },{
+          RoomID: 13,
+          roomId: 13,
+          RoomNumber: 'Young House 8',
+          roomNumber: 'Young House 8',
+          BranchID: 8,
+          branchId: 8,
+          BranchName: 'Young House 8',
+          branchName: 'Young House 8',
+          TypeName: 'Giường gác xép có ban công thoáng',
+          typeName: 'Giường gác xép có ban công thoáng',
+          Price: 2200000,
+          price: 2200000,
+          Status: 'Available',
+          isAvailable: true,
+          Address: ' 41 Mục Uyên 1, xã Tân Xã',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+          RoomTypeID: 17,
+          roomTypeId: 17
         }
         // Add more rooms as needed
       ];
@@ -523,6 +583,12 @@ const SystemHome: React.FC = () => {
             const i = Math.floor(Math.random() * 9) + 1;
             return `/rooms/branch-1/Type1/branch1-${i}.${i === 9 ? 'JPG' : 'jpg'}`;
           }
+          case 5: {
+            // Available images: 1-10, 12, 13 (no 11)
+            const candidates = [1,2,3,4,5,6,7,8,9,10,12,13];
+            const i = candidates[Math.floor(Math.random() * candidates.length)];
+            return `/rooms/branch-5/Type15/branch5-${i}.jpg`;
+          }
           case 2: {
             const typeId = (room.RoomTypeID ?? (room as any).roomTypeId) as number | undefined;
             if (typeId === 5) {
@@ -541,6 +607,14 @@ const SystemHome: React.FC = () => {
           case 4: {
             const i = Math.floor(Math.random() * 6) + 1;
             return `/rooms/branch-4/Type12/branch4-${i}.jpg`;
+          }
+          case 7: {
+            const i = Math.floor(Math.random() * 6) + 1;
+            return `/rooms/branch-7/Type16/branch7-${i}.png`;
+          }
+          case 8: {
+            const i = Math.floor(Math.random() * 6) + 1;
+            return `/rooms/branch-8/Type17/branch8-${i}.jpg`;
           }
           case 9: {
             const i = Math.floor(Math.random() * 9) + 1;
@@ -778,47 +852,92 @@ const SystemHome: React.FC = () => {
                     style={{ cursor: 'pointer' }}
                   >
                     <div className="room-image">
-                      <img 
-                        src={getImagePath(room, viewMode === 'grid' ? 'medium' : 'large')} 
-                        alt={`${room.BranchName} - Phòng ${room.RoomNumber}`}
-                        loading="lazy"
-                        onLoad={(e) => {
-                          // Image loaded successfully
-                          const imgElement = e.currentTarget;
-                          console.log('Image loaded successfully:', getImagePath(room, viewMode === 'grid' ? 'medium' : 'large'));
-                          if (imgElement) {
-                            imgElement.style.opacity = '1';
-                          }
-                        }}
-                        onError={(e) => {
-                          const imgElement = e.currentTarget;
-                          const parentElement = imgElement.parentElement;
-                          console.error('Image failed to load:', getImagePath(room, viewMode === 'grid' ? 'medium' : 'large'));
-                          
-                          if (imgElement && parentElement) {
-                            // Hide the broken image
-                            imgElement.style.display = 'none';
-                            
-                            // Set background and content for parent
-                            parentElement.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
-                            parentElement.innerHTML = `
-                              <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:0.9rem;text-align:center;">
-                                <div>
-                                  <div>Phòng ${room.RoomNumber}</div>
-                                  <div style="font-size:0.8rem;margin-top:4px;">(${room.BranchName})</div>
+                      {((room.BranchID || (room as any).branchId) === 5) ? (
+                        (() => {
+                          const base = getImagePath(room, viewMode === 'grid' ? 'thumbnail' : 'large');
+                          const webp = viewMode === 'grid'
+                            ? base.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.webp'
+                            : base.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.webp';
+                          const jpg = viewMode === 'grid'
+                            ? base.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg'
+                            : base;
+                          return (
+                            <picture>
+                              <source srcSet={webp} type="image/webp" />
+                              <img
+                                src={jpg}
+                                alt={`${room.BranchName} - Phòng ${room.RoomNumber}`}
+                                loading="lazy"
+                                decoding="async"
+                                onLoad={(e) => {
+                                  const imgElement = e.currentTarget as HTMLImageElement;
+                                  if (imgElement) {
+                                    imgElement.style.opacity = '1';
+                                  }
+                                }}
+                                onError={(e) => {
+                                  const imgElement = e.currentTarget as HTMLImageElement;
+                                  const parentElement = imgElement.parentElement as HTMLElement | null;
+                                  if (imgElement && parentElement) {
+                                    imgElement.style.display = 'none';
+                                    parentElement.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
+                                    parentElement.innerHTML = `
+                                      <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:0.9rem;text-align:center;">
+                                        <div>
+                                          <div>Phòng ${room.RoomNumber}</div>
+                                          <div style=\"font-size:0.8rem;margin-top:4px;\">(${room.BranchName})</div>
+                                        </div>
+                                      </div>
+                                    `;
+                                  }
+                                }}
+                                style={{
+                                  opacity: 1,
+                                  transition: 'opacity 0.3s ease',
+                                  width: '100%',
+                                  height: '200px',
+                                  objectFit: 'cover'
+                                }}
+                              />
+                            </picture>
+                          );
+                        })()
+                      ) : (
+                        <img 
+                          src={getImagePath(room, viewMode === 'grid' ? 'medium' : 'large')} 
+                          alt={`${room.BranchName} - Phòng ${room.RoomNumber}`}
+                          loading="lazy"
+                          onLoad={(e) => {
+                            const imgElement = e.currentTarget;
+                            if (imgElement) {
+                              imgElement.style.opacity = '1';
+                            }
+                          }}
+                          onError={(e) => {
+                            const imgElement = e.currentTarget;
+                            const parentElement = imgElement.parentElement;
+                            if (imgElement && parentElement) {
+                              imgElement.style.display = 'none';
+                              parentElement.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
+                              parentElement.innerHTML = `
+                                <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:0.9rem;text-align:center;">
+                                  <div>
+                                    <div>Phòng ${room.RoomNumber}</div>
+                                    <div style="font-size:0.8rem;margin-top:4px;">(${room.BranchName})</div>
+                                  </div>
                                 </div>
-                              </div>
-                            `;
-                          }
-                        }}
-                        style={{ 
-                          opacity: 1, // Changed from 0 to 1 để hiển thị ngay
-                          transition: 'opacity 0.3s ease',
-                          width: '100%',
-                          height: '200px',
-                          objectFit: 'cover'
-                        }}
-                      />
+                              `;
+                            }
+                          }}
+                          style={{ 
+                            opacity: 1,
+                            transition: 'opacity 0.3s ease',
+                            width: '100%',
+                            height: '200px',
+                            objectFit: 'cover'
+                          }}
+                        />
+                      )}
                       <div className="availability-badge">
                         {room.Status === 'Available' ? 'Còn trống' : 
                          room.Status === 'Occupied' ? 'Đã thuê' :

@@ -6,13 +6,6 @@ import { Search, MapPin, Calendar, DollarSign, Eye, Loader2, Leaf, Lightbulb, Ut
 import ViewingAppointmentForm from '../components/ViewingAppointmentForm';
 import './Home.css';
 
-interface Branch {
-  BranchID: number;
-  BranchName: string;
-  Address: string;
-  City: string;
-}
-
 interface RoomType {
   RoomTypeID: number;
   TypeName: string;
@@ -28,10 +21,9 @@ const Home: React.FC = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [branches, setBranches] = useState<Branch[]>([]);
   const [roomTypes, setRoomTypes] = useState<RoomType[]>([]);
   const [searchForm, setSearchForm] = useState({
-    branchId: '',
+    area: '',
     roomTypeId: '',
     priceRange: '',
     status: 'Available'
@@ -41,7 +33,6 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     fetchPosts();
-    initBranches();
     initRoomTypes();
     initRooms();
   }, []);
@@ -59,20 +50,12 @@ const Home: React.FC = () => {
     }
   };
 
-  // Initialize local branches and room types (no API)
-  const initBranches = () => {
-    const localBranches: Branch[] = [
-      { BranchID: 1, BranchName: 'Young House 1', Address: '57 đường Xóm Quán – H10, xã Tân Xã', City: 'Hà Nội' },
-      { BranchID: 2, BranchName: 'Young House 2', Address: '64 Phú Hữu, xã Tân Xã', City: 'Hà Nội' },
-      { BranchID: 4, BranchName: 'Young House 4', Address: '85 Mục Uyên – Công Nghệ, Tân Xã', City: 'Hà Nội' },
-      { BranchID: 9, BranchName: 'Young House 9', Address: 'Bình Yên', City: 'Hà Nội' },
-      { BranchID: 10, BranchName: 'Young House 10', Address: 'Bình Yên', City: 'Hà Nội' },
-      { BranchID: 11, BranchName: 'Young House 11', Address: 'Phú Hữu', City: 'Hà Nội' },
-      { BranchID: 12, BranchName: 'Young House 12', Address: 'Phú Hữu', City: 'Hà Nội' },
-      { BranchID: 14, BranchName: 'Young House 14', Address: 'Phú Hữu', City: 'Hà Nội' },
-    ];
-    setBranches(localBranches);
-  };
+  // Available areas and their corresponding branch IDs
+  const availableAreas = [
+    { name: 'Tân Xã', branchIds: [1, 4, 5, 7, 8] },
+    { name: 'Phú Hữu', branchIds: [2, 11, 12, 14] },
+    { name: 'Bình Yên', branchIds: [9, 10] }
+  ];
 
   const initRoomTypes = () => {
     const localRoomTypes: RoomType[] = [
@@ -93,16 +76,20 @@ const Home: React.FC = () => {
   const initRooms = () => {
     // Local mock rooms aligned with SystemHome mapping
     const localRooms: Room[] = [
-      { RoomID: 1, roomId: 1, RoomNumber: '101', roomNumber: '101', BranchID: 1, branchId: 1, BranchName: 'Young House 1', branchName: 'Young House 1', TypeName: 'Giường đôi', typeName: 'Giường đôi', Price: 2200000, price: 2200000, Status: 'Available', isAvailable: true, Address: '57 đường Xóm Quán – H10, xã Tân Xã', address: '57 đường Xóm Quán – H10, xã Tân Xã', City: 'Hà Nội', RoomTypeID: 1, roomTypeId: 1 },
-      { RoomID: 2, roomId: 2, RoomNumber: '201', roomNumber: '201', BranchID: 2, branchId: 2, BranchName: 'Young House 2', branchName: 'Young House 2', TypeName: 'Giường đôi căn góc thoáng', typeName: 'Giường đôi căn góc thoáng', Price: 2600000, price: 2600000, Status: 'Available', isAvailable: true, Address: '64 Phú Hữu, xã Tân Xã', address: '64 Phú Hữu, xã Tân Xã', City: 'Hà Nội', RoomTypeID: 5, roomTypeId: 5 },
-      { RoomID: 3, roomId: 3, RoomNumber: '202', roomNumber: '202', BranchID: 2, branchId: 2, BranchName: 'Young House 2', branchName: 'Young House 2', TypeName: '2 giường đơn có ban công', typeName: '2 giường đơn có ban công', Price: 2600000, price: 2600000, Status: 'Available', isAvailable: true, Address: '64 Phú Hữu, xã Tân Xã', address: '64 Phú Hữu, xã Tân Xã', City: 'Hà Nội', RoomTypeID: 3, roomTypeId: 3 },
-      { RoomID: 4, roomId: 4, RoomNumber: '203', roomNumber: '203', BranchID: 2, branchId: 2, BranchName: 'Young House 2', branchName: 'Young House 2', TypeName: '2 giường đơn có giếng trời', typeName: '2 giường đơn có giếng trời', Price: 2400000, price: 2400000, Status: 'Available', isAvailable: true, Address: '64 Phú Hữu, xã Tân Xã', address: '64 Phú Hữu, xã Tân Xã', City: 'Hà Nội', RoomTypeID: 4, roomTypeId: 4 },
-      { RoomID: 5, roomId: 5, RoomNumber: '301', roomNumber: '301', BranchID: 4, branchId: 4, BranchName: 'Young House 4', branchName: 'Young House 4', TypeName: 'Giường đôi có hành lang view hồ Tân Xã', typeName: 'Giường đôi có hành lang view hồ Tân Xã', Price: 2200000, price: 2200000, Status: 'Available', isAvailable: true, Address: '85 Mục Uyên – Công Nghệ, Tân Xã ', address: '85 Mục Uyên – Công Nghệ, Tân Xã ', City: 'Hà Nội', RoomTypeID: 12, roomTypeId: 12 },
-      { RoomID: 6, roomId: 6, RoomNumber: '401', roomNumber: '401', BranchID: 9, branchId: 9, BranchName: 'Young House 9', branchName: 'Young House 9', TypeName: 'Giường đôi có ban công thoáng', typeName: 'Giường đôi có ban công thoáng', Price: 1800000, price: 1800000, Status: 'Available', isAvailable: true, Address: 'Bình Yên', address: 'Bình Yên', City: 'Hà Nội', RoomTypeID: 10, roomTypeId: 10 },
-      { RoomID: 7, roomId: 7, RoomNumber: '402', roomNumber: '402', BranchID: 10, branchId: 10, BranchName: 'Young House 10', branchName: 'Young House 10', TypeName: 'Giường đôi', typeName: 'Giường đôi', Price: 1500000, price: 1500000, Status: 'Available', isAvailable: true, Address: 'Bình Yên', address: 'Bình Yên', City: 'Hà Nội', RoomTypeID: 11, roomTypeId: 11 },
-      { RoomID: 8, roomId: 8, RoomNumber: '501', roomNumber: '501', BranchID: 11, branchId: 11, BranchName: 'Young House 11', branchName: 'Young House 11', TypeName: 'Giường gác xép có ban công thoáng', typeName: 'Giường gác xép có ban công thoáng', Price: 2500000, price: 2500000, Status: 'Available', isAvailable: true, Address: 'Phú Hữu', address: 'Phú Hữu', City: 'Hà Nội', RoomTypeID: 8, roomTypeId: 8 },
-      { RoomID: 9, roomId: 9, RoomNumber: '601', roomNumber: '601', BranchID: 12, branchId: 12, BranchName: 'Young House 12', branchName: 'Young House 12', TypeName: 'Giường gác xép có ban công thoáng', typeName: 'Giường gác xép có ban công thoáng', Price: 2500000, price: 2500000, Status: 'Available', isAvailable: true, Address: 'Phú Hữu', address: 'Phú Hữu', City: 'Hà Nội', RoomTypeID: 7, roomTypeId: 7 },
-      { RoomID: 10, roomId: 10, RoomNumber: '701', roomNumber: '701', BranchID: 14, branchId: 14, BranchName: 'Young House 14', branchName: 'Young House 14', TypeName: 'Giường gác xép có cửa sổ thoáng', typeName: 'Giường gác xép có cửa sổ thoáng', Price: 1700000, price: 1700000, Status: 'Available', isAvailable: true, Address: 'Phú Hữu', address: 'Phú Hữu', City: 'Hà Nội', RoomTypeID: 13, roomTypeId: 13 },
+      { RoomID: 1, roomId: 1, roomNumber: '101', BranchID: 1, branchId: 1, BranchName: 'Young House 1', branchName: 'Young House 1', TypeName: 'Giường đôi', typeName: 'Giường đôi', Price: 2200000, price: 2200000, Status: 'Available', isAvailable: true, Address: '57 đường Xóm Quán – H10, xã Tân Xã', address: '57 đường Xóm Quán – H10, xã Tân Xã', City: 'Hà Nội', RoomTypeID: 1, roomTypeId: 1 },
+      { RoomID: 2, roomId: 2, roomNumber: '201', BranchID: 2, branchId: 2, BranchName: 'Young House 2', branchName: 'Young House 2', TypeName: 'Giường đôi căn góc thoáng', typeName: 'Giường đôi căn góc thoáng', Price: 2600000, price: 2600000, Status: 'Available', isAvailable: true, Address: '64 Phú Hữu, xã Tân Xã', address: '64 Phú Hữu, xã Tân Xã', City: 'Hà Nội', RoomTypeID: 5, roomTypeId: 5 },
+      { RoomID: 3, roomId: 3, roomNumber: '202', BranchID: 2, branchId: 2, BranchName: 'Young House 2', branchName: 'Young House 2', TypeName: '2 giường đơn có ban công', typeName: '2 giường đơn có ban công', Price: 2600000, price: 2600000, Status: 'Available', isAvailable: true, Address: '64 Phú Hữu, xã Tân Xã', address: '64 Phú Hữu, xã Tân Xã', City: 'Hà Nội', RoomTypeID: 3, roomTypeId: 3 },
+      { RoomID: 4, roomId: 4, roomNumber: '203', BranchID: 2, branchId: 2, BranchName: 'Young House 2', branchName: 'Young House 2', TypeName: '2 giường đơn có giếng trời', typeName: '2 giường đơn có giếng trời', Price: 2400000, price: 2400000, Status: 'Available', isAvailable: true, Address: '64 Phú Hữu, xã Tân Xã', address: '64 Phú Hữu, xã Tân Xã', City: 'Hà Nội', RoomTypeID: 4, roomTypeId: 4 },
+      { RoomID: 5, roomId: 5, roomNumber: '301', BranchID: 4, branchId: 4, BranchName: 'Young House 4', branchName: 'Young House 4', TypeName: 'Giường đôi có hành lang view hồ Tân Xã', typeName: 'Giường đôi có hành lang view hồ Tân Xã', Price: 2200000, price: 2200000, Status: 'Available', isAvailable: true, Address: '85 Mục Uyên – Công Nghệ, Tân Xã ', address: '85 Mục Uyên – Công Nghệ, Tân Xã ', City: 'Hà Nội', RoomTypeID: 12, roomTypeId: 12 },
+      { RoomID: 6, roomId: 6, roomNumber: '401', BranchID: 9, branchId: 9, BranchName: 'Young House 9', branchName: 'Young House 9', TypeName: 'Giường đôi có ban công thoáng', typeName: 'Giường đôi có ban công thoáng', Price: 1800000, price: 1800000, Status: 'Available', isAvailable: true, Address: 'Bình Yên', address: 'Bình Yên', City: 'Hà Nội', RoomTypeID: 10, roomTypeId: 10 },
+      { RoomID: 7, roomId: 7, roomNumber: '402', BranchID: 10, branchId: 10, BranchName: 'Young House 10', branchName: 'Young House 10', TypeName: 'Giường đôi', typeName: 'Giường đôi', Price: 1500000, price: 1500000, Status: 'Available', isAvailable: true, Address: 'Bình Yên', address: 'Bình Yên', City: 'Hà Nội', RoomTypeID: 11, roomTypeId: 11 },
+      { RoomID: 8, roomId: 8, roomNumber: '501', BranchID: 11, branchId: 11, BranchName: 'Young House 11', branchName: 'Young House 11', TypeName: 'Giường gác xép có ban công thoáng', typeName: 'Giường gác xép có ban công thoáng', Price: 2500000, price: 2500000, Status: 'Available', isAvailable: true, Address: 'Phú Hữu', address: 'Phú Hữu', City: 'Hà Nội', RoomTypeID: 8, roomTypeId: 8 },
+      { RoomID: 9, roomId: 9, roomNumber: '601', BranchID: 12, branchId: 12, BranchName: 'Young House 12', branchName: 'Young House 12', TypeName: 'Giường gác xép có ban công thoáng', typeName: 'Giường gác xép có ban công thoáng', Price: 2500000, price: 2500000, Status: 'Available', isAvailable: true, Address: 'Phú Hữu', address: 'Phú Hữu', City: 'Hà Nội', RoomTypeID: 7, roomTypeId: 7 },
+      { RoomID: 10, roomId: 10, roomNumber: '701', BranchID: 14, branchId: 14, BranchName: 'Young House 14', branchName: 'Young House 14', TypeName: 'Giường gác xép có cửa sổ thoáng', typeName: 'Giường gác xép có cửa sổ thoáng', Price: 1700000, price: 1700000, Status: 'Available', isAvailable: true, Address: 'Phú Hữu', address: 'Phú Hữu', City: 'Hà Nội', RoomTypeID: 13, roomTypeId: 13 },
+      // Added Tân Xã: Young House 5, 7, 8
+      { RoomID: 11, roomId: 11, roomNumber: '801', BranchID: 5, branchId: 5, BranchName: 'Young House 5', branchName: 'Young House 5', TypeName: 'Giường đôi có ban công thoáng', typeName: 'Giường đôi có ban công thoáng', Price: 2000000, price: 2000000, Status: 'Available', isAvailable: true, Address: '23 Mục Uyên – Công nghệ - Tân Xã', address: '23 Mục Uyên – Công nghệ - Tân Xã', City: 'Hà Nội', RoomTypeID: 15, roomTypeId: 15 },
+      { RoomID: 12, roomId: 12, roomNumber: '901', BranchID: 7, branchId: 7, BranchName: 'Young House 7', branchName: 'Young House 7', TypeName: 'Giường đôi có ban công thoáng', typeName: 'Giường đôi có ban công thoáng', Price: 2400000, price: 2400000, Status: 'Available', isAvailable: true, Address: 'Đối diện THPT Hai Bà Trưng - Tân Xã', address: 'Đối diện THPT Hai Bà Trưng - Tân Xã', City: 'Hà Nội', RoomTypeID: 16, roomTypeId: 16 },
+      { RoomID: 13, roomId: 13, roomNumber: '1001', BranchID: 8, branchId: 8, BranchName: 'Young House 8', branchName: 'Young House 8', TypeName: 'Giường gác xép có ban công thoáng', typeName: 'Giường gác xép có ban công thoáng', Price: 2200000, price: 2200000, Status: 'Available', isAvailable: true, Address: '41 Mục Uyên 1, xã Tân Xã', address: '41 Mục Uyên 1, xã Tân Xã', City: 'Hà Nội', RoomTypeID: 17, roomTypeId: 17 },
     ];
     setRooms(localRooms);
   };
@@ -116,6 +103,12 @@ const Home: React.FC = () => {
         const i = 1 + Math.floor(Math.random() * 9);
         return `/rooms/branch-1/Type1/branch1-${i}.${i === 9 ? 'JPG' : 'jpg'}`;
       }
+      case 5: {
+        // Available images: 1-10, 12, 13
+        const candidates = [1,2,3,4,5,6,7,8,9,10,12,13];
+        const i = candidates[Math.floor(Math.random() * candidates.length)];
+        return `/rooms/branch-5/Type15/branch5-${i}.jpg`;
+      }
       case 2: {
         if (typeId === 5) { const i = 1 + Math.floor(Math.random() * 7); return `/rooms/branch-2/Type5/branch2-1-${i}.JPG`; }
         if (typeId === 3) { const i = 1 + Math.floor(Math.random() * 4); return `/rooms/branch-2/Type3/branch2-2-${i}.JPG`; }
@@ -123,6 +116,8 @@ const Home: React.FC = () => {
         const i = 1 + Math.floor(Math.random() * 7); return `/rooms/branch-2/Type5/branch2-1-${i}.JPG`;
       }
       case 4: { const i = 1 + Math.floor(Math.random() * 6); return `/rooms/branch-4/Type12/branch4-${i}.jpg`; }
+      case 7: { const i = 1 + Math.floor(Math.random() * 6); return `/rooms/branch-7/Type16/branch7-${i}.png`; }
+      case 8: { const i = 1 + Math.floor(Math.random() * 6); return `/rooms/branch-8/Type17/branch8-${i}.jpg`; }
       case 9: { const i = 1 + Math.floor(Math.random() * 9); return `/rooms/branch-9/Type10/branch9-${i}.${i >= 8 ? 'JPG' : 'jpg'}`; }
       case 10: { const i = 1 + Math.floor(Math.random() * 6); return `/rooms/branch-10/Type11/branch10-${i}.jpg`; }
       case 11: { const i = 1 + Math.floor(Math.random() * 7); return `/rooms/branch-11/Type8/branch11-${i}.jpg`; }
@@ -145,7 +140,11 @@ const Home: React.FC = () => {
       setError(null);
       
       const results = rooms.filter((room) => {
-        const byBranch = !searchForm.branchId || (room.BranchID === parseInt(searchForm.branchId));
+        const byArea = !searchForm.area || (() => {
+          const area = availableAreas.find(a => a.name === searchForm.area);
+          const branchId = room.BranchID || (room as any).branchId;
+          return area ? area.branchIds.includes(branchId as number) : true;
+        })();
         const byType = !searchForm.roomTypeId || (room.RoomTypeID === parseInt(searchForm.roomTypeId));
         const byStatus = !searchForm.status || (room.Status === searchForm.status);
         let byPrice = true;
@@ -156,7 +155,7 @@ const Home: React.FC = () => {
           const maxV = (max || 0) * 1000000;
           byPrice = max === 0 ? price >= minV : (price >= minV && price <= maxV);
         }
-        return byBranch && byType && byStatus && byPrice;
+        return byArea && byType && byStatus && byPrice;
       });
 
       setSearchResults(results);
@@ -178,7 +177,7 @@ const Home: React.FC = () => {
     setSearchResults([]);
     setHasSearched(false);
     setSearchForm({
-      branchId: '',
+      area: '',
       roomTypeId: '',
       priceRange: '',
       status: 'Available'
@@ -214,21 +213,21 @@ const Home: React.FC = () => {
             
             <div className="search-form">
               <div className="search-field">
-                <label>Chi nhánh</label>
+                <label>Khu vực</label>
                 <select 
-                  value={searchForm.branchId}
-                  onChange={(e) => handleSearchFormChange('branchId', e.target.value)}
+                  value={searchForm.area}
+                  onChange={(e) => handleSearchFormChange('area', e.target.value)}
                 >
-                  <option value="">Tất cả chi nhánh</option>
-                  {branches.map((branch) => (
-                    <option key={branch.BranchID} value={branch.BranchID}>
-                      {branch.BranchName}
+                  <option value="">Tất cả khu vực</option>
+                  {availableAreas.map((area) => (
+                    <option key={area.name} value={area.name}>
+                      {area.name}
                     </option>
                   ))}
                 </select>
               </div>
               
-              <div className="search-field">
+              {/* <div className="search-field">
                 <label>Loại phòng</label>
                 <select 
                   value={searchForm.roomTypeId}
@@ -241,7 +240,7 @@ const Home: React.FC = () => {
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
               
               <div className="search-field">
                 <label>Khoảng giá</label>
@@ -254,7 +253,7 @@ const Home: React.FC = () => {
                   <option value="2-3">2-3 triệu</option>
                   <option value="3-4">3-4 triệu</option>
                   <option value="4-5">4-5 triệu</option>
-                  <option value="5-0">Trên 5 triệu</option>
+                  
                 </select>
               </div>
               
@@ -264,11 +263,9 @@ const Home: React.FC = () => {
                   value={searchForm.status}
                   onChange={(e) => handleSearchFormChange('status', e.target.value)}
                 >
-                  <option value="">Tất cả trạng thái</option>
+                  
                   <option value="Available">Có sẵn</option>
-                  <option value="Occupied">Đã thuê</option>
-                  <option value="Maintenance">Bảo trì</option>
-                  <option value="Reserved">Đã đặt</option>
+                  
                 </select>
               </div>
               
