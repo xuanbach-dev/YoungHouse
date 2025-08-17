@@ -249,10 +249,10 @@ const Home: React.FC = () => {
                   onChange={(e) => handleSearchFormChange('priceRange', e.target.value)}
                 >
                   <option value="">Tất cả mức giá</option>
-                  <option value="0-2">Dưới 2 triệu</option>
-                  <option value="2-3">2-3 triệu</option>
-                  <option value="3-4">3-4 triệu</option>
-                  <option value="4-5">4-5 triệu</option>
+                  <option value="0-1.5">Từ 1.5 triệu</option>
+                  <option value="1.5-2">Từ 1.5-2 triệu</option>
+                  <option value="2-2.5">Từ 2- 2.5 triệu</option>
+                  <option value="2.5-3">Từ 2.5- 3 triệu</option>
                   
                 </select>
               </div>
