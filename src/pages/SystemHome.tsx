@@ -288,7 +288,7 @@ const SystemHome: React.FC = () => {
           price: 1800000,
           Status: 'Available',
           isAvailable: true,
-          Address: '85 Mục Uyên – Công Nghệ, Tân Xã ',
+          Address: 'D2 – Khu Tái định cư đường 420 xã Bình Yên – Thạch Thất ',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
           RoomTypeID: 10,
@@ -716,7 +716,7 @@ const SystemHome: React.FC = () => {
               </div>
 
               {/* Room Type Filter */}
-              <div className="filter-subsection">
+              {/* <div className="filter-subsection">
                 <h5>Loại phòng</h5>
                 <select 
                   value={selectedRoomTypes[0] || ''} 
@@ -736,7 +736,7 @@ const SystemHome: React.FC = () => {
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
 
               {/* Status Filter */}
               <div className="filter-subsection">
