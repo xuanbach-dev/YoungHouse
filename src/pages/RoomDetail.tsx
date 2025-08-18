@@ -697,7 +697,7 @@ const RoomDetail: React.FC = () => {
           <div className="room-offers">
             <h3>Ưu đãi</h3>
             <ul className="offers-list">
-              <li>Hỗ trợ vận chuyển đồ miễn phí</li>
+              
               <li>Ưu đãi giảm tiền phòng 4–8% cho khách hàng</li>
               <li>Tặng 10 suất ăn miễn phí tại Young Food and Drink (các món Á , Âu và Pizza)</li>
             </ul>
