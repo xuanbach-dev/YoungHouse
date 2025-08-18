@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Facebook, MessageCircle, Youtube } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, MessageCircle, Youtube, Eye } from 'lucide-react';
 import './Footer.css';
+import { VisitCounterService } from '../services/visitCounter';
 
 const Footer: React.FC = () => {
+  const [totalVisits, setTotalVisits] = useState(0);
+
+  useEffect(() => {
+    // Get current total site visits
+    const visits = VisitCounterService.getTotalSiteVisits();
+    setTotalVisits(visits);
+  }, []);
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -96,6 +105,10 @@ const Footer: React.FC = () => {
               <a href="#">Chính sách bảo mật</a>
               <a href="#">Điều khoản sử dụng</a>
               <a href="#">Sitemap</a>
+            </div>
+            <div className="visit-counter">
+              <Eye size={16} />
+              <span>Tổng số lượt truy cập: {totalVisits}</span>
             </div>
           </div>
         </div>

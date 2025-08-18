@@ -5,6 +5,7 @@ import { Post, Room } from '../types';
 import { Search, MapPin, Calendar, DollarSign, Eye, Loader2, Leaf, Lightbulb, Utensils, WashingMachine, Shirt, Gift, Sofa, Briefcase, Bed, Shield, Building2, Users, MessageSquare, Headphones } from 'lucide-react';
 import ViewingAppointmentForm from '../components/ViewingAppointmentForm';
 import './Home.css';
+import { VisitCounterService } from '../services/visitCounter';
 
 interface RoomType {
   RoomTypeID: number;
@@ -30,11 +31,15 @@ const Home: React.FC = () => {
   });
   const [isAppointmentFormOpen, setIsAppointmentFormOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+  const [totalVisits, setTotalVisits] = useState(0);
 
   useEffect(() => {
     fetchPosts();
     initRoomTypes();
     initRooms();
+    // Increment total site visits when home page loads
+    const visits = VisitCounterService.incrementTotalSiteVisits();
+    setTotalVisits(visits);
   }, []);
 
   const fetchPosts = async () => {

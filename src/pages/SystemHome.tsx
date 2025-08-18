@@ -3,6 +3,7 @@ import { Search, MapPin, Calendar, Filter, Grid, List, ChevronDown, X } from 'lu
 import { roomsAPI, branchesAPI } from '../services/api';
 import { Room, Branch } from '../types';
 import './SystemHome.css';
+import { VisitCounterService } from '../services/visitCounter';
 
 interface RoomSearchFilters {
   search?: string;
@@ -647,6 +648,14 @@ const SystemHome: React.FC = () => {
       return `/rooms/branch1/branch1-1.jpg`;
     }
   };
+
+  const [totalVisits, setTotalVisits] = useState(0);
+
+  useEffect(() => {
+    // Increment total site visits when system home page loads
+    const visits = VisitCounterService.incrementTotalSiteVisits();
+    setTotalVisits(visits);
+  }, []);
 
   return (
     <div className="system-home">

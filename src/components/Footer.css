@@ -185,8 +185,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
-  color: #95a5a6;
+  width: 100%;
+}
+
+.visit-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.visit-counter svg {
+  color: #888;
+  margin-right: 4px;
 }
 
 .footer-bottom-links {
