@@ -25,10 +25,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && cp public/_redirects build/_redirects && echo 'Build completed successfully'",
+    "build": "react-scripts build && mkdir -p build && cp public/_redirects build/_redirects",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "vercel-build": "echo 'Vercel Build Started' && npm run build && echo 'Vercel Build Completed'"
+    "vercel-build": "npm run build"
   },
   "eslintConfig": {
     "extends": [
