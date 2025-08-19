@@ -639,6 +639,30 @@ const RoomDetail: React.FC = () => {
         )}
       </div>
 
+      {/* Mobile Top Contact Card (shown under images on mobile) */}
+      <div className="contact-card-top">
+        <h3>Liên hệ Xem phòng trực tiếp</h3>
+        <div className="contact-actions">
+          <a className="contact-btn phone" href="tel:0372858098">
+            <PhoneIcon size={20} />
+            Gọi: 0372858098
+          </a>
+          <a className="contact-btn zalo" href="https://zalo.me/0372858098" target="_blank" rel="noreferrer">
+            <img src="/Zalo.png" alt="Zalo" style={{ width: 16, height: 16 }} />
+            Zalo
+          </a>
+          
+          <button 
+            className="contact-btn book-viewing" 
+            onClick={() => setShowViewingAppointmentForm(true)}
+          >
+            <Calendar size={30} />
+            ĐẶT LỊCH XEM PHÒNG NGAY
+          </button>
+        </div>
+        <div className="contact-note">Hỗ trợ 24/7  (T2–CN)</div>
+      </div>
+
       {/* Room Information */}
       <div className="room-info-container">
         <div className="room-main-info">

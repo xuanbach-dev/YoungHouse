@@ -761,3 +761,22 @@
 @media (max-width: 1024px) {
   .contact-sidebar { position: static; }
 }
+
+/* Mobile top contact card: visible only on small screens */
+.contact-card-top { display: none; }
+
+@media (max-width: 768px) {
+  .contact-card-top {
+    display: block;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    padding: 16px;
+    margin: 0 auto 16px;
+    max-width: 1200px;
+  }
+  .contact-card-top h3 { margin: 0 0 10px 0; }
+  /* Hide sidebar card on mobile to avoid duplication */
+  .contact-sidebar { display: none; }
+}
