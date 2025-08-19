@@ -4,15 +4,19 @@
     {
       "src": "package.json",
       "use": "@vercel/node"
+    },
+    {
+      "src": "build/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/index.html"
     }
   ],
-  "buildCommand": "npm install && npm run build",
+  "buildCommand": "npm run build",
   "installCommand": "npm install",
   "outputDirectory": "build"
 }
