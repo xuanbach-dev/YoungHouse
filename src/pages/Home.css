@@ -762,22 +762,15 @@
   }
   
   .amenities-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
   
-  .amenity-item {
-    padding: 1.5rem 1rem;
-  }
+  .amenity-item { padding: 1.25rem 0.75rem; }
   
-  .amenity-icon {
-    width: 50px;
-    height: 50px;
-  }
+  .amenity-icon { width: 46px; height: 46px; }
   
-  .amenity-item span {
-    font-size: 0.9rem;
-  }
+  .amenity-item span { font-size: 0.9rem; }
 }
 
 @media (max-width: 480px) {
@@ -786,14 +779,9 @@
     gap: 1rem;
   }
   
-  .amenity-item {
-    padding: 1rem;
-  }
+  .amenity-item { padding: 0.9rem; }
   
-  .amenity-icon {
-    width: 45px;
-    height: 45px;
-  }
+  .amenity-icon { width: 42px; height: 42px; }
 }
 
 /* Values Section */
@@ -894,42 +882,21 @@
     font-size: 2rem;
   }
   
-  .values-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-  }
+  .values-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
   
-  .value-item {
-    padding: 2rem 1rem;
-  }
+  .value-item { padding: 1.5rem 1rem; }
   
-  .value-icon {
-    width: 70px;
-    height: 70px;
-  }
+  .value-icon { width: 64px; height: 64px; }
   
-  .value-item h3 {
-    font-size: 1rem;
-  }
+  .value-item h3 { font-size: 0.95rem; }
 }
 
 @media (max-width: 480px) {
-  .values-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+  .values-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
   
-  .value-item {
-    padding: 1.5rem 1rem;
-  }
+  .value-item { padding: 1.1rem 0.9rem; }
   
-  .value-icon {
-    width: 60px;
-    height: 60px;
-  }
+  .value-icon { width: 56px; height: 56px; }
   
-  .value-item h3 {
-    font-size: 0.95rem;
-    max-width: none;
-  }
+  .value-item h3 { font-size: 0.9rem; max-width: none; }
 }

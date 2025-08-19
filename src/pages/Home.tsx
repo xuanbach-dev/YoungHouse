@@ -392,49 +392,9 @@ const Home: React.FC = () => {
           <h2 className="amenities-title">Không gian sống tiện nghi</h2>
           <p className="amenities-subtitle">
             Môi trường sống phát triển, văn minh, hiện đại làm nên tăng sống cho mỗi người thức 
-            hiện mọi mục tiêu các nhân trong cuộc sống
+            hiện mọi mục tiêu các nhân trong cuộc sống. Hãy đến để cảm nhận chất lượng và dịch vụ khác biệt cũng như trải nghiệm cơ hội việc làm tuyệt vời tại Young House các bạn nhé.
+
           </p>
-          
-          <div className="amenities-grid">
-            <div className="amenity-item">
-              <div className="amenity-icon">
-                <Leaf size={24} />
-              </div>
-              <span>Cây xanh</span>
-            </div>
-            
-           
-           
-            
-            <div className="amenity-item">
-              <div className="amenity-icon">
-                <Shirt size={24} />
-              </div>
-              <span>Tủ quần áo</span>
-            </div>
-            
-            <div className="amenity-item">
-              <div className="amenity-icon">
-                <Gift size={24} />
-              </div>
-              <span>Bếp nấu ăn</span>
-            </div>
-            
-            
-            <div className="amenity-item">
-              <div className="amenity-icon">
-                <Bed size={24} />
-              </div>
-              <span>Giường</span>
-            </div>
-            
-            <div className="amenity-item">
-              <div className="amenity-icon">
-                <Shield size={24} />
-              </div>
-              <span>An ninh 24/7</span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -462,7 +422,7 @@ const Home: React.FC = () => {
               <div className="value-icon">
                 <MessageSquare size={32} />
               </div>
-              <h3>Cộng đồng sinh viên FPT năng động, hoà đồng</h3>
+              <h3>Cộng đồng sinh viên FPT hoà đồng , năng động</h3>
             </div>
             
             <div className="value-item">
