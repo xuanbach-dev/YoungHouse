@@ -33,6 +33,14 @@ const Home: React.FC = () => {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [totalVisits, setTotalVisits] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  
+  // Update these 4 paths later with your images
+  const videoGalleryImages: string[] = [
+    '/anh1.jpg',
+    '/anh2.jpg',
+    '/anh3.jpg',
+    '/anh4.jpg',
+  ];
 
   useEffect(() => {
     fetchPosts();
@@ -354,12 +362,26 @@ const Home: React.FC = () => {
           <h2 className="video-title"></h2>
           <div className="video-wrapper">
             <iframe
-              src="https://www.youtube.com/embed/-yjQ9VfJzBg"
+              src="https://www.youtube.com/embed/-yjQ9VfJzBg?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1"
               title="Young House Video"
               loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
+          </div>
+          <div className="video-caption">Video giới thiệu Young House</div>
+
+          {/* 2x2 Image Gallery under the video */}
+          <div className="video-gallery">
+            {videoGalleryImages.map((src, idx) => (
+              <div key={idx} className="gallery-item">
+                <img
+                  src={src}
+                  alt={`Hình ảnh ${idx + 1}`}
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/logo.png'; }}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
             <div className="contact-info">
               <div className="contact-item">
                 <MapPin size={16} />
-                <span>Khu đô thị Hoà Lạc, Thạch Thất, Hà Nội</span>
+                <span>Số 85 đường Mục Uyên - Công Nghệ - Tân Xã - Thạch Thất - Hà Nội</span>
               </div>
               <div className="contact-item">
                 <Phone size={16} />
