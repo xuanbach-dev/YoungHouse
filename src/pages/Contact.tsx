@@ -30,17 +30,17 @@ const Contact: React.FC = () => {
             <h2>Kênh liên hệ</h2>
             <div className="contact-actions">
               <a className="contact-btn zalo" href={zaloUrl} target="_blank" rel="noreferrer">
-                <img src="/logo.png" alt="Zalo" className="contact-icon" />
-                Nhắn Zalo: {zaloPhone}
+                <img src="/Zalo.png" alt="Zalo" className="contact-icon" />
+                 Zalo: {zaloPhone}
               </a>
               <a className="contact-btn facebook" href="https://www.facebook.com/profile.php?id=100043274418628" target="_blank" rel="noreferrer">
-                <img src="/logo.png" alt="Facebook" className="contact-icon" />
-                Facebook: Young House
+                <img src="/messenger-icon.png" alt="Facebook" className="contact-icon" />
+                Young House
               </a>
             </div>
             <div className="contact-info">
               <p>Email: bachqxhe180125@fpt.edu.vn</p>
-              <p>Thời gian hỗ trợ: 08:00 – 22:00 (T2–CN)</p>
+              <p>Thời gian hỗ trợ: 24/7 (T2–CN)</p>
             </div>
           </div>
         </div>

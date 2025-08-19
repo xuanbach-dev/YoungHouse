@@ -348,6 +348,22 @@ const Home: React.FC = () => {
         </div>
       </div>
 
+      {/* Intro Video Section */}
+      <div className="video-section">
+        <div className="container">
+          <h2 className="video-title"></h2>
+          <div className="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/-yjQ9VfJzBg"
+              title="Young House Video"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Amenities Section */}
       <div className="amenities-section">
         <div className="container">
