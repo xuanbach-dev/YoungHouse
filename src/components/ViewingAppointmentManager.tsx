@@ -54,7 +54,7 @@ const ViewingAppointmentManager: React.FC = () => {
       setStats(statRes.data || null);
     } catch (err: any) {
       console.error(err);
-      setError('Không thể tải danh sách lịch hẹn');
+      setError('Không thể tải danh sách lịch hẹn nha');
     } finally {
       setLoading(false);
     }
