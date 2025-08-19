@@ -29,12 +29,12 @@ const ViewingAppointmentManager: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const params: any = { page: pagination.page, limit: pagination.limit };
-      if (status !== 'All') params.status = status;
       const [listRes, statRes] = await Promise.all([
-        viewingAppointmentsAPI.getAll(params),
+        viewingAppointmentsAPI.getAll(),
         viewingAppointmentsAPI.getStatistics(),
       ]);
+      
+      // Update to handle mock API response structure
       const rows = (listRes.data?.data || []) as any[];
       const normalized: ViewingAppointment[] = rows.map((r: any) => ({
         appointmentId: r.appointmentId ?? r.AppointmentID,
@@ -42,19 +42,16 @@ const ViewingAppointmentManager: React.FC = () => {
         email: r.email ?? r.Email ?? '',
         phone: r.phone ?? r.Phone ?? '',
         viewingDate: r.viewingDate ?? r.ViewingDate ?? '',
-        viewingTime: (r.viewingTime ?? r.ViewingTime ?? '').toString().slice(0, 5),
+        viewingTime: r.viewingTime ?? r.ViewingTime ?? '',
         roomId: r.roomId ?? r.RoomID ?? 0,
         note: r.note ?? r.Note ?? '',
-        status: r.status ?? r.Status ?? 'Pending',
-        createdAt: r.createdAt ?? r.CreatedAt,
-        roomNumber: r.roomNumber ?? r.RoomNumber,
-        typeName: r.typeName ?? r.TypeName,
-        price: r.price ?? r.Price,
-        branchName: r.branchName ?? r.BranchName,
-        address: r.address ?? r.Address,
+        status: r.status ?? r.Status ?? 'Pending'
       }));
+      
       setItems(normalized);
-      setStats(statRes.data.data || null);
+      
+      // Update to handle mock API response structure
+      setStats(statRes.data || null);
     } catch (err: any) {
       console.error(err);
       setError('Không thể tải danh sách lịch hẹn');

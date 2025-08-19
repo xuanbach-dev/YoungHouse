@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { postsAPI } from '../services/api';
 import { Post, Room } from '../types';
-import { Search, MapPin, Calendar, DollarSign, Eye, Loader2, Leaf, Lightbulb, Utensils, WashingMachine, Shirt, Gift, Sofa, Briefcase, Bed, Shield, Building2, Users, MessageSquare, Headphones } from 'lucide-react';
+import { Search, MapPin, Calendar, DollarSign, Eye, Loader2, Leaf, Lightbulb, Utensils, Shirt, Gift, Sofa, Briefcase, Bed, Shield, Building2, Users, MessageSquare, Headphones } from 'lucide-react';
 import ViewingAppointmentForm from '../components/ViewingAppointmentForm';
 import './Home.css';
 import { VisitCounterService } from '../services/visitCounter';
@@ -32,6 +32,7 @@ const Home: React.FC = () => {
   const [isAppointmentFormOpen, setIsAppointmentFormOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [totalVisits, setTotalVisits] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     fetchPosts();
@@ -46,10 +47,28 @@ const Home: React.FC = () => {
     try {
       setIsLoading(true);
       const response = await postsAPI.getPosts(1, 10);
-      setPosts(response.data.posts);
+      
+      // Validate and transform posts to match exact type
+      if (response.data?.success && response.data?.posts) {
+        const validPosts: Post[] = response.data.posts.map(post => ({
+          ...post,
+          author: {
+            ...post.author,
+            role: post.author.role === 'admin' ? 'admin' : 'user'
+          }
+        }));
+        
+        setPosts(validPosts);
+        setTotalPages(Math.ceil(response.data.total / 10));
+      } else {
+        setPosts([]);
+        setTotalPages(0);
+      }
     } catch (err: any) {
       setError('Failed to fetch posts');
       console.error('Error fetching posts:', err);
+      setPosts([]);
+      setTotalPages(0);
     } finally {
       setIsLoading(false);
     }
@@ -347,13 +366,7 @@ const Home: React.FC = () => {
             </div>
             
            
-            
-            <div className="amenity-item">
-              <div className="amenity-icon">
-                <WashingMachine size={24} />
-              </div>
-              <span>Máy giặt</span>
-            </div>
+           
             
             <div className="amenity-item">
               <div className="amenity-icon">

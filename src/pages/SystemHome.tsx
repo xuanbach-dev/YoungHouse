@@ -471,20 +471,21 @@ const SystemHome: React.FC = () => {
     }
 
     try {
-      setIsLoading(true);
-      setError(null);
-      
       const response = await roomsAPI.searchRooms(searchQuery);
       
-      if (response.data.success) {
-        setRooms(response.data.data);
-        setFilteredRooms(response.data.data);
+      // Update to handle new mock API response structure
+      if (response.data?.success) {
+        const rooms = response.data.data || [];
+        setRooms(rooms);
+        setFilteredRooms(rooms);
+      } else {
+        setRooms([]);
+        setFilteredRooms([]);
       }
     } catch (err: any) {
       console.error('Error searching rooms:', err);
-      setError('Không thể tìm kiếm phòng. Vui lòng thử lại.');
-    } finally {
-      setIsLoading(false);
+      setRooms([]);
+      setFilteredRooms([]);
     }
   };
 

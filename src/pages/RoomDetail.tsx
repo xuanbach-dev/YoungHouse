@@ -7,11 +7,12 @@ import {
   ChevronRight,
   Phone as PhoneIcon,
   Star,
-  Heart
+  Heart,
+  Calendar // Add Calendar icon
 } from 'lucide-react';
 // import { roomsAPI } from '../services/api';
 import { Room } from '../types';
-// Removed ViewingAppointmentForm
+import ViewingAppointmentForm from '../components/ViewingAppointmentForm'; // Re-import the form
 import './RoomDetail.css';
 
 const RoomDetail: React.FC = () => {
@@ -24,7 +25,7 @@ const RoomDetail: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageModal, setShowImageModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  // const [showViewingAppointmentForm, setShowViewingAppointmentForm] = useState(false);
+  const [showViewingAppointmentForm, setShowViewingAppointmentForm] = useState(false);
   const [images, setImages] = useState<string[]>([]);
   const [imageAttempts, setImageAttempts] = useState<Record<number, number>>({});
   
@@ -203,7 +204,7 @@ const RoomDetail: React.FC = () => {
       TypeName: 'Giường gác xép có ban công thoáng',
       typeName: 'Giường gác xép có ban công thoáng',
       Price: 2500000,
-      price: 2500000,
+      price:  2500000,
       Status: 'Available',
       isAvailable: true,
       Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
@@ -695,11 +696,14 @@ const RoomDetail: React.FC = () => {
 
           {/* Offers */}
           <div className="room-offers">
-            <h3>Ưu đãi</h3>
+            <h3>QUYỀN LỢI KHÁCH HÀNG MỚI 2025</h3>
             <ul className="offers-list">
               
-              <li>Ưu đãi giảm tiền phòng 4–8% cho khách hàng</li>
-              <li>Tặng 10 suất ăn miễn phí tại Young Food and Drink (các món Á , Âu và Pizza)</li>
+              <li>Quà tặng : Tặng Voucher sử dụng 10 sản phẩm bất kì của Young Food & Drink (các món ăn Việt, các món Âu như Pizza, Mỳ Ý… Và các loại nước ép, trà sữa, sinh tố…).
+                  Tại trụ sở địa điểm + Tặng 10 cốc nước/nước ép hoặc 01 bánh Pizza khi khách hàng tổ chức Sinh nhật tại Young Food & Drink.
+              </li>
+              <li>Chiết khấu : Giảm 4% tiền thuê nhà khi thanh toán 06 tháng, và giảm 8% tiền thuê nhà khi đóng 12 tháng… khi chuyển khoản trong 48h kể từ ngày kí hợp đồng.
+                 Lưu ý: Số tiền giảm không bao gồm phí dịch vụ.</li>
             </ul>
           </div>
 
@@ -866,13 +870,30 @@ const RoomDetail: React.FC = () => {
                 <img src="/logo.png" alt="Zalo" style={{ width: 18, height: 18 }} />
                 Zalo
               </a>
+              
+              {/* New button to open viewing appointment form */}
+              <button 
+                className="contact-btn book-viewing" 
+                onClick={() => setShowViewingAppointmentForm(true)}
+              >
+                <Calendar size={30} />
+                ĐẶT LỊCH XEM PHÒNG NGAY
+              </button>
             </div>
-            <div className="contact-note">Hỗ trợ 08:00 – 22:00 (T2–CN)</div>
+            <div className="contact-note">Hỗ trợ 24/7  (T2–CN)</div>
           </div>
         </aside>
       </div>
 
-      {/* Removed ViewingAppointmentForm Modal */}
+      {/* Viewing Appointment Form Modal */}
+      {showViewingAppointmentForm && room && (
+        <ViewingAppointmentForm
+          isOpen={showViewingAppointmentForm}
+          room={room}
+          onClose={() => setShowViewingAppointmentForm(false)}
+          roomId={room.roomId || room.RoomID}
+        />
+      )}
     </div>
   );
 };

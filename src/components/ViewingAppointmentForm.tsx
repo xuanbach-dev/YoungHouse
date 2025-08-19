@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, MapPin, X, CheckCircle } from 'lucide-react';
 import { viewingAppointmentsAPI, roomsAPI } from '../services/api';
+import { emailService } from '../services/emailService';
 import { ViewingAppointment, Room } from '../types';
 import './ViewingAppointmentForm.css';
 
@@ -65,7 +66,8 @@ const ViewingAppointmentForm: React.FC<ViewingAppointmentFormProps> = ({
         formData.roomId, 
         formData.viewingDate
       );
-      setAvailableSlots(response.data.data.availableSlots);
+      // Update to handle mock API response structure
+      setAvailableSlots(response.data?.availableSlots || timeSlots);
     } catch (error) {
       console.error('Error fetching available slots:', error);
       setAvailableSlots(timeSlots); // Fallback to all slots
@@ -141,7 +143,47 @@ const ViewingAppointmentForm: React.FC<ViewingAppointmentFormProps> = ({
     setError(null);
 
     try {
-      await viewingAppointmentsAPI.create(formData);
+      // Create the viewing appointment
+      const appointmentResponse = await viewingAppointmentsAPI.create(formData);
+      
+      // Send confirmation email
+      if (formData.email && room) {
+        try {
+          await emailService.sendAppointmentConfirmation({
+            fullName: formData.fullName || '',
+            email: formData.email,
+            phone: formData.phone || '',
+            viewingDate: formData.viewingDate || '',
+            viewingTime: formData.viewingTime || '',
+            roomNumber: room.roomNumber,
+            roomType: room.typeName || 'Phòng Trọ',
+            note: formData.note
+          });
+
+          // Send admin notification email
+          await emailService.sendAdminAppointmentNotification({
+            fullName: formData.fullName || '',
+            email: formData.email,
+            phone: formData.phone || '',
+            viewingDate: formData.viewingDate || '',
+            viewingTime: formData.viewingTime || '',
+            roomNumber: room.roomNumber,
+            roomType: room.typeName || 'Phòng Trọ',
+            note: formData.note
+          });
+        } catch (emailError) {
+          // Log the email error but don't prevent appointment creation
+          console.error('Email sending failed:', emailError);
+          
+          // Set a user-friendly error message
+          setError(
+            emailError instanceof Error && emailError.message.includes('email') 
+              ? 'Địa chỉ email không hợp lệ. Vui lòng kiểm tra lại.' 
+              : 'Đã có lỗi xảy ra khi gửi email. Vui lòng thử lại sau.'
+          );
+        }
+      }
+
       setIsSubmitted(true);
       
       // Reset form after successful submission
@@ -159,6 +201,7 @@ const ViewingAppointmentForm: React.FC<ViewingAppointmentFormProps> = ({
         });
       }, 2000);
     } catch (error: any) {
+      // Handle appointment creation error
       setError(error.response?.data?.message || 'Có lỗi xảy ra khi đặt lịch hẹn');
     } finally {
       setIsLoading(false);
@@ -352,14 +395,9 @@ const ViewingAppointmentForm: React.FC<ViewingAppointmentFormProps> = ({
             <div className="appointment-info">
               <div className="info-item">
                 <Clock size={16} />
-                <span>Tại sao bạn cần xác thực CCCD?</span>
+                <span>Hãy điền chính xác các thông tin để YOUNG HOUSE có thể liên hệ với bạn sớm nhất có thể</span>
               </div>
-              <p className="info-text">
-                Bạn sẽ được cấp một khóa điện tử (eKey) để mở khóa cửa phòng thông qua ứng dụng Nhà Trọ Young House và tự mình tham quan phòng trọ mà không cần nhân viên của chúng tôi.
-              </p>
-              <p className="info-text">
-                Vui lòng cập nhật thông tin CCCD để Young House xác thực danh tính. Chúng tôi cam kết bảo mật thông tin của bạn.
-              </p>
+              
             </div>
 
             <div className="form-actions">

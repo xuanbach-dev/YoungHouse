@@ -22,10 +22,26 @@ const PostDetail: React.FC = () => {
     try {
       setIsLoading(true);
       const response = await postsAPI.getPostById(postId);
-      setPost(response.data.post);
+      
+      // Validate and transform post to match exact type
+      if (response.data?.success && response.data?.post) {
+        const validPost: Post = {
+          ...response.data.post,
+          author: {
+            ...response.data.post.author,
+            role: response.data.post.author.role === 'admin' ? 'admin' : 'user'
+          }
+        };
+        
+        setPost(validPost);
+      } else {
+        setPost(null);
+        setError('Post not found or failed to load');
+      }
     } catch (err: any) {
       setError('Post not found or failed to load');
       console.error('Error fetching post:', err);
+      setPost(null);
     } finally {
       setIsLoading(false);
     }

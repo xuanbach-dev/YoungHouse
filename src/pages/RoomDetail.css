@@ -738,6 +738,20 @@
 .contact-btn.messenger { background: #eef3ff; color: #1b4fc9; }
 .contact-btn.phone { background: #eefaf3; color: #0f7a3a; }
 .contact-btn.zalo { background: #e6f2ff; color: #0b64d4; }
+.contact-btn.book-viewing {
+  background-color: #4CAF50;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.contact-btn.book-viewing:hover {
+  background-color: #45a049;
+}
 
 .contact-sidebar { position: sticky; top: 80px; }
 .contact-card-side { background: #fff; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.06); padding: 16px; }

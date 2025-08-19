@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { emailService } from './services/emailService'; // Import email service
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+// Initialize EmailJS
+try {
+  const initialized = emailService.initialize();
+  if (!initialized) {
+    console.error('Failed to initialize EmailJS. Please check your configuration.');
+  }
+} catch (error) {
+  console.error('Error during EmailJS initialization:', error);
+}
+
 root.render(
   <React.StrictMode>
     <App />
