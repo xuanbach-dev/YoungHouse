@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "framework": "create-react-app",
   "builds": [
     {
       "src": "package.json",
@@ -12,11 +13,23 @@
   ],
   "routes": [
     {
+      "src": "/static/(.*)",
+      "headers": {
+        "cache-control": "v-max-age=31536000, immutable"
+      }
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
   ],
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": "build"
+  "outputDirectory": "build",
+  "env": {
+    "REACT_APP_EMAILJS_PUBLIC_KEY": "@emailjs_public_key",
+    "REACT_APP_EMAILJS_SERVICE_ID": "@emailjs_service_id",
+    "REACT_APP_EMAILJS_TEMPLATE_CUSTOMER": "@emailjs_template_customer",
+    "REACT_APP_EMAILJS_TEMPLATE_ADMIN": "@emailjs_template_admin"
+  }
 }
