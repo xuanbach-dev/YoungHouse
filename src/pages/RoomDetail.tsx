@@ -34,8 +34,8 @@ const RoomDetail: React.FC = () => {
     {
       RoomID: 1,
       roomId: 1,
-      RoomNumber: '101',
-      roomNumber: '101',
+      RoomNumber: 'Young House 1',
+      roomNumber: 'Young House 1',
       BranchID: 1,
       branchId: 1,
       BranchName: 'Young House 1',
@@ -907,6 +907,63 @@ const RoomDetail: React.FC = () => {
             <div className="contact-note">Hỗ trợ 24/7  (T2–CN)</div>
           </div>
         </aside>
+      </div>
+
+      {/* Similar Rooms Section */}
+      <div className="similar-rooms-section">
+        <div className="container">
+          <h2>Đề xuất cho bạn</h2>
+          <div className="similar-rooms-grid">
+            {localRooms
+              .filter(similarRoom => {
+                if (similarRoom.RoomID === room.RoomID) return false;
+                
+                // Same room type
+                const sameType = similarRoom.RoomTypeID === room.RoomTypeID;
+                
+                // Similar price range (within 1-2tr or 2-3tr range)
+                const currentPrice = room.Price || 0;
+                const similarPrice = similarRoom.Price || 0;
+                
+                let samePriceRange = false;
+                if (currentPrice <= 2000000 && similarPrice <= 2000000) {
+                  samePriceRange = true; // Both in 1-2tr range
+                } else if (currentPrice > 2000000 && currentPrice <= 3000000 && 
+                          similarPrice > 2000000 && similarPrice <= 3000000) {
+                  samePriceRange = true; // Both in 2-3tr range
+                }
+                
+                return sameType || samePriceRange;
+              })
+              .slice(0, 4)
+              .map((similarRoom) => (
+                <div 
+                  key={similarRoom.RoomID} 
+                  className="similar-room-card"
+                  onClick={() => navigate(`/rooms/${similarRoom.RoomID}`)}
+                >
+                  <div className="similar-room-image">
+                    <img 
+                      src={getRoomImages(similarRoom)[0]} 
+                      alt={`${similarRoom.BranchName} - Phòng ${similarRoom.RoomNumber}`}
+                      onError={handleImageError(0)}
+                    />
+                  </div>
+                  <div className="similar-room-info">
+                    <h3>Phòng {similarRoom.RoomNumber}</h3>
+                    <p className="similar-room-branch">{similarRoom.BranchName}</p>
+                    <p className="similar-room-type">{similarRoom.TypeName}</p>
+                    <p className="similar-room-price">{formatPrice(similarRoom.Price || 0)}/tháng</p>
+                    <span className={`similar-room-status ${(similarRoom.Status || 'Available').toLowerCase()}`}>
+                      {similarRoom.Status === 'Available' ? 'Còn trống' : 
+                       similarRoom.Status === 'Occupied' ? 'Đã thuê' :
+                       similarRoom.Status === 'Reserved' ? 'Đã đặt' : 'Bảo trì'}
+                    </span>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
 
       {/* Viewing Appointment Form Modal */}

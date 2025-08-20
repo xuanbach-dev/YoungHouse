@@ -762,6 +762,151 @@
   .contact-sidebar { position: static; }
 }
 
+/* Similar Rooms Section */
+.similar-rooms-section {
+  background: #f8f9fa;
+  padding: 4rem 0;
+  margin-top: 2rem;
+}
+
+.similar-rooms-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.similar-rooms-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.similar-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.similar-room-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #e8e8e8;
+}
+
+.similar-room-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.similar-room-image {
+  height: 180px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  overflow: hidden;
+}
+
+.similar-room-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.similar-room-info {
+  padding: 1.25rem;
+}
+
+.similar-room-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.similar-room-branch {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.similar-room-type {
+  color: #666;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.similar-room-price {
+  color: #2d7dd2;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.similar-room-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.similar-room-status.available {
+  background: #d4edda;
+  color: #155724;
+}
+
+.similar-room-status.occupied {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.similar-room-status.reserved {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.similar-room-status.maintenance {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+@media (max-width: 768px) {
+  .similar-rooms-section {
+    padding: 2rem 0;
+  }
+  
+  .similar-rooms-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .similar-rooms-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .similar-room-image {
+    height: 150px;
+  }
+  
+  .similar-room-info {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .similar-rooms-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .similar-room-image {
+    height: 140px;
+  }
+}
+
 /* Mobile top contact card: visible only on small screens */
 .contact-card-top { display: none; }
 
