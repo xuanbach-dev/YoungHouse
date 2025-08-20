@@ -649,7 +649,7 @@ const RoomDetail: React.FC = () => {
           </a>
           <a className="contact-btn zalo" href="https://zalo.me/0372858098" target="_blank" rel="noreferrer">
             <img src="/Zalo.png" alt="Zalo" style={{ width: 16, height: 16 }} />
-            Zalo
+            Zalo - CTV Xuân Bách
           </a>
           
           <button 
@@ -891,8 +891,8 @@ const RoomDetail: React.FC = () => {
                 Gọi: 0372858098
               </a>
               <a className="contact-btn zalo" href="https://zalo.me/0372858098" target="_blank" rel="noreferrer">
-                <img src="/logo.png" alt="Zalo" style={{ width: 18, height: 18 }} />
-                Zalo
+                <img src="/Zalo.png" alt="Zalo" style={{ width: 18, height: 18 }} />
+                Zalo - CTV Xuân Bách
               </a>
               
               {/* New button to open viewing appointment form */}
@@ -940,7 +940,10 @@ const RoomDetail: React.FC = () => {
                 <div 
                   key={similarRoom.RoomID} 
                   className="similar-room-card"
-                  onClick={() => navigate(`/rooms/${similarRoom.RoomID}`)}
+                  onClick={() => {
+                    navigate(`/rooms/${similarRoom.RoomID}`);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                 >
                   <div className="similar-room-image">
                     <img 
