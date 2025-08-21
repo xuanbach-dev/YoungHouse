@@ -563,8 +563,15 @@
   
   .featured-rooms { padding: 2.5rem 0; }
   .rooms-grid { grid-template-columns: 1fr; gap: 1rem; }
-  .room-image { height: 160px; }
+  .room-card { border-radius: 16px; overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+  .room-image { height: 180px; }
   .room-info { padding: 1rem; }
+  .room-info h3 { font-size: 1.15rem; margin: 0 0 .5rem; }
+  .room-type { font-size: .85rem; margin-top: .25rem; }
+  .room-location, .room-price { font-size: .95rem; }
+  .room-price { font-size: 1.05rem; font-weight: 700; color: #2d7dd2; }
+  .room-actions { margin-top: .75rem; }
+  .appointment-button { width: 100%; padding: .75rem 1rem; border-radius: 10px; }
   
   .room-image-placeholder { height: 220px; }
   .search-results-section { padding: 2rem 0; }
@@ -583,8 +590,10 @@
   .search-form { padding: 0.75rem; grid-template-columns: 1fr; }
   .search-field select { font-size: 0.95rem; padding: 0.6rem; }
   .search-button { padding: 0.6rem 1rem; }
-  .rooms-grid { gap: 0.75rem; }
-  .room-image { height: 150px; }
+  .rooms-grid { gap: 0.9rem; }
+  .room-card { border-radius: 16px; }
+  .room-image { height: 170px; }
+  .room-info { padding: .9rem; }
   .featured-rooms { padding: 2rem 0; }
 }
 

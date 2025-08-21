@@ -367,6 +367,16 @@
   line-height: 1.6;
 }
 
+/* Branch video embed above introduction */
+.branch-video { margin: 16px 0 12px; }
+.branch-video .video-wrapper { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+.branch-video .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+@media (max-width: 768px) {
+  .branch-video { margin: 12px 0 8px; }
+  .branch-video .video-wrapper { border-radius: 10px; }
+}
+
 @media (max-width: 480px) {
   .amenities-grid { gap: 8px; }
   .amenity-item { padding: 6px 10px; gap: 6px; }

@@ -545,23 +545,25 @@ const Home: React.FC = () => {
                     />
                   </div>
                   <div className="room-info">
-                    <h3>Phòng {room.RoomNumber}</h3>
-                    <p className="room-type">{room.TypeName}</p>
+                   
+                    
                     <p className="room-location">
                       <MapPin size={14} />
                       {room.BranchName}
+                      <p className="room-type">{room.TypeName}</p>
+                      
                     </p>
                     <p className="room-price">
-                      <DollarSign size={14} />
+                     
                       {room.Price?.toLocaleString('vi-VN')} VND/tháng
                     </p>
                     <div className="room-actions">
                       <button 
                         className="appointment-button"
-                        onClick={() => handleViewingAppointment(room)}
+                        onClick={() => window.location.href = `/rooms/${room.RoomID}`}
                       >
                         <Eye size={16} />
-                        Hẹn lịch xem phòng
+                        Xem chi tiết
                       </button>
                     </div>
                   </div>

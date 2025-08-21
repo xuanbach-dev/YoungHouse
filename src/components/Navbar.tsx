@@ -34,6 +34,11 @@ const Navbar: React.FC = () => {
 
   const handleNavClick = () => setIsMenuOpen(false);
 
+  const isActivePath = (path: string) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -45,15 +50,15 @@ const Navbar: React.FC = () => {
 
         {/* Desktop menu */}
         <div className="navbar-menu desktop-menu">
-          <Link to="/" className="navbar-item">
+          <Link to="/" className={`navbar-item ${isActivePath('/') ? 'active' : ''}`}>
             <span>Trang chủ</span>
           </Link>
 
-          <Link to="/system-home" className="navbar-item">
+          <Link to="/system-home" className={`navbar-item ${isActivePath('/system-home') ? 'active' : ''}`}>
             <span>Hệ thống nhà trọ</span>
           </Link>
 
-          <Link to="/contact" className="navbar-item">
+          <Link to="/contact" className={`navbar-item ${isActivePath('/contact') ? 'active' : ''}`}>
             <span>Liên hệ</span>
           </Link>
         </div>
@@ -83,7 +88,7 @@ const Navbar: React.FC = () => {
         <div className="mobile-menu-body">
           <ul className="mobile-nav" role="menu">
             <li>
-              <Link to="/" className="mobile-nav-item" role="menuitem" onClick={handleNavClick}>
+              <Link to="/" className={`mobile-nav-item ${isActivePath('/') ? 'active' : ''}`} role="menuitem" onClick={handleNavClick}>
                 <span className="item-icon" aria-hidden>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-10.5z" fill="currentColor"/>
@@ -93,7 +98,7 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link to="/system-home" className="mobile-nav-item" role="menuitem" onClick={handleNavClick}>
+              <Link to="/system-home" className={`mobile-nav-item ${isActivePath('/system-home') ? 'active' : ''}`} role="menuitem" onClick={handleNavClick}>
                 <span className="item-icon" aria-hidden>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 3h7v18H3V3zm11 0h7v10h-7V3zm0 12h7v6h-7v-6z" fill="currentColor"/>
@@ -103,7 +108,7 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="mobile-nav-item" role="menuitem" onClick={handleNavClick}>
+              <Link to="/contact" className={`mobile-nav-item ${isActivePath('/contact') ? 'active' : ''}`} role="menuitem" onClick={handleNavClick}>
                 <span className="item-icon" aria-hidden>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z" fill="currentColor"/>

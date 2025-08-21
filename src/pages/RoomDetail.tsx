@@ -28,6 +28,42 @@ const RoomDetail: React.FC = () => {
   const [showViewingAppointmentForm, setShowViewingAppointmentForm] = useState(false);
   const [images, setImages] = useState<string[]>([]);
   const [imageAttempts, setImageAttempts] = useState<Record<number, number>>({});
+
+  // Optional: YouTube video per branch. Fill in the exact links later.
+  const branchVideoUrls: Record<number, string> = {
+    1: 'https://www.youtube.com/watch?v=E1KWKr3gxUc',
+    2: 'https://www.youtube.com/watch?v=D2Go9l19KR8',
+    4: 'https://www.youtube.com/watch?v=jXL-mNsignU',
+    5: 'https://www.youtube.com/watch?v=ZkQUzKE3GKg',
+    7: 'https://www.youtube.com/watch?v=4m3r_T2hwps',
+    8: 'https://www.youtube.com/watch?v=eg2vSMeFfmo',
+    9: 'https://www.youtube.com/watch?v=C0_2w-yNgGo',
+    10: 'https://www.youtube.com/watch?v=dB8UXfhhC_A',
+    11: 'https://www.youtube.com/watch?v=WbDRp5rI_2s',
+    12: 'https://www.youtube.com/watch?v=DWUOLNPVzHw',
+    14: 'https://www.youtube.com/watch?v=grtZYFLfBVw'
+  };
+
+  const toYouTubeEmbed = (url: string): string => {
+    if (!url) return '';
+    try {
+      // Support youtu.be/<id>, youtube.com/watch?v=<id>, youtube.com/embed/<id>
+      const u = new URL(url);
+      let id = '';
+      if (u.hostname === 'youtu.be') {
+        id = u.pathname.replace('/', '');
+      } else if (u.searchParams.get('v')) {
+        id = u.searchParams.get('v') || '';
+      } else {
+        // /embed/<id> or /shorts/<id>
+        const parts = u.pathname.split('/').filter(Boolean);
+        id = parts.pop() || '';
+      }
+      return id ? `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1` : '';
+    } catch {
+      return '';
+    }
+  };
   
   // Local mock rooms (sync minimal fields with SystemHome local data)
   const localRooms: Room[] = [
@@ -732,6 +768,21 @@ const RoomDetail: React.FC = () => {
           </div>
 
         
+          {/* Branch video placed above the introduction, if provided */}
+          {room.BranchID && branchVideoUrls[room.BranchID] && (
+            <div className="branch-video">
+              <div className="video-wrapper">
+                <iframe
+                  src={toYouTubeEmbed(branchVideoUrls[room.BranchID])}
+                  title={`Video giới thiệu ${room.BranchName}`}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          )}
+
           {room.BranchID === 1 && (
             <div className="branch-intro">
               <h3>Giới thiệu Young House 1</h3>
