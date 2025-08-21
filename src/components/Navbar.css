@@ -50,7 +50,7 @@
 }
 
 .logo-image {
-  height: 64px;
+  height: 70px;
   width: auto;
   transition: opacity 0.3s ease;
 }
@@ -93,10 +93,15 @@
 /* Mobile toggle */
 .navbar-toggle {
   display: none;
-  background: none;
-  border: none;
-  padding: 8px;
+  background: #ffffff;
+  border: 1px solid #e7ecf3;
+  padding: 8px 12px;
+  border-radius: 12px;
   cursor: pointer;
+  box-shadow: 0 1px 2px rgba(16,24,40,.04);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .hamburger,
@@ -104,19 +109,21 @@
 .hamburger::after {
   content: '';
   display: block;
-  width: 26px;
+  width: 22px;
   height: 2px;
   background: #333;
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.hamburger::before { transform: translateY(-7px); }
-.hamburger::after { transform: translateY(5px); }
+.hamburger::before { transform: translateY(-6px); }
+.hamburger::after { transform: translateY(6px); }
 
 .navbar-toggle.active .hamburger { background: transparent; }
-.navbar-toggle.active .hamburger::before { transform: rotate(45deg); }
-.navbar-toggle.active .hamburger::after { transform: rotate(-45deg); }
+.navbar-toggle.active .hamburger::before { transform: translateY(0) rotate(45deg); }
+.navbar-toggle.active .hamburger::after { transform: translateY(0) rotate(-45deg); }
+
+.menu-label { font-weight: 600; color: #1d2433; font-size: 0.95rem; }
 
 /* Mobile drawer */
 .mobile-menu {
@@ -127,9 +134,9 @@
   max-width: 360px;
   height: 100vh;
   background: #fff;
-  box-shadow: -2px 0 12px rgba(0,0,0,0.1);
+  box-shadow: -8px 0 24px rgba(0,0,0,0.18);
   z-index: 1100;
-  transition: right 0.3s ease;
+  transition: right 0.34s cubic-bezier(.22,.61,.36,1);
   display: flex;
   flex-direction: column;
 }
@@ -155,21 +162,33 @@
 .mobile-menu-body {
   display: flex;
   flex-direction: column;
-  padding: 8px 8px 24px 8px;
+  padding: 8px 8px 12px 8px;
+  overflow-y: auto;
 }
 
-.mobile-menu .navbar-item {
-  padding: 14px 12px;
-  font-size: 1rem;
-  border-radius: 6px;
-}
+.mobile-nav { list-style: none; margin: 0; padding: 8px; display: flex; flex-direction: column; gap: 4px; }
+.mobile-nav-item { display: flex; align-items: center; gap: 12px; padding: 14px 12px; color: #1d2433; text-decoration: none; border-radius: 10px; font-weight: 600; background: #f7f9fc; border: 1px solid #eef2f7; transition: background .2s ease, transform .1s ease; }
+.mobile-nav-item:active { transform: translateY(1px); }
+.mobile-nav-item:hover { background: #eef4ff; }
+.mobile-nav-item .item-icon { color: #2d7dd2; display: inline-flex; }
+.mobile-nav-item .item-text { font-size: 1rem; }
 
 .menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.45);
   z-index: 1090;
+  animation: fadeIn .2s ease forwards;
 }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.mobile-menu-footer { margin-top: auto; padding: 10px; border-top: 1px solid #ececec; background: #ffffff; }
+.quick-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.quick-action { display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; padding: 12px 10px; border-radius: 10px; font-weight: 700; border: 1px solid #e9eef5; background: #f7f9fc; color: #1d2433; }
+.quick-action img { width: 18px; height: 18px; }
+.quick-action.call { background: #e8fff3; color: #0a7a3d; border-color: #ccf2df; }
+.quick-action.zalo { background: #e6f2ff; color: #0b64d4; border-color: #d6e8ff; }
 
 /* Safe-area padding for notched devices */
 .navbar, .navbar-container { padding-left: max(2rem, env(safe-area-inset-left)); padding-right: max(2rem, env(safe-area-inset-right)); }
@@ -180,18 +199,18 @@
 /* Responsive */
 @media (max-width: 1024px) {
   .navbar-container { padding: 0 1rem; }
-  .logo-image { height: 56px; }
+  .logo-image { height: 60px; }
 }
 
 @media (max-width: 768px) {
   .navbar-container { padding: 0 0.75rem; height: 64px; }
   .desktop-menu { display: none; }
   .navbar-toggle { display: inline-flex; }
-  .logo-image { height: 52px; }
+  .logo-image { height: 55px; }
 }
 
 @media (max-width: 420px) {
   .navbar-container { padding: 0 0.5rem; height: 60px; }
-  .logo-image { height: 46px; }
+  .logo-image { height: 55px; }
   .mobile-menu { width: 88%; }
 }

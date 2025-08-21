@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
       <div className="navbar-container">
         <Link to="/" className="navbar-brand" onClick={handleNavClick}>
           <div className="brand-logo">
-            <img src="/logo.png" alt="YoungHouse" className="logo-image" />
+            <img src="/logo3.png" alt="YoungHouse" className="logo-image" />
           </div>
         </Link>
 
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
           onClick={() => setIsMenuOpen(v => !v)}
         >
           <span className="hamburger" />
-          <span className="sr-only">Menu</span>
+          <span className="menu-label">Menu</span>
         </button>
       </div>
 
@@ -74,22 +74,57 @@ const Navbar: React.FC = () => {
       <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`} role="dialog" aria-modal="true">
         <div className="mobile-menu-header">
           <div className="brand-logo small">
-            <img src="/logo.png" alt="YoungHouse" className="logo-image" />
+            <img src="/logo3.png" alt="YoungHouse" className="logo-image" />
           </div>
           <button className="close-btn" aria-label="Đóng menu" onClick={() => setIsMenuOpen(false)}>
             ✕
           </button>
         </div>
         <div className="mobile-menu-body">
-          <Link to="/" className="navbar-item" onClick={handleNavClick}>
-            Trang chủ
-          </Link>
-          <Link to="/system-home" className="navbar-item" onClick={handleNavClick}>
-            Hệ thống nhà trọ
-          </Link>
-          <Link to="/contact" className="navbar-item" onClick={handleNavClick}>
-            Liên hệ
-          </Link>
+          <ul className="mobile-nav" role="menu">
+            <li>
+              <Link to="/" className="mobile-nav-item" role="menuitem" onClick={handleNavClick}>
+                <span className="item-icon" aria-hidden>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-10.5z" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span className="item-text">Trang chủ</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/system-home" className="mobile-nav-item" role="menuitem" onClick={handleNavClick}>
+                <span className="item-icon" aria-hidden>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3h7v18H3V3zm11 0h7v10h-7V3zm0 12h7v6h-7v-6z" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span className="item-text">Hệ thống nhà trọ</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="mobile-nav-item" role="menuitem" onClick={handleNavClick}>
+                <span className="item-icon" aria-hidden>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span className="item-text">Liên hệ</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="mobile-menu-footer">
+          <div className="quick-actions">
+            <a className="quick-action call" href="tel:0372858098" onClick={handleNavClick}>
+              <img src="/phone-icon.png" alt="Gọi" />
+              <span>Gọi ngay</span>
+            </a>
+            <a className="quick-action zalo" href="https://zalo.me/0372858098" target="_blank" rel="noreferrer" onClick={handleNavClick}>
+              <img src="/Zalo.png" alt="Zalo" />
+              <span>Chat Zalo</span>
+            </a>
+          </div>
         </div>
       </div>
 
