@@ -1,0 +1,364 @@
+.roommate-finder-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  padding: 0;
+  margin: 0;
+}
+
+/* Page Header */
+.page-header {
+  background: white;
+  border-radius: 12px;
+  margin: 2rem auto;
+  max-width: 1400px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.header-content h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+.header-content p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.view-btn,
+.create-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  text-decoration: none;
+  color: white;
+}
+
+.view-btn {
+  background: #2d7dd2;
+}
+
+.view-btn:hover,
+.view-btn.active {
+  background: #1e6bb8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(45, 125, 210, 0.3);
+}
+
+.create-btn {
+  background: #27ae60;
+}
+
+.create-btn:hover,
+.create-btn.active {
+  background: #229954;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+/* Page Content */
+.page-content {
+  max-width: 1400px;
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+}
+
+/* Quick Stats */
+.quick-stats {
+  max-width: 1400px;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 0 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+  font-size: 3rem;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2d7dd2 0%, #1e6bb8 100%);
+  border-radius: 50%;
+  color: white;
+}
+
+.stat-content h3 {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+}
+
+.stat-number {
+  color: #2d7dd2;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Features Section */
+.features-section {
+  max-width: 1400px;
+  margin: 0 auto 3rem;
+  padding: 3rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.features-section h2 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  background: #f8f9fa;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e9ecef;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-color: #2d7dd2;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.feature-card h3 {
+  color: #2c3e50;
+  font-size: 1.3rem;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+
+.feature-card p {
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .roommate-finder-page {
+    padding: 1rem 0;
+  }
+
+  .page-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+
+  .header-content h1 {
+    font-size: 2rem;
+  }
+
+  .header-actions {
+    justify-content: center;
+  }
+
+  .view-btn,
+  .create-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .quick-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+  }
+
+  .stat-icon {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .features-section {
+    margin: 0 1rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .features-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+  }
+
+  .page-content {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .header-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .header-content p {
+    font-size: 1rem;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .view-btn,
+  .create-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .features-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Animation for page load */
+.roommate-finder-page {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth transitions for view switching */
+.page-content {
+  transition: opacity 0.3s ease;
+}
+
+/* Loading state */
+.page-content.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Focus styles for accessibility */
+.view-btn:focus,
+.create-btn:focus {
+  outline: 2px solid #2d7dd2;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .roommate-finder-page {
+    background: white;
+  }
+  
+  .page-header,
+  .quick-stats,
+  .features-section {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}

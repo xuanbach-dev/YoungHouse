@@ -231,12 +231,12 @@ const Home: React.FC = () => {
       <div className="hero-section">
         <div className="hero-content">
           <div className="hero-text">
-            <h1>Nhà trọ tiện nghi</h1>
-            <h2>Cư dân YoungHouse</h2>
+           
+            <h2>YoungHouse Hoà Lạc</h2>
+            <h1 style={{color: '#2d7dd2'}}>"Hơn cả mái nhà - Đó là mái ấm"</h1>
             <p>
-              Khi nhà trọ cũng là nhà, YoungHouse tin rằng một không gian tiện nghi, 
-              lối sống văn minh là nền móng để cư dân trẻ có thể tự do sống tích cực 
-              và thành công trong cuộc sống.
+            Hãy đến để cảm nhận chất lượng và dịch vụ khác biệt cũng như trải nghiệm cơ hội việc làm tuyệt vời tại Young House các bạn nhé.
+
             </p>
             <p className="hero-subtitle">
             Young House - Hệ thống nhà cho thuê Lớn và Uy tín nhất Hòa Lạc ❤️
@@ -415,14 +415,14 @@ const Home: React.FC = () => {
               <div className="value-icon">
                 <Users size={32} />
               </div>
-              <h3>Phòng trọ tiện nghi, thiết kế tối giản, gọn gàng</h3>
+              <h3>Phòng trọ tiện nghi, thiết kế tối giản</h3>
             </div>
             
             <div className="value-item">
               <div className="value-icon">
                 <MessageSquare size={32} />
               </div>
-              <h3>Cộng đồng sinh viên FPT hoà đồng , năng động</h3>
+              <h3>Cộng đồng sinh viên FPT hoà đồng, năng động</h3>
             </div>
             
             <div className="value-item">

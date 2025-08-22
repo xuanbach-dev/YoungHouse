@@ -154,3 +154,29 @@ export interface RoomType {
   price: number;
   description?: string;
 }
+
+export interface RoommatePost {
+  id: number;
+  title: string;
+  description: string;
+  location: string;
+  price: string;
+  roomType: string;
+  gender: string;
+  age: string;
+  contact: string;
+  createdAt: string;
+  status: string;
+}
+
+export interface CreateRoommatePostData {
+  title: string;
+  description: string;
+  location?: string;
+  price?: string;
+  roomType?: string;
+  gender?: string;
+  age?: string;
+  contact: string;
+  status?: string;
+}

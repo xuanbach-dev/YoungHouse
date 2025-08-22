@@ -57,10 +57,15 @@ const Navbar: React.FC = () => {
           <Link to="/system-home" className={`navbar-item ${isActivePath('/system-home') ? 'active' : ''}`}>
             <span>Hệ thống nhà trọ</span>
           </Link>
+          <Link to="/roommate-finder" className={`navbar-item ${isActivePath('/roommate-finder') ? 'active' : ''}`}>
+            <span>Tìm người ở ghép</span>
+          </Link>
 
           <Link to="/contact" className={`navbar-item ${isActivePath('/contact') ? 'active' : ''}`}>
             <span>Liên hệ</span>
           </Link>
+
+          
         </div>
 
         {/* Mobile toggle */}
@@ -108,6 +113,16 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
             <li>
+              <Link to="/roommate-finder" className={`mobile-nav-item ${isActivePath('/roommate-finder') ? 'active' : ''}`} role="menuitem" onClick={handleNavClick}>
+                <span className="item-icon" aria-hidden>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span className="item-text">Tìm người ở ghép</span>
+              </Link>
+            </li>
+            <li>
               <Link to="/contact" className={`mobile-nav-item ${isActivePath('/contact') ? 'active' : ''}`} role="menuitem" onClick={handleNavClick}>
                 <span className="item-icon" aria-hidden>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,6 +132,7 @@ const Navbar: React.FC = () => {
                 <span className="item-text">Liên hệ</span>
               </Link>
             </li>
+           
           </ul>
         </div>
         <div className="mobile-menu-footer">

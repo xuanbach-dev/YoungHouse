@@ -9,6 +9,7 @@ import PostDetail from './pages/PostDetail';
 import SystemHome from './pages/SystemHome';
 import RoomDetail from './pages/RoomDetail';
 import Contact from './pages/Contact';
+import RoommateFinder from './pages/RoommateFinder';
 
 import './App.css';
 
@@ -25,6 +26,7 @@ function App() {
               <Route path="/rooms/:id" element={<RoomDetail />} />
               <Route path="/posts/:id" element={<PostDetail />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/roommate-finder" element={<RoommateFinder />} />
               
               {/* Fallback */}
               <Route path="*" element={<Navigate to="/" replace />} />
