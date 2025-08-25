@@ -259,3 +259,4 @@ const CreateRoommatePost: React.FC<CreateRoommatePostProps> = ({ onSuccess, onCa
 
 export default CreateRoommatePost;
 
+
