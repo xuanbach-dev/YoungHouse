@@ -316,6 +316,7 @@ const SystemHome: React.FC = () => {
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
           RoomTypeID: 11,
           roomTypeId: 11
+        },
         // },{
         //   RoomID: 8,
         //   roomId: 8,
@@ -337,27 +338,8 @@ const SystemHome: React.FC = () => {
         //   RoomTypeID: 8,
         //   roomTypeId: 8
         // },{
-        },{
-          RoomID: 9,
-          roomId: 9,
-          RoomNumber: 'Young House 12',
-          roomNumber: 'Young House 12',
-          BranchID: 12,
-          branchId: 12,
-          BranchName: 'Young House 12',
-          branchName: 'Young House 12',
-          TypeName: 'Giường gác xép có ban công thoáng',
-          typeName: 'Giường gác xép có ban công thoáng',
-          Price: 2500000,
-          price: 2500000,
-          Status: 'Available',
-          isAvailable: true,
-          Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 7,
-          roomTypeId: 7
-        },{
+        // } 
+        {
           RoomID: 10,
           roomId: 10,
           RoomNumber: 'Young House 14',
