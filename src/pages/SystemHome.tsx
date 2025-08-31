@@ -348,10 +348,10 @@ const SystemHome: React.FC = () => {
           branchName: 'Young House 14',
           TypeName: 'Giường gác xép có cửa sổ thoáng',
           typeName: 'Giường gác xép có cửa sổ thoáng',
-          Price: 1800000,
-          price: 1800000,
-          Status: 'Occupied',
-          isAvailable: false,
+          Price: 1700000,
+          price: 1700000,
+          Status: 'Available',
+          isAvailable: true,
           Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -747,7 +747,7 @@ const SystemHome: React.FC = () => {
                       checked={statusFilter === 'Available'}
                       onChange={() => setStatusFilter('Available')}
                     />
-                    <span>Còn trống (Chỉ Young House 10)</span>
+                    <span>Còn trống (Young House 10 & 14)</span>
                   </label>
                 </div>
               </div>
@@ -799,7 +799,7 @@ const SystemHome: React.FC = () => {
             <div className="results-header">
               <div className="results-info">
                 <h2>Tìm phòng trống</h2>
-                <p>Còn <strong>{filteredRooms.length}</strong> dạng phòng trống (Chỉ Young House 10)</p>
+                <p>Còn <strong>{filteredRooms.length}</strong> dạng phòng trống (Young House 10 & 14)</p>
               </div>
               
               <div className="view-controls">
