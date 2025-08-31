@@ -187,75 +187,74 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đôi',
           Price: 2000000,
           price: 2000000,
-          Status: 'Available',
-          isAvailable: true,
+          Status: 'Occupied',
+          isAvailable: false,
           Address: '57 đường Xóm Quán – H10, xã Tân Xã',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
           RoomTypeID: 1,
           roomTypeId: 1
+        },{
+          RoomID: 2,
+          roomId: 2,
+          RoomNumber: 'Young House 2',
+          roomNumber: 'Young House 2',
+          BranchID: 2,
+          branchId: 2,
+          BranchName: 'Young House 2',
+          branchName: 'Young House 2',
+          TypeName: 'Giường đôi căn góc thoáng',
+          typeName: 'Giường đôi căn góc thoáng',
+          Price: 2600000,
+          price: 2600000,
+          Status: 'Occupied',
+          isAvailable: false,
+          Address: '64 Phú Hữu, xã Tân Xã',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+          RoomTypeID: 5,
+          roomTypeId: 5
+        },{
+          RoomID: 3,
+          roomId: 3,
+          RoomNumber: 'Young House 2',
+          roomNumber: 'Young House 2',
+          BranchID: 2,
+          branchId: 2,
+          BranchName: 'Young House 2',
+          branchName: 'Young House 2',
+          TypeName: 'Giường đơn có ban công thoáng',
+          typeName: 'Giường đơn có ban công thoáng',
+          Price: 2600000,
+          price: 2600000,
+          Status: 'Occupied',
+          isAvailable: false,
+          Address: '64 Phú Hữu, xã Tân Xã',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+          RoomTypeID: 3,
+          roomTypeId: 3
+        },{
+          RoomID: 4,
+          roomId: 4,
+          RoomNumber: 'Young House 2',
+          roomNumber: 'Young House 2',
+          BranchID: 2,
+          branchId: 2,
+          BranchName: 'Young House 2',
+          branchName: 'Young House 2',
+          TypeName: 'Giường đơn có giếng trời thoáng',
+          typeName: 'Giường đơn có giếng trời thoáng',
+          Price: 2400000,
+          price: 2400000,
+          Status: 'Occupied',
+          isAvailable: false,
+          Address: '64 Phú Hữu, xã Tân Xã',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+          RoomTypeID: 4,
+          roomTypeId: 4
         },
-        // },{
-        //   RoomID: 2,
-        //   roomId: 2,
-        //   RoomNumber: 'Young House 2',
-        //   roomNumber: 'Young House 2',
-        //   BranchID: 2,
-        //   branchId: 2,
-        //   BranchName: 'Young House 2',
-        //   branchName: 'Young House 2',
-        //   TypeName: 'Giường đôi căn góc thoáng',
-        //   typeName: 'Giường đôi căn góc thoáng',
-        //   Price: 2600000,
-        //   price: 2600000,
-        //   Status: 'Available',
-        //   isAvailable: true,
-        //   Address: '64 Phú Hữu, xã Tân Xã',
-        //   City: 'Hà Nội',
-        //   Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-        //   RoomTypeID: 5,
-        //   roomTypeId: 5
-        // },{
-        //   RoomID: 3,
-        //   roomId: 3,
-        //   RoomNumber: 'Young House 2',
-        //   roomNumber: 'Young House 2',
-        //   BranchID: 2,
-        //   branchId: 2,
-        //   BranchName: 'Young House 2',
-        //   branchName: 'Young House 2',
-        //   TypeName: 'Giường đơn có ban công thoáng',
-        //   typeName: 'Giường đơn có ban công thoáng',
-        //   Price: 2600000,
-        //   price: 2600000,
-        //   Status: 'Available',
-        //   isAvailable: true,
-        //   Address: '64 Phú Hữu, xã Tân Xã',
-        //   City: 'Hà Nội',
-        //   Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-        //   RoomTypeID: 3,
-        //   roomTypeId: 3
-        // },{
-        //   RoomID: 4,
-        //   roomId: 4,
-        //   RoomNumber: 'Young House 2',
-        //   roomNumber: 'Young House 2',
-        //   BranchID: 2,
-        //   branchId: 2,
-        //   BranchName: 'Young House 2',
-        //   branchName: 'Young House 2',
-        //   TypeName: 'Giường đơn có giếng trời thoáng',
-        //   typeName: 'Giường đơn có giếng trời thoáng',
-        //   Price: 2400000,
-        //   price: 2400000,
-        //   Status: 'Available',
-        //   isAvailable: true,
-        //   Address: '64 Phú Hữu, xã Tân Xã',
-        //   City: 'Hà Nội',
-        //   Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-        //   RoomTypeID: 4,
-        //   roomTypeId: 4
-        // },{
         {
           RoomID: 5,
           roomId: 5,
@@ -269,8 +268,8 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đôi có hành lang view hồ Tân Xã',
           Price: 2000000,
           price: 2000000,
-          Status: 'Available',
-          isAvailable: true,
+          Status: 'Occupied',
+          isAvailable: false,
           Address: '85 Mục Uyên – Công Nghệ, Tân Xã ',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -289,8 +288,8 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đôi có ban công thoáng',
           Price: 2000000,
           price: 2000000,
-          Status: 'Available',
-          isAvailable: true,
+          Status: 'Occupied',
+          isAvailable: false,
           Address: 'D2 – Khu Tái định cư đường 420 xã Bình Yên – Thạch Thất ',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -307,8 +306,8 @@ const SystemHome: React.FC = () => {
           branchName: 'Young House 10',
           TypeName: 'Giường đôi ',
           typeName: 'Giường đôi ',
-          Price: 1500000,
-          price: 1500000,
+          Price: 1400000,
+          price: 1400000,
           Status: 'Available',
           isAvailable: true,
           Address: 'Nhà văn hóa thôn Thái Bình, xã Bình Yên.  ',
@@ -316,29 +315,28 @@ const SystemHome: React.FC = () => {
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
           RoomTypeID: 11,
           roomTypeId: 11
+        },{
+          RoomID: 8,
+          roomId: 8,
+          RoomNumber: 'Young House 11',
+          roomNumber: 'Young House 11',
+          BranchID: 11,
+          branchId: 11,
+          BranchName: 'Young House 11',
+          branchName: 'Young House 11',
+          TypeName: 'Giường gác xép có ban công thoáng',
+          typeName: 'Giường gác xép có ban công thoáng',
+          Price: 2200000,
+          price: 2200000,
+          Status: 'Occupied',
+          isAvailable: false,
+          Address: 'Số 6, đường Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+          RoomTypeID: 8,
+          roomTypeId: 8
         },
-        // },{
-        //   RoomID: 8,
-        //   roomId: 8,
-        //   RoomNumber: 'Young House 11',
-        //   roomNumber: 'Young House 11',
-        //   BranchID: 11,
-        //   branchId: 11,
-        //   BranchName: 'Young House 11',
-        //   branchName: 'Young House 10',
-        //   TypeName: 'Giường gác xép có ban công thoáng',
-        //   typeName: 'Giường gác xép có ban công thoáng',
-        //   Price: 2200000,
-        //   price: 2200000,
-        //   Status: 'Available',
-        //   isAvailable: true,
-        //   Address: 'Số 6, đường Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
-        //   City: 'Hà Nội',
-        //   Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-        //   RoomTypeID: 8,
-        //   roomTypeId: 8
-        // },{
-        // } 
+        
         {
           RoomID: 10,
           roomId: 10,
@@ -352,8 +350,8 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường gác xép có cửa sổ thoáng',
           Price: 1800000,
           price: 1800000,
-          Status: 'Available',
-          isAvailable: true,
+          Status: 'Occupied',
+          isAvailable: false,
           Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -373,8 +371,8 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường gác xép có ban công thoáng',
           Price: 2000000,
           price: 2000000,
-          Status: 'Available',
-          isAvailable: true,
+          Status: 'Occupied',
+          isAvailable: false,
           Address: '23 Mục Uyên – Công nghệ - Tân Xã',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -394,8 +392,8 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đôi có ban công thoáng',
           Price: 2400000,
           price: 2400000,
-          Status: 'Available',
-          isAvailable: true,
+          Status: 'Occupied',
+          isAvailable: false,
           Address: 'Đối diện THPT Hai Bà Trưng - Tân Xã',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -414,8 +412,8 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường gác xép có ban công thoáng',
           Price: 2200000,
           price: 2200000,
-          Status: 'Available',
-          isAvailable: true,
+          Status: 'Occupied',
+          isAvailable: false,
           Address: ' 41 Mục Uyên 1, xã Tân Xã',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -425,9 +423,9 @@ const SystemHome: React.FC = () => {
         // Add more rooms as needed
       ];
       
-      // Filter rooms based on status
+      // Filter rooms based on status - only show available rooms (Young House 10)
       const filteredLocalRooms = localRooms.filter(room => 
-        !statusFilter || room.Status === statusFilter
+        room.Status === 'Available' && room.isAvailable === true
       );
       
       setRooms(filteredLocalRooms);
@@ -486,6 +484,11 @@ const SystemHome: React.FC = () => {
 
   const filterRooms = () => {
     let filtered = rooms.filter(room => {
+      // Only show available rooms (Young House 10)
+      if (room.Status !== 'Available' || !room.isAvailable) {
+        return false;
+      }
+
       // Check if room matches selected areas
       let matchesArea = true;
       if (selectedAreas.length > 0) {
@@ -538,7 +541,7 @@ const SystemHome: React.FC = () => {
     setSelectedRoomTypes([]);
     setPriceRange({ min: 0, max: 10000000 });
     setSearchQuery('');
-    setStatusFilter('Available');
+    setStatusFilter('Available'); // Keep only available rooms
   };
 
   const handleSearch = () => {
@@ -744,7 +747,7 @@ const SystemHome: React.FC = () => {
                       checked={statusFilter === 'Available'}
                       onChange={() => setStatusFilter('Available')}
                     />
-                    <span>Còn trống</span>
+                    <span>Còn trống (Chỉ Young House 10)</span>
                   </label>
                 </div>
               </div>
@@ -796,7 +799,7 @@ const SystemHome: React.FC = () => {
             <div className="results-header">
               <div className="results-info">
                 <h2>Tìm phòng trống</h2>
-                <p>Còn <strong>{filteredRooms.length}</strong> dạng phòng trống</p>
+                <p>Còn <strong>{filteredRooms.length}</strong> dạng phòng trống (Chỉ Young House 10)</p>
               </div>
               
               <div className="view-controls">
@@ -937,7 +940,7 @@ const SystemHome: React.FC = () => {
                       )}
                       <div className="availability-badge">
                         {room.Status === 'Available' ? 'Còn trống' : 
-                         room.Status === 'Occupied' ? 'Đã thuê' :
+                         room.Status === 'Occupied' ? 'Hết phòng' :
                          room.Status === 'Reserved' ? 'Đã đặt' : 'Bảo trì'}
                       </div>
                     </div>
