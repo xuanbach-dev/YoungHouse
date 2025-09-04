@@ -39,7 +39,7 @@ const SystemHome: React.FC = () => {
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [selectedRoomTypes, setSelectedRoomTypes] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState({ min: 0, max: 10000000 });
-  const [statusFilter, setStatusFilter] = useState<string>('Available');
+  const [statusFilter, setStatusFilter] = useState<string>('All');
 
   // Available areas and their corresponding branch IDs
   const availableAreas = [
@@ -328,8 +328,8 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường gác xép có ban công thoáng',
           Price: 2200000,
           price: 2200000,
-          Status: 'Occupied',
-          isAvailable: false,
+          Status: 'Available',
+          isAvailable: true,
           Address: 'Số 6, đường Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -358,7 +358,7 @@ const SystemHome: React.FC = () => {
           RoomTypeID: 13,
           roomTypeId: 13
         }
-        ,{
+        ,        {
           RoomID: 11,
           roomId: 11,
           RoomNumber: 'Young House 5',
@@ -371,8 +371,8 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường gác xép có ban công thoáng',
           Price: 2000000,
           price: 2000000,
-          Status: 'Occupied',
-          isAvailable: false,
+          Status: 'Available',
+          isAvailable: true,
           Address: '23 Mục Uyên – Công nghệ - Tân Xã',
           City: 'Hà Nội',
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -423,10 +423,8 @@ const SystemHome: React.FC = () => {
         // Add more rooms as needed
       ];
       
-      // Filter rooms based on status - only show available rooms (Young House 10)
-      const filteredLocalRooms = localRooms.filter(room => 
-        room.Status === 'Available' && room.isAvailable === true
-      );
+      // Show all rooms instead of filtering by status
+      const filteredLocalRooms = localRooms;
       
       setRooms(filteredLocalRooms);
       setFilteredRooms(filteredLocalRooms);
@@ -480,12 +478,12 @@ const SystemHome: React.FC = () => {
 
   useEffect(() => {
     filterRooms();
-  }, [selectedBranches, selectedAreas, selectedRoomTypes, priceRange, rooms]);
+  }, [selectedBranches, selectedAreas, selectedRoomTypes, priceRange, rooms, statusFilter]);
 
   const filterRooms = () => {
     let filtered = rooms.filter(room => {
-      // Only show available rooms (Young House 10)
-      if (room.Status !== 'Available' || !room.isAvailable) {
+      // Filter by status if not 'All'
+      if (statusFilter === 'Available' && (room.Status !== 'Available' || !room.isAvailable)) {
         return false;
       }
 
@@ -541,7 +539,7 @@ const SystemHome: React.FC = () => {
     setSelectedRoomTypes([]);
     setPriceRange({ min: 0, max: 10000000 });
     setSearchQuery('');
-    setStatusFilter('Available'); // Keep only available rooms
+    setStatusFilter('All'); // Show all rooms
   };
 
   const handleSearch = () => {
@@ -678,7 +676,7 @@ const SystemHome: React.FC = () => {
           {/* Sidebar Filters */}
           <aside className={`filters-sidebar ${showFilters ? 'show' : ''}`}>
             <div className="filters-header">
-              <h3>Tìm phòng trống</h3>
+              <h3>Tìm phòng</h3>
               <button
                 type="button"
                 className="filters-close"
@@ -744,10 +742,19 @@ const SystemHome: React.FC = () => {
                     <input
                       type="radio"
                       name="status"
+                      checked={statusFilter === 'All'}
+                      onChange={() => setStatusFilter('All')}
+                    />
+                    <span>Tất cả phòng</span>
+                  </label>
+                  <label className="checkbox-item">
+                    <input
+                      type="radio"
+                      name="status"
                       checked={statusFilter === 'Available'}
                       onChange={() => setStatusFilter('Available')}
                     />
-                    <span>Còn trống (Young House 10 & 14)</span>
+                    <span>Chỉ phòng còn trống</span>
                   </label>
                 </div>
               </div>
@@ -798,8 +805,8 @@ const SystemHome: React.FC = () => {
           <main className="main-content">
             <div className="results-header">
               <div className="results-info">
-                <h2>Tìm phòng trống</h2>
-                <p>Còn <strong>{filteredRooms.length}</strong> dạng phòng trống (Young House 10 & 14)</p>
+                <h2>Tất cả phòng</h2>
+                <p>Có <strong>{filteredRooms.length}</strong> phòng {statusFilter === 'Available' ? 'còn trống' : 'tất cả'}</p>
               </div>
               
               <div className="view-controls">
@@ -938,7 +945,7 @@ const SystemHome: React.FC = () => {
                           }}
                         />
                       )}
-                      <div className="availability-badge">
+                      <div className={`availability-badge ${room.Status === 'Occupied' ? 'occupied' : room.Status === 'Available' ? 'available' : 'other'}`}>
                         {room.Status === 'Available' ? 'Còn trống' : 
                          room.Status === 'Occupied' ? 'Hết phòng' :
                          room.Status === 'Reserved' ? 'Đã đặt' : 'Bảo trì'}

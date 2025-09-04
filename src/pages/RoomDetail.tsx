@@ -222,8 +222,8 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường gác xép có ban công thoáng',
       Price: 2000000,
       price: 2000000,
-      Status: 'Occupied',
-      isAvailable: false,
+      Status: 'Available',
+      isAvailable: true,
       Address: 'Số 6, đường Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
       City: 'Hà Nội',
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -277,13 +277,13 @@ const RoomDetail: React.FC = () => {
       BranchID: 5,
       branchId: 5,
       BranchName: 'Young House 5',
-      branchName: 'Young House 14',
+      branchName: 'Young House 5',
       TypeName: 'Giường đôi có ban công thoáng',
       typeName: 'Giường đôi có ban công thoáng',
       Price: 2000000,
       price: 2000000,
-      Status: 'Occupied',
-      isAvailable: false,
+      Status: 'Available',
+      isAvailable: true,
       Address: '23 Mục Uyên – Công nghệ - Tân Xã',
       City: 'Hà Nội',
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
@@ -724,7 +724,7 @@ const RoomDetail: React.FC = () => {
           </div>
 
           <div className="room-status">
-            <span className={`status-badge ${(room.Status || 'Available').toLowerCase()}`}>
+            <span className={`status-badge ${room.Status === 'Occupied' ? 'occupied' : room.Status === 'Available' ? 'available' : 'other'}`}>
               {room.Status === 'Available' ? 'Còn trống' : 
                room.Status === 'Occupied' ? 'Hết phòng' :
                room.Status === 'Reserved' ? 'Đã đặt' : 'Bảo trì'}
@@ -970,10 +970,7 @@ const RoomDetail: React.FC = () => {
               .filter(similarRoom => {
                 if (similarRoom.RoomID === room.RoomID) return false;
                 
-                // Only show available rooms
-                if (similarRoom.Status !== 'Available' || !similarRoom.isAvailable) {
-                  return false;
-                }
+                // Show all rooms regardless of status
                 
                 // Same room type
                 const sameType = similarRoom.RoomTypeID === room.RoomTypeID;
@@ -1014,7 +1011,7 @@ const RoomDetail: React.FC = () => {
                     <p className="similar-room-branch">{similarRoom.BranchName}</p>
                     <p className="similar-room-type">{similarRoom.TypeName}</p>
                     <p className="similar-room-price">{formatPrice(similarRoom.Price || 0)}/tháng</p>
-                    <span className={`similar-room-status ${(similarRoom.Status || 'Available').toLowerCase()}`}>
+                    <span className={`similar-room-status ${similarRoom.Status === 'Occupied' ? 'occupied' : similarRoom.Status === 'Available' ? 'available' : 'other'}`}>
                       {similarRoom.Status === 'Available' ? 'Còn trống' : 
                        similarRoom.Status === 'Occupied' ? 'Hết phòng' :
                        similarRoom.Status === 'Reserved' ? 'Đã đặt' : 'Bảo trì'}

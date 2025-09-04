@@ -312,6 +312,11 @@
     color: #383d41;
   }
   
+  .status-badge.other {
+    background: #fff3cd;
+    color: #856404;
+  }
+  
   /* Room Details */
   .room-details, .room-amenities, .contact-info, .room-offers {
     margin-bottom: 32px;
@@ -882,6 +887,11 @@
 .similar-room-status.maintenance {
   background: #e2e3e5;
   color: #383d41;
+}
+
+.similar-room-status.other {
+  background: #fff3cd;
+  color: #856404;
 }
 
 @media (max-width: 768px) {

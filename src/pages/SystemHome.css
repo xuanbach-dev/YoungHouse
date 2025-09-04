@@ -491,6 +491,19 @@
   font-weight: 600;
 }
 
+.availability-badge.available {
+  background: #28a745;
+}
+
+.availability-badge.occupied {
+  background: #dc3545;
+}
+
+.availability-badge.other {
+  background: #ffc107;
+  color: #000;
+}
+
 .room-content {
   padding: 1.5rem;
 }
