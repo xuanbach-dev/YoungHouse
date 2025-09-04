@@ -574,8 +574,8 @@ const SystemHome: React.FC = () => {
             return `/rooms/branch-1/Type1/branch1-${i}.${i === 9 ? 'JPG' : 'jpg'}`;
           }
           case 5: {
-            // Available images: 1-10, 12, 13 (no 11)
-            const candidates = [1,2,3,4,5,6,7,8,9,10,12,13];
+            // Available images: 1, 2
+            const candidates = [1,2];
             const i = candidates[Math.floor(Math.random() * candidates.length)];
             return `/rooms/branch-5/Type15/branch5-${i}.jpg`;
           }
@@ -611,7 +611,9 @@ const SystemHome: React.FC = () => {
             return `/rooms/branch-9/Type10/branch9-${i}.${i >= 8 ? 'JPG' : 'jpg'}`;
           }
           case 10: {
-            const i = Math.floor(Math.random() * 6) + 1;
+            // Available images: 3-6
+            const candidates = [3,4,5,6];
+            const i = candidates[Math.floor(Math.random() * candidates.length)];
             return `/rooms/branch-10/Type11/branch10-${i}.jpg`;
           }
           case 11: {

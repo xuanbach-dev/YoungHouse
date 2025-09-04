@@ -391,21 +391,16 @@ const RoomDetail: React.FC = () => {
     }
 
     if (branchId === 10) {
-      // 6 images: branch10-1.jpg..-6.jpg, plus a special branch10_2.jpg present
-      images.push(`/rooms/branch-10/Type11/branch10-1.jpg`);
-      images.push(`/rooms/branch-10/Type11/branch10-2.jpg`);
-      images.push(`/rooms/branch-10/Type11/branch10-3.jpg`);
-      images.push(`/rooms/branch-10/Type11/branch10-4.jpg`);
-      images.push(`/rooms/branch-10/Type11/branch10-5.jpg`);
-      images.push(`/rooms/branch-10/Type11/branch10-6.jpg`);
-      // alt underscore variant for index 2 as fallback via onError
-      images.splice(2, 0, `/rooms/branch-10/Type11/branch10_2.jpg`);
+      // Available images: branch10-3.jpg to branch10-6.jpg
+      for (let i = 3; i <= 6; i++) {
+        images.push(`/rooms/branch-10/Type11/branch10-${i}.jpg`);
+      }
       return images;
     }
 
     if (branchId === 5) {
-      // Available images: 1-10, 12, 13 (no 11)
-      const available = [1,2,8,9,10,12,13];
+      // Available images: 1, 2
+      const available = [1,2];
       for (const i of available) {
         images.push(`/rooms/branch-5/Type15/branch5-${i}.jpg`);
       }
