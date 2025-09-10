@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
+import BottomNavbar from './components/BottomNavbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 
@@ -32,6 +33,7 @@ function App() {
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </main>
+        <BottomNavbar />
         <Footer />
       </div>
     </Router>
