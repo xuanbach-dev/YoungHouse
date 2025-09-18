@@ -7,6 +7,7 @@ import SurroundingAreas from '../components/SurroundingAreas';
 import './SystemHome.css';
 import { VisitCounterService } from '../services/visitCounter';
 import Meta from '../components/Meta';
+import { buildRoomSlug } from '../utils/slug';
 
 interface RoomSearchFilters {
   search?: string;
@@ -890,9 +891,9 @@ const SystemHome: React.FC = () => {
                     onClick={(e) => {
                       // Sử dụng window.open để mở trong tab mới nếu Ctrl được giữ
                       if (e.ctrlKey || e.metaKey) {
-                        window.open(`/rooms/${room.RoomID}`, '_blank');
+                        window.open(`/room/${buildRoomSlug(room as any)}`, '_blank');
                       } else {
-                        window.location.href = `/rooms/${room.RoomID}`;
+                        window.location.href = `/room/${buildRoomSlug(room as any)}`;
                       }
                     }}
                     style={{ cursor: 'pointer' }}

@@ -7,6 +7,7 @@ import ViewingAppointmentForm from '../components/ViewingAppointmentForm';
 import './Home.css';
 import Meta from '../components/Meta';
 import { VisitCounterService } from '../services/visitCounter';
+import { buildRoomSlug } from '../utils/slug';
 
 interface RoomType {
   RoomTypeID: number;
@@ -488,7 +489,7 @@ const Home: React.FC = () => {
             {searchResults.length > 0 && (
               <div className="rooms-grid">
                 {searchResults.map((room) => (
-                  <div key={room.RoomID || (room as any).roomId} className="room-card" onClick={() => window.location.href = `/rooms/${room.RoomID}` }>
+                  <div key={room.RoomID || (room as any).roomId} className="room-card" onClick={() => window.location.href = `/room/${buildRoomSlug(room as any)}` }>
                     <div className="room-image">
                       <img 
                         src={getImagePath(room)}
@@ -546,7 +547,7 @@ const Home: React.FC = () => {
             <h2>Phòng nổi bật</h2>
             <div className="rooms-grid">
               {rooms.slice(0, 6).map((room) => (
-                <div key={room.RoomID} className="room-card" onClick={() => window.location.href = `/rooms/${room.RoomID}` }>
+                <div key={room.RoomID} className="room-card" onClick={() => window.location.href = `/room/${require('../utils/slug').buildRoomSlug(room)}` }>
                   <div className="room-image">
                     <img 
                       src={getImagePath(room)}
@@ -574,7 +575,7 @@ const Home: React.FC = () => {
                     <div className="room-actions">
                       <button 
                         className="appointment-button"
-                        onClick={() => window.location.href = `/rooms/${room.RoomID}`}
+                        onClick={() => window.location.href = `/room/${require('../utils/slug').buildRoomSlug(room)}`}
                       >
                         <Eye size={16} />
                         Xem chi tiết

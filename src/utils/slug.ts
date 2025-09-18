@@ -16,8 +16,15 @@ export const buildRoomSlug = (room: {
 }): string => {
   const branch = toSlug(room.BranchName || room.branchName || 'young-house');
   const type = toSlug(room.TypeName || room.typeName || 'phong');
-  const number = room.RoomNumber || room.roomNumber || String(room.RoomID || room.roomId || '');
-  return `${branch}-${type}-${number}`;
+  // Prefer numeric stable id; fall back to digits in roomNumber; finally toSlug(roomNumber)
+  const rawNum = (room.RoomID || room.roomId || '').toString();
+  let numberPart = rawNum;
+  if (!numberPart) {
+    const rn = (room.RoomNumber || room.roomNumber || '').toString();
+    const digits = rn.replace(/\D+/g, '');
+    numberPart = digits || toSlug(rn);
+  }
+  return `${branch}-${type}-${numberPart}`;
 };
 
 export const parseRoomSlug = (slug: string): { branch: string; type: string; number: string } => {

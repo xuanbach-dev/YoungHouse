@@ -449,9 +449,48 @@ const RoomDetail: React.FC = () => {
     if (id) {
       const roomId = parseInt(id, 10);
       found = localRooms.find(r => r.RoomID === roomId) || null;
+      // Redirect permanent to slug URL for SEO canonical
+      if (found) {
+        const target = `/room/${buildRoomSlug(found as any)}`;
+        if (window.location.pathname !== target) {
+          navigate(target, { replace: true });
+          return;
+        }
+      }
     } else if (slug) {
       const target = slug;
-      found = localRooms.find(r => buildRoomSlug(r) === target) || null;
+      // 1) Exact match by our slug builder
+      found = localRooms.find(r => buildRoomSlug(r as any) === target) || null;
+      // 2) Robust fallback: compare normalized slug built from available fields
+      if (!found) {
+        found = localRooms.find(r => {
+          const branch = (r.BranchName || (r as any).branchName || '').toString();
+          const type = (r.TypeName || (r as any).typeName || '').toString();
+          const number = (r.RoomNumber || (r as any).roomNumber || r.RoomID || (r as any).roomId || '').toString();
+          const alt = `${branch}-${type}-${number}`;
+          try {
+            // toSlug imported above
+            return toSlug(alt) === target;
+          } catch {
+            return false;
+          }
+        }) || null;
+      }
+      // 3) If slug ends with number or contains encoded branch name, try multiple heuristics
+      if (!found) {
+        const decoded = decodeURIComponent(target);
+        const parts = decoded.split('-');
+        const last = parts[parts.length - 1];
+        const num = parseInt(last, 10);
+        if (!isNaN(num)) {
+          found = localRooms.find(r => (r.RoomID === num) || ((r as any).roomId === num) || ((r.RoomNumber || (r as any).roomNumber) === last)) || null;
+        }
+        // Try match by branch name presence
+        if (!found) {
+          const branchKey = parts.slice(0, parts.length - 2).join('-');
+          found = localRooms.find(r => toSlug(r.BranchName || (r as any).branchName || '') === branchKey) || null;
+        }
+      }
     }
     if (found) {
       setRoom(found);
@@ -1049,7 +1088,7 @@ const RoomDetail: React.FC = () => {
                   key={similarRoom.RoomID} 
                   className="similar-room-card"
                   onClick={() => {
-                    navigate(`/rooms/${similarRoom.RoomID}`);
+                    navigate(`/room/${buildRoomSlug(similarRoom as any)}`);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 >
