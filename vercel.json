@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "https://*.vercel.app/:path*", "destination": "https://younghousehoalac.com/:path*", "permanent": true },
+    { "source": "https://www.younghousehoalac.com/:path*", "destination": "https://younghousehoalac.com/:path*", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "no-referrer-when-downgrade" }
+      ]
+    }
+  ]
+}
+
