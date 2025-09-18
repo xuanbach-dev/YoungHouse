@@ -6,12 +6,6 @@
       "has": [{ "type": "host", "value": "*.vercel.app" }],
       "destination": "https://younghousehoalac.com/:path*",
       "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.younghousehoalac.com" }],
-      "destination": "https://younghousehoalac.com/:path*",
-      "permanent": true
     }
   ],
   "headers": [
@@ -19,7 +13,8 @@
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "no-referrer-when-downgrade" }
+        { "key": "Referrer-Policy", "value": "no-referrer-when-downgrade" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
       ]
     }
   ]
