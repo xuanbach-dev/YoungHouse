@@ -5,6 +5,7 @@ import { Post, Room } from '../types';
 import { Search, MapPin, Calendar, DollarSign, Eye, Loader2, Leaf, Lightbulb, Utensils, Shirt, Gift, Sofa, Briefcase, Bed, Shield, Building2, Users, MessageSquare, Headphones } from 'lucide-react';
 import ViewingAppointmentForm from '../components/ViewingAppointmentForm';
 import './Home.css';
+import Meta from '../components/Meta';
 import { VisitCounterService } from '../services/visitCounter';
 
 interface RoomType {
@@ -228,6 +229,19 @@ const Home: React.FC = () => {
 
   return (
     <div className="home-container">
+      <Meta
+        title="YoungHouse Hoà Lạc | Trang chủ"
+        description="YoungHouse - Hệ thống nhà trọ tiện nghi tại Hoà Lạc, gần FPT University. Tìm và đặt phòng nhanh chóng."
+        url="https://younghousehoalac.com/"
+        image="/logo.png"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: 'YoungHouse Hoà Lạc',
+          url: 'https://younghousehoalac.com/',
+          logo: 'https://younghousehoalac.com/logo.png'
+        }}
+      />
       <div className="hero-section">
         <div className="hero-content">
           <div className="hero-text">

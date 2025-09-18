@@ -16,9 +16,12 @@ import ViewingAppointmentForm from '../components/ViewingAppointmentForm'; // Re
 import GoogleMapEmbed from '../components/GoogleMapEmbed';
 import SurroundingAreas from '../components/SurroundingAreas';
 import './RoomDetail.css';
+import Meta from '../components/Meta';
+import { toSlug, buildRoomSlug } from '../utils/slug';
 
 const RoomDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   
   const [room, setRoom] = useState<Room | null>(null);
@@ -436,14 +439,20 @@ const RoomDetail: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!id) return;
+    if (!id && !slug) return;
 
-    const roomId = parseInt(id, 10);
     setIsLoading(true);
     setError(null);
 
     // Load from local list instead of API
-    const found = localRooms.find(r => r.RoomID === roomId) || null;
+    let found: Room | null = null;
+    if (id) {
+      const roomId = parseInt(id, 10);
+      found = localRooms.find(r => r.RoomID === roomId) || null;
+    } else if (slug) {
+      const target = slug;
+      found = localRooms.find(r => buildRoomSlug(r) === target) || null;
+    }
     if (found) {
       setRoom(found);
       const imgs = getRoomImages(found);
@@ -568,6 +577,27 @@ const RoomDetail: React.FC = () => {
 
   return (
     <div className="room-detail">
+      <Meta
+        title={`${room.BranchName || (room as any).branchName} - ${room.TypeName || (room as any).typeName}`}
+        description={`Phòng ${room.TypeName || (room as any).typeName} tại ${(room.BranchName || (room as any).branchName) ?? ''}. Giá ${(room.Price || (room as any).price || 0).toLocaleString('vi-VN')} VND/tháng.`}
+        url={`https://younghousehoalac.com/room/${buildRoomSlug(room as any)}`}
+        image={(room.Media && room.Media[0]?.FilePath) || '/logo.png'}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: `${room.BranchName || (room as any).branchName} - ${room.TypeName || (room as any).typeName}`,
+          image: `https://younghousehoalac.com${(room.Media && room.Media[0]?.FilePath) || '/logo.png'}`,
+          description: (room as any).RoomDescription || (room as any).description || 'Phòng trọ YoungHouse tại Hoà Lạc',
+          brand: { '@type': 'Brand', name: 'YoungHouse' },
+          offers: {
+            '@type': 'Offer',
+            priceCurrency: 'VND',
+            price: String(room.Price || (room as any).price || 0),
+            availability: (room.Status === 'Available') ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            url: `https://younghousehoalac.com/room/${buildRoomSlug(room as any)}`
+          }
+        }}
+      />
       {/* Header */}
       <div className="room-detail-header">
         <button onClick={() => navigate(-1)} className="back-button">

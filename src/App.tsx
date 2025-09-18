@@ -25,6 +25,7 @@ function App() {
 
               <Route path="/system-home" element={<SystemHome />} />
               <Route path="/rooms/:id" element={<RoomDetail />} />
+              <Route path="/room/:slug" element={<RoomDetail />} />
               <Route path="/posts/:id" element={<PostDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/roommate-finder" element={<RoommateFinder />} />

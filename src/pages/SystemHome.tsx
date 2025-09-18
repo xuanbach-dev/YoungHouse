@@ -6,6 +6,7 @@ import GoogleMapEmbed from '../components/GoogleMapEmbed';
 import SurroundingAreas from '../components/SurroundingAreas';
 import './SystemHome.css';
 import { VisitCounterService } from '../services/visitCounter';
+import Meta from '../components/Meta';
 
 interface RoomSearchFilters {
   search?: string;
@@ -672,6 +673,18 @@ const SystemHome: React.FC = () => {
 
   return (
     <div className="system-home">
+      <Meta
+        title="Hệ thống nhà trọ YoungHouse Hoà Lạc"
+        description="Danh sách hệ thống nhà trọ YoungHouse tại Hoà Lạc với nhiều loại phòng tiện nghi, giá tốt."
+        url="https://younghousehoalac.com/system-home"
+        image="/logo.png"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Hệ thống nhà trọ YoungHouse',
+          url: 'https://younghousehoalac.com/system-home'
+        }}
+      />
       {/* Header Search */}
       <div className="search-header">
         <div className="container">
