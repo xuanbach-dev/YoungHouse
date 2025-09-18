@@ -1,0 +1,255 @@
+/* Surrounding Areas Component */
+.surrounding-areas {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+  border: 1px solid #e9ecef;
+}
+
+.surrounding-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f8f9fa;
+}
+
+.surrounding-header h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.surrounding-subtitle {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.location-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+}
+
+.location-item:hover {
+  background: #e3f2fd;
+  border-color: #2d7dd2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 125, 210, 0.15);
+}
+
+.location-icon-container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.location-icon {
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.location-icon.university {
+  color: #1976d2;
+}
+
+.location-icon.shopping {
+  color: #388e3c;
+}
+
+.location-icon.restaurant {
+  color: #f57c00;
+}
+
+.location-icon.coffee {
+  color: #5d4037;
+}
+
+.location-icon.park {
+  color: #2e7d32;
+}
+
+.location-icon.transport {
+  color: #7b1fa2;
+}
+
+.location-icon.other {
+  color: #616161;
+}
+
+.location-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.location-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.25rem 0;
+  line-height: 1.3;
+}
+
+.location-distance {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2d7dd2;
+  margin: 0 0 0.25rem 0;
+  background: rgba(45, 125, 210, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.location-description {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .surrounding-areas {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .surrounding-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .locations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .location-item {
+    padding: 0.75rem;
+  }
+  
+  .location-icon-container {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .location-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .location-name {
+    font-size: 0.95rem;
+  }
+  
+  .location-distance {
+    font-size: 0.85rem;
+  }
+  
+  .location-description {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .surrounding-areas {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .surrounding-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .surrounding-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .surrounding-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .locations-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .location-item {
+    padding: 0.5rem;
+    gap: 0.75rem;
+  }
+  
+  .location-icon-container {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .location-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Animation for hover effects */
+@keyframes locationHover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-2px);
+  }
+}
+
+.location-item:hover {
+  animation: locationHover 0.3s ease;
+}
+
+/* Special styling for different location types */
+.location-item:hover .location-icon.university {
+  color: #1565c0;
+}
+
+.location-item:hover .location-icon.shopping {
+  color: #2e7d32;
+}
+
+.location-item:hover .location-icon.restaurant {
+  color: #ef6c00;
+}
+
+.location-item:hover .location-icon.coffee {
+  color: #4e342e;
+}
+
+.location-item:hover .location-icon.park {
+  color: #1b5e20;
+}
+
+.location-item:hover .location-icon.transport {
+  color: #6a1b9a;
+}
+
+.location-item:hover .location-icon.other {
+  color: #424242;
+}

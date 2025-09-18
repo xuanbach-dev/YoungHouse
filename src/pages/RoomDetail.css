@@ -777,6 +777,61 @@
   .contact-sidebar { position: static; }
 }
 
+/* Map Section */
+.map-section {
+  margin: 3rem 0;
+  padding: 2rem 0;
+  background: #f8fafc;
+}
+
+.map-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.room-map {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .map-section {
+    margin: 2rem 0;
+    padding: 1rem 0;
+  }
+  
+  .map-section .container {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Surrounding Areas Section */
+.surrounding-section {
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.surrounding-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.room-surrounding {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .surrounding-section {
+    margin: 1.5rem 0;
+  }
+  
+  .surrounding-section .container {
+    padding: 0 0.5rem;
+  }
+}
+
 /* Similar Rooms Section */
 .similar-rooms-section {
   background: #f8f9fa;

@@ -13,6 +13,8 @@ import {
 // import { roomsAPI } from '../services/api';
 import { Room } from '../types';
 import ViewingAppointmentForm from '../components/ViewingAppointmentForm'; // Re-import the form
+import GoogleMapEmbed from '../components/GoogleMapEmbed';
+import SurroundingAreas from '../components/SurroundingAreas';
 import './RoomDetail.css';
 
 const RoomDetail: React.FC = () => {
@@ -924,6 +926,33 @@ const RoomDetail: React.FC = () => {
             </div>
           )}
 
+          {/* Google Maps Section */}
+          {room && (
+            <div className="map-section">
+              <div className="container">
+                <GoogleMapEmbed 
+                  branchId={room.BranchID || room.branchId}
+                  branchName={room.BranchName || room.branchName || ''}
+                  address={room.Address || room.address || ''}
+                  className="room-map"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Surrounding Areas Section */}
+          {room && (
+            <div className="surrounding-section">
+              <div className="container">
+                <SurroundingAreas 
+                  branchId={room.BranchID || room.branchId}
+                  branchName={room.BranchName || room.branchName || ''}
+                  className="room-surrounding"
+                />
+              </div>
+            </div>
+          )}
+
           {/* Contact Methods moved to sidebar */}
         </div>
 
@@ -953,10 +982,10 @@ const RoomDetail: React.FC = () => {
             </div>
             <div className="contact-note">Hỗ trợ 24/7  (T2–CN)</div>
           </div>
-        </aside>
-      </div>
+          </aside>
+        </div>
 
-      {/* Similar Rooms Section */}
+        {/* Similar Rooms Section */}
       <div className="similar-rooms-section">
         <div className="container">
           <h2>Đề xuất cho bạn</h2>

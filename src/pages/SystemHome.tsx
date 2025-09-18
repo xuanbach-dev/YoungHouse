@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Search, MapPin, Calendar, Filter, Grid, List, ChevronDown, X } from 'lucide-react';
 import { roomsAPI, branchesAPI } from '../services/api';
 import { Room, Branch } from '../types';
+import GoogleMapEmbed from '../components/GoogleMapEmbed';
+import SurroundingAreas from '../components/SurroundingAreas';
 import './SystemHome.css';
 import { VisitCounterService } from '../services/visitCounter';
 
@@ -1010,9 +1012,10 @@ const SystemHome: React.FC = () => {
                   Xóa bộ lọc
                 </button>
               </div>
-            )}
+              )}
 
-            {/* Pagination */}
+
+              {/* Pagination */}
             <div className="pagination">
               <button className="page-btn active">1</button>
             </div>
