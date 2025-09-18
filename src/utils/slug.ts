@@ -1,7 +1,7 @@
 export const toSlug = (text: string): string => {
   return text
     .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
+    .replace(/\p{Diacritic}/g, '')
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, '')
     .trim()
@@ -35,5 +35,6 @@ export const parseRoomSlug = (slug: string): { branch: string; type: string; num
   const branch = parts.join('-');
   return { branch, type, number };
 };
+
 
 

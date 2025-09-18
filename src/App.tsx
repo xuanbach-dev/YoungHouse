@@ -4,15 +4,13 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from './components/Navbar';
 import BottomNavbar from './components/BottomNavbar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-
-import PostDetail from './pages/PostDetail';
-import SystemHome from './pages/SystemHome';
-import RoomDetail from './pages/RoomDetail';
-import Contact from './pages/Contact';
-import RoommateFinder from './pages/RoommateFinder';
-
 import './App.css';
+const Home = React.lazy(() => import('./pages/Home'));
+const PostDetail = React.lazy(() => import('./pages/PostDetail'));
+const SystemHome = React.lazy(() => import('./pages/SystemHome'));
+const RoomDetail = React.lazy(() => import('./pages/RoomDetail'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+const RoommateFinder = React.lazy(() => import('./pages/RoommateFinder'));
 
 function App() {
   return (
@@ -20,6 +18,7 @@ function App() {
       <div className="App">
         <Navbar />
         <main className="main-content">
+          <React.Suspense fallback={<div />}> 
           <Routes>
               <Route path="/" element={<Home />} />
 
@@ -33,6 +32,7 @@ function App() {
               {/* Fallback */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
+          </React.Suspense>
         </main>
         <BottomNavbar />
         <Footer />

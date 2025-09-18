@@ -12,7 +12,11 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    </noscript>
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -31,8 +35,42 @@
     <title>YoungHouse Hoà Lạc - Trọ Hoà Lạc</title>
   </head>
   <body>
+    <style>
+      .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    </style>
+    <h1 class="sr-only">YoungHouse Hoà Lạc - Trọ Hoà Lạc</h1>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <section class="seo-content" aria-label="Giới thiệu YoungHouse Hoà Lạc">
+      <div class="seo-container">
+        <h2>Hệ thống nhà trọ YoungHouse tại Hoà Lạc</h2>
+        <p>
+          YoungHouse Hoà Lạc là hệ thống nhà cho thuê dành cho sinh viên, người đi làm tại khu vực Hoà Lạc và lân cận. 
+          Chúng tôi tập trung xây dựng các tòa nhà sáng, thoáng, kết cấu chắc chắn, cùng không gian sinh hoạt sạch sẽ, 
+          an ninh và tiện nghi. Mỗi phòng đều được trang bị đầy đủ nội thất cơ bản như giường tủ, bàn học, điều hòa, 
+          bình nóng lạnh, tủ bếp, cùng hệ thống internet tốc độ cao. Các tòa nhà được quản lý chuyên nghiệp, hỗ trợ 24/7, 
+          đảm bảo trải nghiệm ở ổn định, thân thiện và tiết kiệm cho cư dân.
+        </p>
+        <p>
+          Vị trí các cơ sở YoungHouse phân bố tại Tân Xã, Phú Hữu, Bình Yên… thuận tiện di chuyển tới 
+          Đại học FPT, khu Công nghệ cao Hoà Lạc và các tiện ích công cộng. Nhiều loại phòng linh hoạt: phòng đơn, 
+          phòng đôi, phòng gác xép, phòng có ban công hoặc hành lang thoáng, phù hợp nhu cầu cá nhân và nhóm bạn. 
+          Hệ thống an ninh sử dụng khóa vân tay, camera giám sát toàn tòa, quy trình vệ sinh định kỳ; khu để xe 
+          rộng rãi; máy giặt chung; thang máy tại các tòa cao tầng; hành lang cây xanh và không gian sinh hoạt chung.
+        </p>
+        <p>
+          Website younghousehoalac.com giúp bạn tìm phòng nhanh qua bộ lọc khu vực, mức giá, tình trạng phòng, 
+          đồng thời cung cấp hình ảnh, video, bản đồ vị trí từng cơ sở để bạn dễ dàng hình dung trước khi đặt lịch xem. 
+          Nếu bạn cần hỗ trợ, đội ngũ tư vấn luôn sẵn sàng qua điện thoại và Zalo. Hãy khám phá hệ thống nhà trọ YoungHouse, 
+          nơi mang đến không gian sống tiện nghi, an toàn và cộng đồng thân thiện tại Hoà Lạc.
+        </p>
+        <nav class="seo-links" aria-label="Liên kết nhanh">
+          <a href="/system-home">Hệ thống nhà trọ</a>
+          <a href="/roommate-finder">Tìm người ở ghép</a>
+          <a href="/contact">Liên hệ</a>
+        </nav>
+      </div>
+    </section>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
