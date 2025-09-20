@@ -499,9 +499,14 @@
   background: #dc3545;
 }
 
-.availability-badge.other {
+.availability-badge.reserved {
   background: #ffc107;
   color: #000;
+}
+
+.availability-badge.other {
+  background: #6c757d;
+  color: #fff;
 }
 
 .room-content {

@@ -260,7 +260,69 @@ const SystemHome: React.FC = () => {
           roomTypeId: 4
         },
         {
-          RoomID: 5,
+          RoomID: 14,
+          roomId: 14,
+          RoomNumber: 'Young House 2',
+          roomNumber: 'Young House 2',
+          BranchID: 2,
+          branchId: 2,
+          BranchName: 'Young House 2',
+          branchName: 'Young House 2',
+          TypeName: 'Căn 2 ngủ căn góc có ban công thoáng',
+          typeName: 'Căn 2 ngủ căn góc có ban công thoáng',
+          Price: 4500000,
+          price: 4500000,
+          Status: 'Reserved',
+          isAvailable: false,
+          Address: '64 Phú Hữu, xã Tân Xã',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+          RoomTypeID: 20,
+          roomTypeId: 20
+        },
+        {
+          RoomID: 15,
+          roomId: 15,
+          RoomNumber: 'Young House 2',
+          roomNumber: 'Young House 2',
+          BranchID: 2,
+          branchId: 2,
+          BranchName: 'Young House 2',
+          branchName: 'Young House 2',
+          TypeName: 'Căn 2 ngủ căn góc có giếng trời thoáng',
+          typeName: 'Căn 2 ngủ căn góc có giếng trời thoáng',
+          Price: 4500000,
+          price: 4500000,
+          Status: 'Reserved',
+          isAvailable: false,
+          Address: '64 Phú Hữu, xã Tân Xã',
+          City: 'Hà Nội',
+          
+          RoomTypeID: 21,
+          roomTypeId: 21
+        },{
+          RoomID: 16,
+          roomId: 16,
+          RoomNumber: 'Young House 2',
+          roomNumber: 'Young House 2',
+          BranchID: 2,
+          branchId: 2,
+          BranchName: 'Young House 2',
+          branchName: 'Young House 2',
+          TypeName: 'Căn 2 ngủ có ban công thoáng',
+          typeName: 'Căn 2 ngủ có ban công thoáng',
+          Price: 4500000,
+          price: 4500000,
+          Status: 'Reserved',
+          isAvailable: false,
+          Address: '64 Phú Hữu, xã Tân Xã',
+          City: 'Hà Nội',
+          
+          RoomTypeID: 22,
+          roomTypeId: 22
+         },
+         {
+           RoomID: 5,
           roomId: 5,
           RoomNumber: 'Young House 4',
           roomNumber: 'Young House 4',
@@ -616,6 +678,19 @@ const SystemHome: React.FC = () => {
             } else if (typeId === 4) {
               const i = Math.floor(Math.random() * 2) + 1;
               return `/rooms/branch-2/Type4/branch2-3-${i}.JPG`;
+            } else if (typeId === 20) {
+              const i = Math.floor(Math.random() * 5) + 1;
+              // Handle special case for image 4
+              if (i === 4) {
+                return `/rooms/branch-2/Type20/branch-20-4.JPG`;
+              }
+              return `/rooms/branch-2/Type20/branch2-20-${i}.JPG`;
+            } else if (typeId === 21) {
+              const i = Math.floor(Math.random() * 5) + 1;
+              return `/rooms/branch-2/Type21/branch2-21-${i}.JPG`;
+            } else if (typeId === 22) {
+              const i = Math.floor(Math.random() * 3) + 1;
+              return `/rooms/branch-2/Type22/branch2-22-${i}.JPG`;
             }
             const i = Math.floor(Math.random() * 7) + 1;
             return `/rooms/branch-2/Type5/branch2-1-${i}.JPG`;
@@ -899,7 +974,7 @@ const SystemHome: React.FC = () => {
                     style={{ cursor: 'pointer' }}
                   >
                     <div className="room-image">
-                      {((room.BranchID || (room as any).branchId) === 5) ? (
+                      {((room.BranchID || (room as any).branchId) === 5 || ((room.BranchID || (room as any).branchId) === 2 && ((room.RoomTypeID || (room as any).roomTypeId) === 20 || (room.RoomTypeID || (room as any).roomTypeId) === 21 || (room.RoomTypeID || (room as any).roomTypeId) === 22))) ? (
                         (() => {
                           const base = getImagePath(room, viewMode === 'grid' ? 'thumbnail' : 'large');
                           const webp = viewMode === 'grid'
@@ -985,10 +1060,10 @@ const SystemHome: React.FC = () => {
                           }}
                         />
                       )}
-                      <div className={`availability-badge ${room.Status === 'Occupied' ? 'occupied' : room.Status === 'Available' ? 'available' : 'other'}`}>
+                      <div className={`availability-badge ${room.Status === 'Occupied' ? 'occupied' : room.Status === 'Available' ? 'available' : room.Status === 'Reserved' ? 'reserved' : 'other'}`}>
                         {room.Status === 'Available' ? 'Còn trống' : 
                          room.Status === 'Occupied' ? 'Hết phòng' :
-                         room.Status === 'Reserved' ? 'Đã đặt' : 'Bảo trì'}
+                         room.Status === 'Reserved' ? 'Đặt trước' : 'Bảo trì'}
                       </div>
                     </div>
                     

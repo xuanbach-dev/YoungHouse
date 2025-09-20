@@ -147,6 +147,22 @@ const Home: React.FC = () => {
         if (typeId === 5) { const i = 1 + Math.floor(Math.random() * 7); return `/rooms/branch-2/Type5/branch2-1-${i}.JPG`; }
         if (typeId === 3) { const i = 1 + Math.floor(Math.random() * 4); return `/rooms/branch-2/Type3/branch2-2-${i}.JPG`; }
         if (typeId === 4) { const i = 1 + Math.floor(Math.random() * 2); return `/rooms/branch-2/Type4/branch2-3-${i}.JPG`; }
+        if (typeId === 20) { 
+          const i = 1 + Math.floor(Math.random() * 5); 
+          // Handle special case for image 4
+          if (i === 4) {
+            return `/rooms/branch-2/Type20/branch-20-4.JPG`;
+          }
+          return `/rooms/branch-2/Type20/branch2-20-${i}.JPG`; 
+        }
+        if (typeId === 21) { 
+          const i = 1 + Math.floor(Math.random() * 5); 
+          return `/rooms/branch-2/Type21/branch2-21-${i}.JPG`; 
+        }
+        if (typeId === 22) { 
+          const i = 1 + Math.floor(Math.random() * 3); 
+          return `/rooms/branch-2/Type22/branch2-22-${i}.JPG`; 
+        }
         const i = 1 + Math.floor(Math.random() * 7); return `/rooms/branch-2/Type5/branch2-1-${i}.JPG`;
       }
       case 4: { const i = 1 + Math.floor(Math.random() * 6); return `/rooms/branch-4/Type12/branch4-${i}.jpg`; }

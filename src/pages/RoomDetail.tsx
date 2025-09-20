@@ -153,7 +153,70 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
       RoomTypeID: 4,
       roomTypeId: 4
+    },
+    {
+      RoomID: 14,
+      roomId: 14,
+      RoomNumber: 'Young House 2',
+      roomNumber: 'Young House 2',
+      BranchID: 2,
+      branchId: 2,
+      BranchName: 'Young House 2',
+      branchName: 'Young House 2',
+      TypeName: 'Căn 2 ngủ căn góc có ban công thoáng',
+      typeName: 'Căn 2 ngủ căn góc có ban công thoáng',
+      Price: 4500000,
+      price: 4500000,
+      Status: 'Reserved',
+      isAvailable: false,
+      Address: '64 Phú Hữu, xã Tân Xã',
+      City: 'Hà Nội',
+      
+      RoomTypeID: 20,
+      roomTypeId: 20
+    },
+    {
+      RoomID: 15,
+      roomId: 15,
+      RoomNumber: 'Young House 2',
+      roomNumber: 'Young House 2',
+      BranchID: 2,
+      branchId: 2,
+      BranchName: 'Young House 2',
+      branchName: 'Young House 2',
+      TypeName: 'Căn 2 ngủ căn góc có giếng trời thoáng',
+      typeName: 'Căn 2 ngủ căn góc có giếng trời thoáng',
+      Price: 4500000,
+      price: 4500000,
+      Status: 'Reserved',
+      isAvailable: false,
+      Address: '64 Phú Hữu, xã Tân Xã',
+      City: 'Hà Nội',
+      
+      RoomTypeID: 21,
+      roomTypeId: 21
     },{
+      RoomID: 16,
+      roomId: 16,
+      RoomNumber: 'Young House 2',
+      roomNumber: 'Young House 2',
+      BranchID: 2,
+      branchId: 2,
+      BranchName: 'Young House 2',
+      branchName: 'Young House 2',
+      TypeName: 'Căn 2 ngủ có ban công thoáng',
+      typeName: 'Căn 2 ngủ có ban công thoáng',
+      Price: 4500000,
+      price: 4500000,
+      Status: 'Reserved',
+      isAvailable: false,
+      Address: '64 Phú Hữu, xã Tân Xã',
+      City: 'Hà Nội',
+      
+      RoomTypeID: 22,
+      roomTypeId: 22
+    },
+    {
     
       RoomID: 5,
       roomId: 5,
@@ -352,13 +415,39 @@ const RoomDetail: React.FC = () => {
     }
 
     if (branchId === 2) {
-      // Type depends on RoomTypeID: 5->Type5 (branch2-1-i.JPG), 3->Type3 (branch2-2-i.JPG), 4->Type4 (branch2-3-i.JPG)
+      // Type depends on RoomTypeID: 5->Type5 (branch2-1-i.JPG), 3->Type3 (branch2-2-i.JPG), 4->Type4 (branch2-3-i.JPG), 20->Type20 (branch2-20-i.JPG)
       const roomTypeId = room.RoomTypeID || (room as any).roomTypeId;
       let typeFolder = 'Type5';
       let prefix = 'branch2-1-';
       let count = 7;
       if (roomTypeId === 3) { typeFolder = 'Type3'; prefix = 'branch2-2-'; count = 4; }
       if (roomTypeId === 4) { typeFolder = 'Type4'; prefix = 'branch2-3-'; count = 2; }
+      if (roomTypeId === 20) { 
+        typeFolder = 'Type20'; 
+        // Handle both naming patterns: branch2-20-X and branch-20-X
+        images.push('/rooms/branch-2/Type20/branch2-20-1.JPG');
+        images.push('/rooms/branch-2/Type20/branch2-20-2.JPG');
+        images.push('/rooms/branch-2/Type20/branch2-20-3.JPG');
+        images.push('/rooms/branch-2/Type20/branch-20-4.JPG'); // Special case for image 4
+        images.push('/rooms/branch-2/Type20/branch2-20-5.JPG');
+        return images;
+      }
+      if (roomTypeId === 21) { 
+        typeFolder = 'Type21'; 
+        // Type21: branch2-21-X (5 images)
+        for (let i = 1; i <= 5; i++) {
+          images.push(`/rooms/branch-2/Type21/branch2-21-${i}.JPG`);
+        }
+        return images;
+      }
+      if (roomTypeId === 22) { 
+        typeFolder = 'Type22'; 
+        // Type22: branch2-22-X (3 images)
+        for (let i = 1; i <= 3; i++) {
+          images.push(`/rooms/branch-2/Type22/branch2-22-${i}.JPG`);
+        }
+        return images;
+      }
       for (let i = 1; i <= count; i++) {
         images.push(`/rooms/branch-2/${typeFolder}/${prefix}${i}.JPG`);
       }
@@ -657,7 +746,7 @@ const RoomDetail: React.FC = () => {
       {/* Image Gallery */}
       <div className="room-images">
         <div className="main-image-container">
-          {((room.BranchID || (room as any).branchId) === 5) ? (
+          {((room.BranchID || (room as any).branchId) === 5 || ((room.BranchID || (room as any).branchId) === 2 && ((room.RoomTypeID || (room as any).roomTypeId) === 20 || (room.RoomTypeID || (room as any).roomTypeId) === 21 || (room.RoomTypeID || (room as any).roomTypeId) === 22))) ? (
             (() => {
               const current = images[currentImageIndex] || '';
               const webp = current.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.webp';
@@ -790,10 +879,10 @@ const RoomDetail: React.FC = () => {
           </div>
 
           <div className="room-status">
-            <span className={`status-badge ${room.Status === 'Occupied' ? 'occupied' : room.Status === 'Available' ? 'available' : 'other'}`}>
+            <span className={`status-badge ${room.Status === 'Occupied' ? 'occupied' : room.Status === 'Available' ? 'available' : room.Status === 'Reserved' ? 'reserved' : 'other'}`}>
               {room.Status === 'Available' ? 'Còn trống' : 
                room.Status === 'Occupied' ? 'Hết phòng' :
-               room.Status === 'Reserved' ? 'Đã đặt' : 'Bảo trì'}
+               room.Status === 'Reserved' ? 'Đặt trước' : 'Bảo trì'}
             </span>
           </div>
 
@@ -1107,7 +1196,7 @@ const RoomDetail: React.FC = () => {
                     <span className={`similar-room-status ${similarRoom.Status === 'Occupied' ? 'occupied' : similarRoom.Status === 'Available' ? 'available' : 'other'}`}>
                       {similarRoom.Status === 'Available' ? 'Còn trống' : 
                        similarRoom.Status === 'Occupied' ? 'Hết phòng' :
-                       similarRoom.Status === 'Reserved' ? 'Đã đặt' : 'Bảo trì'}
+                       similarRoom.Status === 'Reserved' ? 'Đặt trước' : 'Bảo trì'}
                     </span>
                   </div>
                 </div>
