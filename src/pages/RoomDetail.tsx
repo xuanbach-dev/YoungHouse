@@ -619,6 +619,7 @@ const RoomDetail: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log('RoomDetail useEffect triggered:', { id, slug });
     if (!id && !slug) return;
 
     setIsLoading(true);
@@ -626,18 +627,7 @@ const RoomDetail: React.FC = () => {
 
     // Load from local list instead of API
     let found: Room | null = null;
-    if (id) {
-      const roomId = parseInt(id, 10);
-      found = localRooms.find(r => r.RoomID === roomId) || null;
-      // Redirect permanent to slug URL for SEO canonical
-      if (found) {
-        const target = `/room/${buildRoomSlug(found as any)}`;
-        if (window.location.pathname !== target) {
-          navigate(target, { replace: true });
-          return;
-        }
-      }
-    } else if (slug) {
+    if (slug) {
       const target = slug;
       // 1) Exact match by our slug builder
       found = localRooms.find(r => buildRoomSlug(r as any) === target) || null;
@@ -673,15 +663,17 @@ const RoomDetail: React.FC = () => {
       }
     }
     if (found) {
+      console.log('Setting room:', found);
       setRoom(found);
       const imgs = getRoomImages(found);
       setImages(imgs);
       setImageAttempts({});
     } else {
+      console.log('Room not found for slug:', slug);
       setError('Không tìm thấy thông tin phòng');
     }
     setIsLoading(false);
-  }, [id]);
+  }, [id, slug, navigate]);
 
   const nextImage = () => {
     if (images.length > 0) {

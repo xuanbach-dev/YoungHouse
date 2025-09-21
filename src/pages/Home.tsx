@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { postsAPI } from '../services/api';
 import { Post, Room } from '../types';
 import { Search, MapPin, Calendar, DollarSign, Eye, Loader2, Leaf, Lightbulb, Utensils, Shirt, Gift, Sofa, Briefcase, Bed, Shield, Building2, Users, MessageSquare, Headphones } from 'lucide-react';
@@ -17,6 +17,7 @@ interface RoomType {
 }
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState<Post[]>([]);
   const [rooms, setRooms] = useState<Room[]>([]);
   const [searchResults, setSearchResults] = useState<Room[]>([]);
@@ -505,7 +506,7 @@ const Home: React.FC = () => {
             {searchResults.length > 0 && (
               <div className="rooms-grid">
                 {searchResults.map((room) => (
-                  <div key={room.RoomID || (room as any).roomId} className="room-card" onClick={() => window.location.href = `/room/${buildRoomSlug(room as any)}` }>
+                  <div key={room.RoomID || (room as any).roomId} className="room-card" onClick={() => navigate(`/room/${buildRoomSlug(room as any)}`)}>
                     <div className="room-image">
                       <img 
                         src={getImagePath(room)}
@@ -563,7 +564,10 @@ const Home: React.FC = () => {
             <h2>Phòng nổi bật</h2>
             <div className="rooms-grid">
               {rooms.slice(0, 6).map((room) => (
-                <div key={room.RoomID} className="room-card" onClick={() => window.location.href = `/room/${require('../utils/slug').buildRoomSlug(room)}` }>
+                <div key={room.RoomID} className="room-card" onClick={() => {
+                  console.log('Navigating to room:', buildRoomSlug(room));
+                  window.location.href = `/room/${buildRoomSlug(room)}`;
+                }}>
                   <div className="room-image">
                     <img 
                       src={getImagePath(room)}
@@ -591,7 +595,7 @@ const Home: React.FC = () => {
                     <div className="room-actions">
                       <button 
                         className="appointment-button"
-                        onClick={() => window.location.href = `/room/${require('../utils/slug').buildRoomSlug(room)}`}
+                        onClick={() => navigate(`/room/${buildRoomSlug(room)}`)}
                       >
                         <Eye size={16} />
                         Xem chi tiết
