@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "YoungHouse",
+  "name": "YoungHouse Hoà Lạc - Trọ Hoà Lạc",
+  "description": "Hệ thống nhà trọ tiện nghi tại Hoà Lạc, gần FPT University",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,18 +9,19 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "logo-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "logo-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#f39c12",
+  "background_color": "#ffffff",
+  "categories": ["business", "lifestyle", "utilities"]
 }
