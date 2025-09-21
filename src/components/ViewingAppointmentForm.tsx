@@ -155,7 +155,7 @@ const ViewingAppointmentForm: React.FC<ViewingAppointmentFormProps> = ({
             phone: formData.phone || '',
             viewingDate: formData.viewingDate || '',
             viewingTime: formData.viewingTime || '',
-            roomNumber: room.roomNumber,
+            roomNumber: (room.RoomID || room.roomId || '').toString(),
             roomType: room.typeName || 'Phòng Trọ',
             note: formData.note
           });
@@ -167,7 +167,7 @@ const ViewingAppointmentForm: React.FC<ViewingAppointmentFormProps> = ({
             phone: formData.phone || '',
             viewingDate: formData.viewingDate || '',
             viewingTime: formData.viewingTime || '',
-            roomNumber: room.roomNumber,
+            roomNumber: (room.RoomID || room.roomId || '').toString(),
             roomType: room.typeName || 'Phòng Trọ',
             note: formData.note
           });
@@ -248,7 +248,7 @@ const ViewingAppointmentForm: React.FC<ViewingAppointmentFormProps> = ({
               {room && (
                 <p className="room-info">
                   <MapPin size={16} />
-                  {room.roomNumber} - {room.typeName}
+                  {room.BranchName} - {room.typeName}
                 </p>
               )}
             </div>
@@ -270,7 +270,7 @@ const ViewingAppointmentForm: React.FC<ViewingAppointmentFormProps> = ({
             <div className="appointment-details">
               <p><strong>Ngày:</strong> {formData.viewingDate}</p>
               <p><strong>Giờ:</strong> {formData.viewingTime}</p>
-              <p><strong>Phòng:</strong> {room?.roomNumber}</p>
+              <p><strong>Phòng:</strong> {room?.BranchName}</p>
             </div>
           </div>
         ) : (

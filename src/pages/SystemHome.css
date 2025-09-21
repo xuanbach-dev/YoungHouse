@@ -559,6 +559,13 @@
   border: 1px solid #e8e8e8;
 }
 
+.area-tag {
+  background: #e3f2fd;
+  color: #1976d2;
+  border: 1px solid #bbdefb;
+  font-weight: 500;
+}
+
 /* Maps Section */
 .maps-section {
   margin: 4rem 0;

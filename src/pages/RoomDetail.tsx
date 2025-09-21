@@ -75,16 +75,14 @@ const RoomDetail: React.FC = () => {
     {
       RoomID: 1,
       roomId: 1,
-      RoomNumber: 'Young House 1',
-      roomNumber: 'Young House 1',
       BranchID: 1,
       branchId: 1,
       BranchName: 'Young House 1',
       branchName: 'Young House 1',
       TypeName: 'Giường đôi',
       typeName: 'Giường đôi',
-      Price: 2000000,
-      price: 2000000,
+      Price: 1500000,
+      price: 1500000,
       Status: 'Available',
       Address: '57 đường Xóm Quán – H10, xã Tân Xã',
       City: 'Hà Nội',
@@ -92,11 +90,29 @@ const RoomDetail: React.FC = () => {
       RoomTypeID: 1,
       roomTypeId: 1,
       isAvailable: true,
-    },{
+    },
+    {
+      RoomID: 17,
+      roomId: 17,
+      BranchID: 1,
+      branchId: 1,
+      BranchName: 'Young House 1',
+      branchName: 'Young House 1',
+      TypeName: 'Giường gác xép có ban công thoáng',
+      typeName: 'Giường gác xép có ban công thoáng',
+      Price: 2200000,
+      price: 2200000,
+      Status: 'Occupied',
+      isAvailable: true,
+      Address: '57 đường Xóm Quán – H10, xã Tân Xã',
+      City: 'Hà Nội',
+      Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+      RoomTypeID: 25,
+      roomTypeId: 25
+    },
+    {
       RoomID: 2,
       roomId: 2,
-      RoomNumber: 'Young House 2',
-      roomNumber: 'Young House 2',
       BranchID: 2,
       branchId: 2,
       BranchName: 'Young House 2',
@@ -116,8 +132,6 @@ const RoomDetail: React.FC = () => {
     {
       RoomID: 3,
       roomId: 3,
-      RoomNumber: 'Young House 2',
-      roomNumber: 'Young House 2',
       BranchID: 2,
       branchId: 2,
       BranchName: 'Young House 2',
@@ -136,8 +150,6 @@ const RoomDetail: React.FC = () => {
     },{
       RoomID: 4,
       roomId: 4,
-      RoomNumber: 'Young House 2',
-      roomNumber: 'Young House 2',
       BranchID: 2,
       branchId: 2,
       BranchName: 'Young House 2',
@@ -157,8 +169,6 @@ const RoomDetail: React.FC = () => {
     {
       RoomID: 14,
       roomId: 14,
-      RoomNumber: 'Young House 2',
-      roomNumber: 'Young House 2',
       BranchID: 2,
       branchId: 2,
       BranchName: 'Young House 2',
@@ -178,8 +188,6 @@ const RoomDetail: React.FC = () => {
     {
       RoomID: 15,
       roomId: 15,
-      RoomNumber: 'Young House 2',
-      roomNumber: 'Young House 2',
       BranchID: 2,
       branchId: 2,
       BranchName: 'Young House 2',
@@ -198,8 +206,6 @@ const RoomDetail: React.FC = () => {
     },{
       RoomID: 16,
       roomId: 16,
-      RoomNumber: 'Young House 2',
-      roomNumber: 'Young House 2',
       BranchID: 2,
       branchId: 2,
       BranchName: 'Young House 2',
@@ -220,14 +226,12 @@ const RoomDetail: React.FC = () => {
     
       RoomID: 5,
       roomId: 5,
-      RoomNumber: 'Young House 4',
-      roomNumber: 'Young House 4',
       BranchID: 4,
       branchId: 4,
       BranchName: 'Young House 4',
       branchName: 'Young House 4',
-      TypeName: 'Giường đôi có hành lang view hồ Tân Xã',
-      typeName: 'Giường đôi có hành lang view hồ Tân Xã',
+      TypeName: 'Giường gác xép có hành lang view hồ Tân Xã',
+      typeName: 'Giường gác xép có hành lang view hồ Tân Xã',
       Price: 2000000,
       price: 2000000,
       Status: 'Occupied',
@@ -237,11 +241,30 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch4/branch4-1.jpg' }],
       RoomTypeID: 12,
       roomTypeId: 12
-    },{
+    },
+    {
+    
+      RoomID: 18,
+      roomId: 18,
+      BranchID: 5,
+      branchId: 5,
+      BranchName: 'Young House 5',
+      branchName: 'Young House 5',
+      TypeName: 'Giường hai giường đôi có ban công thoáng',
+      typeName: 'Giường hai giường đôi có ban công thoáng',
+      Price: 2800000,
+      price: 2800000,
+      Status: 'Occupied',
+      isAvailable: false,
+      Address: 'Địa chỉ Young House 4',
+      City: 'Hà Nội',
+      Media: [{ FilePath: '/room/branch4/branch4-1.jpg' }],
+      RoomTypeID: 26,
+      roomTypeId: 26
+    },
+    {
       RoomID: 6,
       roomId: 6,
-      RoomNumber: 'Young House 9',
-      roomNumber: 'Young House 9',
       BranchID: 9,
       branchId: 9,
       BranchName: 'Young House 9',
@@ -260,8 +283,6 @@ const RoomDetail: React.FC = () => {
     },    {
       RoomID: 7,
       roomId: 7,
-      RoomNumber: 'Young House 10',
-      roomNumber: 'Young House 10',
       BranchID: 10,
       branchId: 10,
       BranchName: 'Young House 10',
@@ -280,8 +301,6 @@ const RoomDetail: React.FC = () => {
     },{
       RoomID: 8,
       roomId: 8,
-      RoomNumber: 'Young House 11',
-      roomNumber: 'Young House 11',
       BranchID: 11,
       branchId: 11,
       BranchName: 'Young House 11',
@@ -300,8 +319,6 @@ const RoomDetail: React.FC = () => {
     },{
       RoomID: 9,
       roomId: 9,
-      RoomNumber: 'Young House 12',
-      roomNumber: 'Young House 12',
       BranchID: 12,
       branchId: 12,
       BranchName: 'Young House 12',
@@ -317,11 +334,30 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
       RoomTypeID: 7,
       roomTypeId: 7
-    },{
+    },
+    
+    {
+      RoomID: 19,
+      roomId: 19,
+      BranchID: 12,
+      branchId: 12,
+      BranchName: 'Young House 12',
+      branchName: 'Young House 12',
+      TypeName: 'Giường đôi có ban công thoáng view FPT',
+      typeName: 'Giường đôi có ban công thoáng view FPT',
+      Price: 2300000,
+      price:  2300000,
+      Status: 'Occupied',
+      isAvailable: false,
+      Address: 'Gần nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
+      City: 'Hà Nội',
+      Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+      RoomTypeID: 27,
+      roomTypeId: 27
+    },
+    {
       RoomID: 10,
       roomId: 10,
-      RoomNumber: 'Young House 14',
-      roomNumber: 'Young House 14',
       BranchID: 14,
       branchId: 14,
       BranchName: 'Young House 14',
@@ -340,8 +376,6 @@ const RoomDetail: React.FC = () => {
     },{
       RoomID: 11,
       roomId: 11,
-      RoomNumber: 'Young House 5',
-      roomNumber: 'Young House 5',
       BranchID: 5,
       branchId: 5,
       BranchName: 'Young House 5',
@@ -360,8 +394,6 @@ const RoomDetail: React.FC = () => {
     },{
       RoomID: 12,
       roomId: 12,
-      RoomNumber: 'Young House 7',
-      roomNumber: 'Young House 7',
       BranchID: 7,
       branchId: 7,
       BranchName: 'Young House 7',
@@ -377,11 +409,29 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
       RoomTypeID: 16,
       roomTypeId: 16
-    },{
+    },
+    {
+      RoomID: 19,
+      roomId: 19,
+      BranchID: 12,
+      branchId: 12,
+      BranchName: 'Young House 12',
+      branchName: 'Young House 12',
+      TypeName: 'Giường đôi có ban công thoáng view FPT',
+      typeName: 'Giường đôi có ban công thoáng view FPT',
+      Price: 2300000,
+      price:  2300000,
+      Status: 'Occupied',
+      isAvailable: false,
+      Address: 'Gần nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
+      City: 'Hà Nội',
+      Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+      RoomTypeID: 27,
+      roomTypeId: 27
+    },
+    {
       RoomID: 13,
       roomId: 13,
-      RoomNumber: 'Young House 8',
-      roomNumber: 'Young House 8',
       BranchID: 8,
       branchId: 8,
       BranchName: 'Young House 8',
@@ -407,6 +457,17 @@ const RoomDetail: React.FC = () => {
 
     // Branch-specific patterns that match your public folder
     if (branchId === 1) {
+      const roomTypeId = room.RoomTypeID || (room as any).roomTypeId;
+      
+      // Handle Type25 for roomID 17
+      if (roomTypeId === 25) {
+        for (let i = 1; i <= 5; i++) {
+          images.push(`/rooms/branch-1/Type25/branch1-25-${i}.jpg`);
+        }
+        return images;
+      }
+      
+      // Default Type1 for other rooms in branch 1
       // branch-1/Type1/branch1-<i>.jpg (1..9), note last may be .JPG but onError will handle
       for (let i = 1; i <= 9; i++) {
         images.push(`/rooms/branch-1/Type1/branch1-${i}.jpg`);
@@ -455,6 +516,7 @@ const RoomDetail: React.FC = () => {
     }
 
     if (branchId === 4) {
+      // Default Type12 for rooms in branch 4
       for (let i = 1; i <= 6; i++) {
         images.push(`/rooms/branch-4/Type12/branch4-${i}.jpg`);
       }
@@ -493,7 +555,25 @@ const RoomDetail: React.FC = () => {
     }
 
     if (branchId === 5) {
-      // Available images: 1, 2
+      const roomTypeId = room.RoomTypeID || (room as any).roomTypeId;
+      
+      // Handle Type26 for roomID 18
+      if (roomTypeId === 26) {
+        for (let i = 1; i <= 6; i++) {
+          images.push(`/rooms/branch-5/Type26/branch5-26-${i}.jpg`);
+        }
+        return images;
+      }
+      
+      // Handle Type15 for roomID 11
+      if (roomTypeId === 15) {
+        for (let i = 1; i <= 2; i++) {
+          images.push(`/rooms/branch-5/Type15/branch5-${i}.jpg`);
+        }
+        return images;
+      }
+      
+      // Default fallback for other rooms in branch 5
       const available = [1,2];
       for (const i of available) {
         images.push(`/rooms/branch-5/Type15/branch5-${i}.jpg`);
@@ -509,6 +589,17 @@ const RoomDetail: React.FC = () => {
     }
 
     if (branchId === 12) {
+      const roomTypeId = room.RoomTypeID || (room as any).roomTypeId;
+      
+      // Handle Type27 for roomID 19
+      if (roomTypeId === 27) {
+        for (let i = 1; i <= 4; i++) {
+          images.push(`/rooms/branch-12/Type27/branch12-27-${i}.jpg`);
+        }
+        return images;
+      }
+      
+      // Default Type7 for other rooms in branch 12
       for (let i = 1; i <= 9; i++) {
         images.push(`/rooms/branch-12/Type7/branch12-${i}.jpg`);
       }
@@ -555,7 +646,7 @@ const RoomDetail: React.FC = () => {
         found = localRooms.find(r => {
           const branch = (r.BranchName || (r as any).branchName || '').toString();
           const type = (r.TypeName || (r as any).typeName || '').toString();
-          const number = (r.RoomNumber || (r as any).roomNumber || r.RoomID || (r as any).roomId || '').toString();
+          const number = (r.RoomID || (r as any).roomId || '').toString();
           const alt = `${branch}-${type}-${number}`;
           try {
             // toSlug imported above
@@ -572,7 +663,7 @@ const RoomDetail: React.FC = () => {
         const last = parts[parts.length - 1];
         const num = parseInt(last, 10);
         if (!isNaN(num)) {
-          found = localRooms.find(r => (r.RoomID === num) || ((r as any).roomId === num) || ((r.RoomNumber || (r as any).roomNumber) === last)) || null;
+          found = localRooms.find(r => (r.RoomID === num) || ((r as any).roomId === num)) || null;
         }
         // Try match by branch name presence
         if (!found) {
@@ -605,10 +696,10 @@ const RoomDetail: React.FC = () => {
   };
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('vi-VN', {
+    return `Từ ${new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND'
-    }).format(price);
+    }).format(price)}`;
   };
 
   // Get service fee based on branch (fallback defaults)
@@ -662,18 +753,20 @@ const RoomDetail: React.FC = () => {
           ? '/rooms/branch-1/Type1/branch1-1.jpg'
           : branchId === 4
             ? '/rooms/branch-4/Type12/branch4-1.jpg'
-            : branchId === 7
-              ? '/rooms/branch-7/Type16/branch7-1.png'
-              : branchId === 8
-                ? '/rooms/branch-8/Type17/branch8-1.jpg'
-                : branchId === 9
-                  ? '/rooms/branch-9/Type10/branch9-1.jpg'
-                  : branchId === 11
-                    ? '/rooms/branch-11/Type8/branch11-1.jpg'
-                    : branchId === 12
-                      ? '/rooms/branch-12/Type7/branch12-1.jpg'
-                      : branchId === 14
-                        ? '/rooms/branch-14/Type13/branch14-1.png'
+            : branchId === 5
+              ? '/rooms/branch-5/Type15/branch5-1.jpg'
+              : branchId === 7
+                ? '/rooms/branch-7/Type16/branch7-1.png'
+                : branchId === 8
+                  ? '/rooms/branch-8/Type17/branch8-1.jpg'
+                  : branchId === 9
+                    ? '/rooms/branch-9/Type10/branch9-1.jpg'
+                    : branchId === 11
+                      ? '/rooms/branch-11/Type8/branch11-1.jpg'
+                      : branchId === 12
+                        ? '/rooms/branch-12/Type7/branch12-1.jpg'
+                        : branchId === 14
+                          ? '/rooms/branch-14/Type13/branch14-1.png'
                         : '/rooms/branch-1/Type1/branch1-1.jpg';
       setImages(prev => prev.map((s, i) => (i === index ? safeSrc : s)));
     }
@@ -707,7 +800,7 @@ const RoomDetail: React.FC = () => {
     <div className="room-detail">
       <Meta
         title={`${room.BranchName || (room as any).branchName} - ${room.TypeName || (room as any).typeName}`}
-        description={`Phòng ${room.TypeName || (room as any).typeName} tại ${(room.BranchName || (room as any).branchName) ?? ''}. Giá ${(room.Price || (room as any).price || 0).toLocaleString('vi-VN')} VND/tháng.`}
+        description={`Phòng ${room.TypeName || (room as any).typeName} tại ${(room.BranchName || (room as any).branchName) ?? ''}. Từ ${(room.Price || (room as any).price || 0).toLocaleString('vi-VN')} VND/tháng.`}
         url={`https://younghousehoalac.com/room/${buildRoomSlug(room as any)}`}
         image={(room.Media && room.Media[0]?.FilePath) || '/logo.png'}
         jsonLd={{
@@ -746,34 +839,24 @@ const RoomDetail: React.FC = () => {
       {/* Image Gallery */}
       <div className="room-images">
         <div className="main-image-container">
-          {((room.BranchID || (room as any).branchId) === 5 || ((room.BranchID || (room as any).branchId) === 2 && ((room.RoomTypeID || (room as any).roomTypeId) === 20 || (room.RoomTypeID || (room as any).roomTypeId) === 21 || (room.RoomTypeID || (room as any).roomTypeId) === 22))) ? (
-            (() => {
-              const current = images[currentImageIndex] || '';
-              const webp = current.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.webp';
-              return (
-                <picture>
-                  <source srcSet={webp} type="image/webp" />
-                  <img 
-                    src={current}
-                    alt={`${room.BranchName} - Phòng ${room.RoomNumber}`}
-                    className="main-image"
-                    loading="eager"
-                    decoding="async"
-                    onClick={() => setShowImageModal(true)}
-                    onError={handleImageError(currentImageIndex)}
-                  />
-                </picture>
-              );
-            })()
-          ) : (
-            <img 
-              src={images[currentImageIndex]} 
-              alt={`${room.BranchName} - Phòng ${room.RoomNumber}`}
-              className="main-image"
-              onClick={() => setShowImageModal(true)}
-              onError={handleImageError(currentImageIndex)}
-            />
-          )}
+          {(() => {
+            const current = images[currentImageIndex] || '';
+            const webp = current.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.webp';
+            return (
+              <picture>
+                <source srcSet={webp} type="image/webp" />
+                <img 
+                  src={current}
+                  alt={`${room.BranchName}`}
+                  className="main-image"
+                  loading="eager"
+                  decoding="async"
+                  onClick={() => setShowImageModal(true)}
+                  onError={handleImageError(currentImageIndex)}
+                />
+              </picture>
+            );
+          })()}
           
           {images.length > 1 && (
             <>
@@ -860,7 +943,7 @@ const RoomDetail: React.FC = () => {
         <div className="room-main-info">
           <div className="room-header">
             <div className="room-title">
-              <h1>{room.BranchName} - Phòng {room.RoomNumber}</h1>
+              <h1>{room.BranchName}</h1>
               <div className="room-rating">
                 <Star size={16} fill="currentColor" />
                 <span>4.8 (124 đánh giá)</span>
@@ -1184,12 +1267,12 @@ const RoomDetail: React.FC = () => {
                   <div className="similar-room-image">
                     <img 
                       src={getRoomImages(similarRoom)[0]} 
-                      alt={`${similarRoom.BranchName} - Phòng ${similarRoom.RoomNumber}`}
+                      alt={`${similarRoom.BranchName}`}
                       onError={handleImageError(0)}
                     />
                   </div>
                   <div className="similar-room-info">
-                    <h3>Phòng {similarRoom.RoomNumber}</h3>
+                    <h3>{similarRoom.BranchName}</h3>
                     <p className="similar-room-branch">{similarRoom.BranchName}</p>
                     <p className="similar-room-type">{similarRoom.TypeName}</p>
                     <p className="similar-room-price">{formatPrice(similarRoom.Price || 0)}/tháng</p>

@@ -1,7 +1,7 @@
 export const toSlug = (text: string): string => {
   return text
     .normalize('NFD')
-    .replace(/\p{Diacritic}/g, '')
+    .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, '')
     .trim()
@@ -12,17 +12,15 @@ export const toSlug = (text: string): string => {
 export const buildRoomSlug = (room: {
   BranchName?: string; branchName?: string;
   TypeName?: string; typeName?: string;
-  RoomID?: number; roomId?: number; roomNumber?: string; RoomNumber?: string;
+  RoomID?: number; roomId?: number;
 }): string => {
   const branch = toSlug(room.BranchName || room.branchName || 'young-house');
   const type = toSlug(room.TypeName || room.typeName || 'phong');
-  // Prefer numeric stable id; fall back to digits in roomNumber; finally toSlug(roomNumber)
+  // Use RoomID as the identifier
   const rawNum = (room.RoomID || room.roomId || '').toString();
   let numberPart = rawNum;
   if (!numberPart) {
-    const rn = (room.RoomNumber || room.roomNumber || '').toString();
-    const digits = rn.replace(/\D+/g, '');
-    numberPart = digits || toSlug(rn);
+    numberPart = 'unknown';
   }
   return `${branch}-${type}-${numberPart}`;
 };

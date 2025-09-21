@@ -72,7 +72,7 @@ const ViewingAppointmentManager: React.FC = () => {
       (it.fullName || '').toLowerCase().includes(q) ||
       (it.email || '').toLowerCase().includes(q) ||
       (it.phone || '').toLowerCase().includes(q) ||
-      (it.roomNumber || '').toLowerCase().includes(q) ||
+      (it.roomId || '').toString().toLowerCase().includes(q) ||
       (it.branchName || '').toLowerCase().includes(q)
     );
   }, [items, search]);
@@ -194,7 +194,7 @@ const ViewingAppointmentManager: React.FC = () => {
                     <div>{it.viewingDate}</div>
                     <small className="muted">{it.viewingTime}</small>
                   </td>
-                    <td>{it.roomNumber || it.roomId}</td>
+                    <td>{it.roomId}</td>
                     <td>{it.branchName || it.address}</td>
                   <td>
                     <span

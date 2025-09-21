@@ -104,6 +104,23 @@ const SystemHome: React.FC = () => {
     const area = availableAreas.find(area => area.branchIds.includes(branchId));
     return area ? area.name : null;
   };
+
+  // Function to get room area from branch ID
+  const getRoomArea = (branchId: number): string => {
+    const areaMapping: Record<number, string> = {
+      1: '25m²', // Phòng rộng 25m² dạng gác xép
+      2: '20-40m²', // Phòng rộng 20m-40m2
+      4: '16-20m²', // Diện tích sử dụng phòng 16–20m²
+      5: '18-30m²', // Phòng rộng 18m-30m
+      8: '25m²', // Phòng rộng 25m dạng gác xép
+      9: '20-25m²', // Phòng rộng 20–25m²
+      10: '20-25m²', // Phòng rộng 20–25m²
+      11: '25-30m²', // Phòng rộng 25–30m²
+      12: '30-40m²', // Phòng rộng 30–40m² dạng gác xép
+      14: '20-25m²' // Default fallback
+    };
+    return areaMapping[branchId] || '20-25m²';
+  };
   const availableRoomTypes = [
     'Giường đôi',
     'Giường đôi gác xép',
@@ -181,16 +198,14 @@ const SystemHome: React.FC = () => {
         {
           RoomID: 1,
           roomId: 1,
-          RoomNumber: 'Young House 1',
-          roomNumber: 'Young House 1',
           BranchID: 1,
           branchId: 1,
           BranchName: 'Young House 1',
           branchName: 'Young House 1',
           TypeName: 'Giường đôi',
           typeName: 'Giường đôi',
-          Price: 2000000,
-          price: 2000000,
+          Price: 1500000,
+          price: 1500000,
           Status: 'Available',
           isAvailable: true,
           Address: '57 đường Xóm Quán – H10, xã Tân Xã',
@@ -198,11 +213,29 @@ const SystemHome: React.FC = () => {
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
           RoomTypeID: 1,
           roomTypeId: 1
-        },{
+        },
+        {
+          RoomID: 17,
+          roomId: 17,
+          BranchID: 1,
+          branchId: 1,
+          BranchName: 'Young House 1',
+          branchName: 'Young House 1',
+          TypeName: 'Giường gác xép có ban công thoáng',
+          typeName: 'Giường gác xép có ban công thoáng',
+          Price: 2200000,
+          price: 2200000,
+          Status: 'Occupied',
+          isAvailable: true,
+          Address: '57 đường Xóm Quán – H10, xã Tân Xã',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+          RoomTypeID: 25,
+          roomTypeId: 25
+        },
+        {
           RoomID: 2,
           roomId: 2,
-          RoomNumber: 'Young House 2',
-          roomNumber: 'Young House 2',
           BranchID: 2,
           branchId: 2,
           BranchName: 'Young House 2',
@@ -221,8 +254,6 @@ const SystemHome: React.FC = () => {
         },{
           RoomID: 3,
           roomId: 3,
-          RoomNumber: 'Young House 2',
-          roomNumber: 'Young House 2',
           BranchID: 2,
           branchId: 2,
           BranchName: 'Young House 2',
@@ -241,8 +272,6 @@ const SystemHome: React.FC = () => {
         },{
           RoomID: 4,
           roomId: 4,
-          RoomNumber: 'Young House 2',
-          roomNumber: 'Young House 2',
           BranchID: 2,
           branchId: 2,
           BranchName: 'Young House 2',
@@ -262,8 +291,6 @@ const SystemHome: React.FC = () => {
         {
           RoomID: 14,
           roomId: 14,
-          RoomNumber: 'Young House 2',
-          roomNumber: 'Young House 2',
           BranchID: 2,
           branchId: 2,
           BranchName: 'Young House 2',
@@ -283,8 +310,6 @@ const SystemHome: React.FC = () => {
         {
           RoomID: 15,
           roomId: 15,
-          RoomNumber: 'Young House 2',
-          roomNumber: 'Young House 2',
           BranchID: 2,
           branchId: 2,
           BranchName: 'Young House 2',
@@ -303,8 +328,6 @@ const SystemHome: React.FC = () => {
         },{
           RoomID: 16,
           roomId: 16,
-          RoomNumber: 'Young House 2',
-          roomNumber: 'Young House 2',
           BranchID: 2,
           branchId: 2,
           BranchName: 'Young House 2',
@@ -324,8 +347,6 @@ const SystemHome: React.FC = () => {
          {
            RoomID: 5,
           roomId: 5,
-          RoomNumber: 'Young House 4',
-          roomNumber: 'Young House 4',
           BranchID: 4,
           branchId: 4,
           BranchName: 'Young House 4',
@@ -344,8 +365,6 @@ const SystemHome: React.FC = () => {
         },{
           RoomID: 6,
           roomId: 6,
-          RoomNumber: 'Young House 9',
-          roomNumber: 'Young House 9',
           BranchID: 9,
           branchId: 9,
           BranchName: 'Young House 9',
@@ -364,8 +383,6 @@ const SystemHome: React.FC = () => {
         },{
           RoomID: 7,
           roomId: 7,
-          RoomNumber: 'Young House 10',
-          roomNumber: 'Young House 10',
           BranchID: 10,
           branchId: 10,
           BranchName: 'Young House 10',
@@ -384,8 +401,6 @@ const SystemHome: React.FC = () => {
         },{
           RoomID: 8,
           roomId: 8,
-          RoomNumber: 'Young House 11',
-          roomNumber: 'Young House 11',
           BranchID: 11,
           branchId: 11,
           BranchName: 'Young House 11',
@@ -406,8 +421,6 @@ const SystemHome: React.FC = () => {
         {
           RoomID: 9,
           roomId: 9,
-          RoomNumber: 'Young House 12',
-          roomNumber: 'Young House 12',
           BranchID: 12,
           branchId: 12,
           BranchName: 'Young House 12',
@@ -424,12 +437,29 @@ const SystemHome: React.FC = () => {
           RoomTypeID: 7,
           roomTypeId: 7
         },
+        {
+          RoomID: 19,
+          roomId: 19,
+          BranchID: 12,
+          branchId: 12,
+          BranchName: 'Young House 12',
+          branchName: 'Young House 12',
+          TypeName: 'Giường đôi có ban công thoáng view FPT',
+          typeName: 'Giường đôi có ban công thoáng view FPT',
+          Price: 2300000,
+          price:  2300000,
+          Status: 'Occupied',
+          isAvailable: false,
+          Address: 'Gần nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
+          RoomTypeID: 27,
+          roomTypeId: 27
+        },
         
         {
           RoomID: 10,
           roomId: 10,
-          RoomNumber: 'Young House 14',
-          roomNumber: 'Young House 14',
           BranchID: 14,
           branchId: 14,
           BranchName: 'Young House 14',
@@ -449,8 +479,6 @@ const SystemHome: React.FC = () => {
         ,        {
           RoomID: 11,
           roomId: 11,
-          RoomNumber: 'Young House 5',
-          roomNumber: 'Young House 5',
           BranchID: 5,
           branchId: 5,
           BranchName: 'Young House 5',
@@ -467,11 +495,30 @@ const SystemHome: React.FC = () => {
           RoomTypeID: 15,
           roomTypeId: 15
         }
-        ,{
+        ,
+        {
+    
+          RoomID: 18,
+          roomId: 18,
+          BranchID: 5,
+          branchId: 5,
+          BranchName: 'Young House 5',
+          branchName: 'Young House 5',
+          TypeName: 'Giường hai giường đôi có ban công thoáng',
+          typeName: 'Giường hai giường đôi có ban công thoáng',
+          Price: 2800000,
+          price: 2800000,
+          Status: 'Occupied',
+          isAvailable: false,
+          Address: 'Địa chỉ Young House 4',
+          City: 'Hà Nội',
+          Media: [{ FilePath: '/room/branch4/branch4-1.jpg' }],
+          RoomTypeID: 26,
+          roomTypeId: 26
+        },
+        {
           RoomID: 12,
           roomId: 12,
-          RoomNumber: 'Young House 7',
-          roomNumber: 'Young House 7',
           BranchID: 7,
           branchId: 7,
           BranchName: 'Young House 7',
@@ -490,8 +537,6 @@ const SystemHome: React.FC = () => {
         },{
           RoomID: 13,
           roomId: 13,
-          RoomNumber: 'Young House 8',
-          roomNumber: 'Young House 8',
           BranchID: 8,
           branchId: 8,
           BranchName: 'Young House 8',
@@ -635,10 +680,10 @@ const SystemHome: React.FC = () => {
   };
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('vi-VN', {
+    return `Từ ${new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND'
-    }).format(price);
+    }).format(price)}`;
   };
 
   // Get optimized image path based on branch and room
@@ -651,7 +696,7 @@ const SystemHome: React.FC = () => {
         // Use local public directory images
         const branchId = room.BranchID || room.branchId || 1;
         const roomTypeId = room.RoomTypeID || room.roomTypeId || 1;
-        const roomNumber = room.RoomNumber || room.roomNumber || '101';
+        const roomNumber = room.RoomID || room.roomId || 101;
         
         let imageIndex = 1;
         
@@ -662,7 +707,13 @@ const SystemHome: React.FC = () => {
             return `/rooms/branch-1/Type1/branch1-${i}.${i === 9 ? 'JPG' : 'jpg'}`;
           }
           case 5: {
-            // Available images: 1, 2
+            const typeId = (room.RoomTypeID ?? (room as any).roomTypeId) as number | undefined;
+            if (typeId === 26) {
+              // Type26: branch5-26-X.jpg (6 images)
+              const i = Math.floor(Math.random() * 6) + 1;
+              return `/rooms/branch-5/Type26/branch5-26-${i}.jpg`;
+            }
+            // Default Type15: branch5-X.jpg (2 images)
             const candidates = [1,2];
             const i = candidates[Math.floor(Math.random() * candidates.length)];
             return `/rooms/branch-5/Type15/branch5-${i}.jpg`;
@@ -722,6 +773,11 @@ const SystemHome: React.FC = () => {
             return `/rooms/branch-11/Type8/branch11-${i}.jpg`;
           }
           case 12: {
+            const typeId = (room.RoomTypeID ?? (room as any).roomTypeId) as number | undefined;
+            if (typeId === 27) {
+              const i = Math.floor(Math.random() * 4) + 1;
+              return `/rooms/branch-12/Type27/branch12-27-${i}.jpg`;
+            }
             const i = Math.floor(Math.random() * 9) + 1;
             return `/rooms/branch-12/Type7/branch12-${i}.jpg`;
           }
@@ -988,7 +1044,7 @@ const SystemHome: React.FC = () => {
                               <source srcSet={webp} type="image/webp" />
                               <img
                                 src={jpg}
-                                alt={`${room.BranchName} - Phòng ${room.RoomNumber}`}
+                                alt={`${room.BranchName}`}
                                 loading="lazy"
                                 decoding="async"
                                 onLoad={(e) => {
@@ -1006,7 +1062,7 @@ const SystemHome: React.FC = () => {
                                     parentElement.innerHTML = `
                                       <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:0.9rem;text-align:center;">
                                         <div>
-                                          <div>Phòng ${room.RoomNumber}</div>
+                                          <div>${room.BranchName}</div>
                                           <div style=\"font-size:0.8rem;margin-top:4px;\">(${room.BranchName})</div>
                                         </div>
                                       </div>
@@ -1027,7 +1083,7 @@ const SystemHome: React.FC = () => {
                       ) : (
                         <img 
                           src={getImagePath(room, viewMode === 'grid' ? 'medium' : 'large')} 
-                          alt={`${room.BranchName} - Phòng ${room.RoomNumber}`}
+                          alt={`${room.BranchName}`}
                           loading="lazy"
                           onLoad={(e) => {
                             const imgElement = e.currentTarget;
@@ -1044,7 +1100,7 @@ const SystemHome: React.FC = () => {
                               parentElement.innerHTML = `
                                 <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:0.9rem;text-align:center;">
                                   <div>
-                                    <div>Phòng ${room.RoomNumber}</div>
+                                    <div>${room.BranchName}</div>
                                     <div style="font-size:0.8rem;margin-top:4px;">(${room.BranchName})</div>
                                   </div>
                                 </div>
@@ -1072,7 +1128,7 @@ const SystemHome: React.FC = () => {
                         {formatPrice(room.Price ?? 0)}/tháng
                       </div>
                       
-                      <h3 className="room-name">{room.BranchName} - Phòng {room.RoomNumber}</h3>
+                      <h3 className="room-name">{room.BranchName}</h3>
                       
                       <div className="room-location">
                         <MapPin size={14} />
@@ -1081,6 +1137,7 @@ const SystemHome: React.FC = () => {
                       
                       <div className="room-amenities">
                         <span className="amenity-tag">{room.TypeName}</span>
+                        <span className="amenity-tag area-tag">{getRoomArea(room.BranchID || room.branchId || 1)}</span>
                         
                         {/* Add branch description details */}
                         {room.BranchID && branchDescriptions[room.BranchID] && (

@@ -86,7 +86,6 @@ export interface ViewingAppointment {
   status?: 'Pending' | 'Confirmed' | 'Completed' | 'Cancelled';
   createdAt?: string;
   // Additional fields from joins
-  roomNumber?: string;
   typeName?: string;
   price?: number;
   branchName?: string;
@@ -96,8 +95,6 @@ export interface ViewingAppointment {
 export interface Room {
   roomId: number;
   RoomID?: number; // Alternative naming
-  roomNumber: string;
-  RoomNumber?: string; // Alternative naming
   description?: string;
   RoomDescription?: string; // Alternative naming
   roomTypeId: number;
