@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://younghousehoalac.com/</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://younghousehoalac.com/logo192.png</image:loc>
-      <image:title>YoungHouse Logo</image:title>
-      <image:caption>YoungHouse Hoà Lạc - Hệ thống nhà trọ tiện nghi</image:caption>
-    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>1</priority>
   </url>
   <url>
     <loc>https://younghousehoalac.com/system-home</loc>
@@ -19,12 +13,26 @@
   <url>
     <loc>https://younghousehoalac.com/roommate-finder</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://younghousehoalac.com/contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://younghousehoalac.com/room/young-house-1-giuong-oi-101</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://younghousehoalac.com/room/young-house-2-giuong-oi-can-goc-thoang-201</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://younghousehoalac.com/room/young-house-4-giuong-oi-co-hanh-lang-view-ho-tan-xa-301</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
-
