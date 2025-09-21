@@ -1,4 +1,12 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+Allow: /logo*.png
+Allow: /favicon.ico
+Allow: /manifest.json
+
+# Sitemaps
 Sitemap: https://younghousehoalac.com/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1

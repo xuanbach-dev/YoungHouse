@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Structured Data - YoungHouse</title>
+</head>
+<body>
+    <h1>Test Structured Data</h1>
+    <p>This page is for testing structured data validation.</p>
+    
+    <!-- Organization Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "YoungHouse Hoà Lạc",
+      "alternateName": "YoungHouse",
+      "url": "https://younghousehoalac.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://younghousehoalac.com/logo192.png",
+        "width": 192,
+        "height": 192,
+        "caption": "YoungHouse Logo"
+      },
+      "image": "https://younghousehoalac.com/logo192.png",
+      "description": "Hệ thống nhà trọ tiện nghi tại Hoà Lạc, gần FPT University",
+      "foundingDate": "2020",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hoà Lạc",
+        "addressRegion": "Hà Nội",
+        "addressCountry": "VN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": "Vietnamese"
+      },
+      "sameAs": [
+        "https://younghousehoalac.com"
+      ]
+    }
+    </script>
+    
+    <!-- Website Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "YoungHouse Hoà Lạc",
+      "url": "https://younghousehoalac.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://younghousehoalac.com/logo192.png",
+        "width": 192,
+        "height": 192
+      },
+      "description": "Hệ thống nhà trọ tiện nghi tại Hoà Lạc, gần FPT University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "YoungHouse Hoà Lạc",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://younghousehoalac.com/logo192.png"
+        }
+      }
+    }
+    </script>
+</body>
+</html>

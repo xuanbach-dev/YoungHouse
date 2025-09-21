@@ -14,7 +14,7 @@ const Meta: React.FC<MetaProps> = ({
   title = 'YoungHouse Hoà Lạc - Trọ Hoà Lạc',
   description = 'YoungHouse - Hệ thống nhà trọ tiện nghi tại Hoà Lạc, gần FPT University.',
   url = 'https://younghousehoalac.com/',
-  image = '/logo-512.png',
+  image = '/logo192.png',
   canonical,
   jsonLd
 }) => {
