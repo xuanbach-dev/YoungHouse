@@ -354,67 +354,47 @@
   font-size: 0.95rem;
 }
 
-.view-controls {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.sort-options {
+.sort-controls {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.sort-options span {
-  font-size: 0.9rem;
-  color: #666;
-  white-space: nowrap;
-}
-
-.sort-btn {
-  background: none;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  color: #666;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.sort-btn.active,
-.sort-btn:hover {
-  background: #2d7dd2;
-  color: white;
-}
-
-.view-mode {
+.sort-dropdown {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
+}
+
+.sort-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+
+.sort-select {
+  padding: 0.5rem 1rem;
   border: 1px solid #ddd;
   border-radius: 8px;
-  overflow: hidden;
-}
-
-/* Ensure buttons meet touch target */
-.view-btn {
   background: white;
-  border: none;
-  padding: 0.75rem;
-  min-width: 44px;
-  min-height: 44px;
+  font-size: 0.9rem;
+  color: #333;
   cursor: pointer;
-  color: #666;
-  transition: all 0.3s ease;
+  min-width: 200px;
+  transition: border-color 0.2s ease;
 }
 
-.view-btn.active,
-.view-btn:hover {
-  background: #2d7dd2;
-  color: white;
+.sort-select:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
 }
+
+.sort-select:hover {
+  border-color: #1976d2;
+}
+
 
 .mobile-filter-btn {
   display: none;
@@ -726,13 +706,14 @@
     gap: 1.5rem;
   }
   
-  .view-controls {
-    gap: 1rem;
+  .sort-controls {
+    gap: 0.75rem;
   }
   
-  .sort-options {
-    gap: 0.5rem;
+  .sort-select {
+    min-width: 180px;
   }
+  
 }
 
 @media (max-width: 1024px) {
@@ -761,7 +742,7 @@
   }
   
   .mobile-filter-btn {
-    display: flex;
+    display: none;
   }
 
   .desktop-only { display: none; }
@@ -805,21 +786,34 @@
     gap: 1rem;
   }
   
-  .view-controls {
+  .results-header {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
   }
   
-  .sort-options {
-    order: 2;
-    flex: 1;
-    justify-content: center;
-  }
-  
-  .view-mode {
+  .results-info {
     order: 1;
-    align-self: flex-end;
+    flex: 1;
   }
+  
+  .sort-controls {
+    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .sort-select {
+    min-width: 160px;
+  }
+  
+  .mobile-filter-btn {
+    display: none;
+  }
+  
 }
 
 /* Mobile enhancements */
@@ -833,12 +827,19 @@
   }
 
   .search-bar {
-    flex-direction: column;
-    gap: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
   }
 
-  .search-button {
-    width: 100%;
+  .search-input-wrapper {
+    flex: 1;
+  }
+
+  
+  
+  .search-button span {
+    display: none;
   }
 
   .results-header {
@@ -848,39 +849,37 @@
     margin-bottom: 1rem;
   }
 
-  .view-controls {
-    display: grid;
-    grid-template-columns: 1fr auto;
+  .results-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .results-info {
+    order: 1;
+  }
+  
+  .sort-controls {
+    order: 2;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
   }
-
-  /* On very small screens stack fully */
-  @media (max-width: 420px) {
-    .view-controls { grid-template-columns: 1fr; }
+  
+  .sort-select {
+    min-width: 140px;
+    font-size: 0.85rem;
+  }
+  
+  .mobile-filter-btn {
+    display: none;
   }
 
-  .sort-options {
-    order: 2;
-    display: flex;
-    gap: 0.5rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 0.25rem;
-  }
-  .sort-options::-webkit-scrollbar { display: none; }
-  .sort-btn { flex: 0 0 auto; padding: 0.5rem 0.75rem; font-size: 0.85rem; }
 
-  .view-mode {
-    order: 1;
-    justify-self: end;
-  }
 
-  .mobile-filter-btn { display: flex; width: 100%; justify-content: center; }
 
   .rooms-grid { grid-template-columns: 1fr; gap: 1rem; }
-  .rooms-grid.list .room-card { grid-template-columns: 1fr; }
-  .rooms-grid.list .room-image { height: 200px; }
   .room-content { padding: 1rem; }
 }
 
@@ -894,16 +893,39 @@
     margin-bottom: 0.75rem;
   }
   
+  .search-bar {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
   .search-input-wrapper {
-    padding: 0.6rem 0.75rem;
+    flex: 1;
+    padding: 0.5rem 0.75rem;
   }
   
   .search-input {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   
   .search-button {
-    padding: 0.6rem 1.5rem;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-button::before {
+    content: "🔍";
+    font-size: 1rem;
+  }
+  
+  .search-button span {
+    display: none;
   }
   
   .results-info h2 {
@@ -918,7 +940,26 @@
     font-size: 1rem;
   }
   
-  .sort-options span {
+  .results-header {
+    gap: 0.75rem;
+  }
+  
+  .sort-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .sort-dropdown {
+    justify-content: space-between;
+  }
+  
+  .sort-select {
+    min-width: 120px;
+    font-size: 0.8rem;
+  }
+  
+  .mobile-filter-btn {
     display: none;
   }
 

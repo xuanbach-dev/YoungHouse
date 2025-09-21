@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-// Dữ liệu phòng từ SystemHome.tsx (cập nhật từ dữ liệu thực tế)
+// Dữ liệu phòng từ SystemHome.tsx
 const localRooms = [
   { RoomID: 1, BranchName: 'Young House 1', TypeName: 'Giường đôi', BranchID: 1 },
   { RoomID: 2, BranchName: 'Young House 2', TypeName: 'Giường đôi căn góc thoáng', BranchID: 2 },
@@ -26,23 +26,23 @@ const localRooms = [
   { RoomID: 21, BranchName: 'Young House 7', TypeName: 'Giường đôi có ban công thoáng', BranchID: 7 },
   { RoomID: 22, BranchName: 'Young House 7', TypeName: 'Giường đôi có ban công thoáng', BranchID: 7 },
   { RoomID: 23, BranchName: 'Young House 8', TypeName: 'Giường gác xép có ban công thoáng', BranchID: 8 },
-  { RoomID: 24, BranchName: 'Young House 8', TypeName: 'Giường gác xep có ban công thoáng', BranchID: 8 },
-  { RoomID: 25, BranchName: 'Young House 8', TypeName: 'Giường gác xep có ban công thoáng', BranchID: 8 },
+  { RoomID: 24, BranchName: 'Young House 8', TypeName: 'Giường gác xép có ban công thoáng', BranchID: 8 },
+  { RoomID: 25, BranchName: 'Young House 8', TypeName: 'Giường gác xép có ban công thoáng', BranchID: 8 },
   { RoomID: 26, BranchName: 'Young House 9', TypeName: 'Giường đôi có ban công thoáng', BranchID: 9 },
   { RoomID: 27, BranchName: 'Young House 9', TypeName: 'Giường đôi có ban công thoáng', BranchID: 9 },
   { RoomID: 28, BranchName: 'Young House 9', TypeName: 'Giường đôi có ban công thoáng', BranchID: 9 },
   { RoomID: 29, BranchName: 'Young House 10', TypeName: 'Giường đôi', BranchID: 10 },
   { RoomID: 30, BranchName: 'Young House 10', TypeName: 'Giường đôi', BranchID: 10 },
-  { RoomID: 31, BranchName: 'Young House 11', TypeName: 'Giường gác xep có ban công thoáng', BranchID: 11 },
-  { RoomID: 32, BranchName: 'Young House 11', TypeName: 'Giường gác xep có ban công thoáng', BranchID: 11 },
-  { RoomID: 33, BranchName: 'Young House 11', TypeName: 'Giường gác xep có ban công thoáng', BranchID: 11 },
-  { RoomID: 34, BranchName: 'Young House 12', TypeName: 'Giường gác xep có ban công thoáng', BranchID: 12 },
-  { RoomID: 35, BranchName: 'Young House 12', TypeName: 'Giường gác xep có ban công thoáng', BranchID: 12 },
-  { RoomID: 36, BranchName: 'Young House 12', TypeName: 'Giường gác xep có ban công thoáng', BranchID: 12 },
-  { RoomID: 37, BranchName: 'Young House 14', TypeName: 'Giường gác xep có cửa sổ thoáng', BranchID: 14 },
-  { RoomID: 38, BranchName: 'Young House 14', TypeName: 'Giường gác xep có cửa sổ thoáng', BranchID: 14 },
-  { RoomID: 39, BranchName: 'Young House 14', TypeName: 'Giường gác xep có cửa sổ thoáng', BranchID: 14 },
-  { RoomID: 40, BranchName: 'Young House 14', TypeName: 'Giường gác xep có cửa sổ thoáng', BranchID: 14 }
+  { RoomID: 31, RoomID: 31, BranchName: 'Young House 11', TypeName: 'Giường gác xép có ban công thoáng', BranchID: 11 },
+  { RoomID: 32, RoomID: 32, BranchName: 'Young House 11', TypeName: 'Giường gác xép có ban công thoáng', BranchID: 11 },
+  { RoomID: 33, RoomID: 33, BranchName: 'Young House 11', TypeName: 'Giường gác xép có ban công thoáng', BranchID: 11 },
+  { RoomID: 34, RoomID: 34, BranchName: 'Young House 12', TypeName: 'Giường gác xép có ban công thoáng', BranchID: 12 },
+  { RoomID: 35, RoomID: 35, BranchName: 'Young House 12', TypeName: 'Giường gác xép có ban công thoáng', BranchID: 12 },
+  { RoomID: 36, RoomID: 36, BranchName: 'Young House 12', TypeName: 'Giường gác xép có ban công thoáng', BranchID: 12 },
+  { RoomID: 37, RoomID: 37, BranchName: 'Young House 14', TypeName: 'Giường gác xép có cửa sổ thoáng', BranchID: 14 },
+  { RoomID: 38, RoomID: 38, BranchName: 'Young House 14', TypeName: 'Giường gác xép có cửa sổ thoáng', BranchID: 14 },
+  { RoomID: 39, RoomID: 39, BranchName: 'Young House 14', TypeName: 'Giường gác xép có cửa sổ thoáng', BranchID: 14 },
+  { RoomID: 40, RoomID: 40, BranchName: 'Young House 14', TypeName: 'Giường gác xép có cửa sổ thoáng', BranchID: 14 }
 ];
 
 // Hàm tạo slug từ tên phòng

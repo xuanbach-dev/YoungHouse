@@ -107,40 +107,30 @@
   background: #2d7dd2; /* primary blue underline */
 }
 
-/* Mobile toggle */
-.navbar-toggle {
-  display: none;
-  background: #ffffff;
-  border: 1px solid #e7ecf3;
-  padding: 8px 12px;
-  border-radius: 12px;
+/* Book Now Button */
+.book-now-button {
+  background: linear-gradient(135deg, #2d7dd2 0%, #1a5fa0 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(16,24,40,.04);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(45, 125, 210, 0.3);
   display: inline-flex;
-  align-items: center;
-  gap: 10px;
 }
 
-.hamburger,
-.hamburger::before,
-.hamburger::after {
-  content: '';
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: #333;
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+.book-now-button:hover {
+  background: linear-gradient(135deg, #1a5fa0 0%, #2d7dd2 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 125, 210, 0.4);
 }
 
-.hamburger::before { transform: translateY(-6px); }
-.hamburger::after { transform: translateY(6px); }
-
-.navbar-toggle.active .hamburger { background: transparent; }
-.navbar-toggle.active .hamburger::before { transform: translateY(0) rotate(45deg); }
-.navbar-toggle.active .hamburger::after { transform: translateY(0) rotate(-45deg); }
-
-.menu-label { font-weight: 600; color: #1d2433; font-size: 0.95rem; }
+.book-now-text {
+  white-space: nowrap;
+}
 
 /* Mobile drawer */
 .mobile-menu {
@@ -225,12 +215,20 @@
 @media (max-width: 768px) {
   .navbar-container { padding: 0 0.75rem; height: 64px; }
   .desktop-menu { display: none; }
-  .navbar-toggle { display: inline-flex; }
+  .book-now-button { 
+    display: inline-flex;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
   .logo-image { height: 55px; }
 }
 
 @media (max-width: 420px) {
   .navbar-container { padding: 0 0.5rem; height: 60px; }
   .logo-image { height: 55px; }
-  .mobile-menu { width: 88%; }
+  .book-now-button { 
+    display: inline-flex;
+    padding: 8px 14px; 
+    font-size: 0.8rem; 
+  }
 }

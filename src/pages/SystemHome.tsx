@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, MapPin, Calendar, Filter, Grid, List, ChevronDown, X } from 'lucide-react';
+import { Search, MapPin, Filter, X } from 'lucide-react';
 import { roomsAPI, branchesAPI } from '../services/api';
 import { Room, Branch } from '../types';
 import GoogleMapEmbed from '../components/GoogleMapEmbed';
@@ -27,7 +27,6 @@ const SystemHome: React.FC = () => {
   const [roomTypes, setRoomTypes] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
   const [pagination, setPagination] = useState({
     page: 1,
@@ -44,6 +43,7 @@ const SystemHome: React.FC = () => {
   const [selectedRoomTypes, setSelectedRoomTypes] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState({ min: 0, max: 10000000 });
   const [statusFilter, setStatusFilter] = useState<string>('All');
+  const [sortBy, setSortBy] = useState<'default' | 'price-low' | 'price-high'>('default');
 
   // Available areas and their corresponding branch IDs
   const availableAreas = [
@@ -611,7 +611,7 @@ const SystemHome: React.FC = () => {
 
   useEffect(() => {
     filterRooms();
-  }, [selectedBranches, selectedAreas, selectedRoomTypes, priceRange, rooms, statusFilter]);
+  }, [selectedBranches, selectedAreas, selectedRoomTypes, priceRange, rooms, statusFilter, sortBy]);
 
   const filterRooms = () => {
     let filtered = rooms.filter(room => {
@@ -635,6 +635,13 @@ const SystemHome: React.FC = () => {
 
       return matchesArea && matchesBranch && matchesRoomType && matchesPrice;
     });
+
+    // Apply sorting
+    if (sortBy === 'price-low') {
+      filtered.sort((a, b) => (a.Price || a.price || 0) - (b.Price || b.price || 0));
+    } else if (sortBy === 'price-high') {
+      filtered.sort((a, b) => (b.Price || b.price || 0) - (a.Price || a.price || 0));
+    }
 
     setFilteredRooms(filtered);
   };
@@ -673,6 +680,11 @@ const SystemHome: React.FC = () => {
     setPriceRange({ min: 0, max: 10000000 });
     setSearchQuery('');
     setStatusFilter('All'); // Show all rooms
+    setSortBy('default');
+  };
+
+  const handleSortChange = (sortType: 'default' | 'price-low' | 'price-high') => {
+    setSortBy(sortType);
   };
 
   const handleSearch = () => {
@@ -837,7 +849,7 @@ const SystemHome: React.FC = () => {
                 className="search-input"
               />
             </div>
-            <button className="search-button">Tìm kiếm</button>
+            
           </div>
         </div>
       </div>
@@ -980,22 +992,20 @@ const SystemHome: React.FC = () => {
                 <p>Có <strong>{filteredRooms.length}</strong> phòng {statusFilter === 'Available' ? 'còn trống' : 'tất cả'}</p>
               </div>
               
-              <div className="view-controls">
-                
-                
-                <div className="view-mode">
-                  <button 
-                    className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
-                    onClick={() => setViewMode('grid')}
+              <div className="sort-controls">
+                {/* Sort Dropdown */}
+                <div className="sort-dropdown">
+                  <label htmlFor="sort-select" className="sort-label">Sắp xếp:</label>
+                  <select 
+                    id="sort-select"
+                    value={sortBy} 
+                    onChange={(e) => handleSortChange(e.target.value as 'default' | 'price-low' | 'price-high')}
+                    className="sort-select"
                   >
-                    <Grid size={20} />
-                  </button>
-                  <button 
-                    className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
-                    onClick={() => setViewMode('list')}
-                  >
-                    <List size={20} />
-                  </button>
+                    <option value="default">Mặc định</option>
+                    <option value="price-low">Giá từ thấp đến cao</option>
+                    <option value="price-high">Giá từ cao đến thấp</option>
+                  </select>
                 </div>
               </div>
               
@@ -1014,7 +1024,7 @@ const SystemHome: React.FC = () => {
             ) : error ? (
               <div className="error-message">{error}</div>
             ) : (
-              <div className={`rooms-grid ${viewMode}`}>
+              <div className="rooms-grid grid">
                 {filteredRooms.map(room => (
                   <div 
                     key={room.RoomID} 
@@ -1032,13 +1042,9 @@ const SystemHome: React.FC = () => {
                     <div className="room-image">
                       {((room.BranchID || (room as any).branchId) === 5 || ((room.BranchID || (room as any).branchId) === 2 && ((room.RoomTypeID || (room as any).roomTypeId) === 20 || (room.RoomTypeID || (room as any).roomTypeId) === 21 || (room.RoomTypeID || (room as any).roomTypeId) === 22))) ? (
                         (() => {
-                          const base = getImagePath(room, viewMode === 'grid' ? 'thumbnail' : 'large');
-                          const webp = viewMode === 'grid'
-                            ? base.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.webp'
-                            : base.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.webp';
-                          const jpg = viewMode === 'grid'
-                            ? base.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg'
-                            : base;
+                          const base = getImagePath(room, 'thumbnail');
+                          const webp = base.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.webp';
+                          const jpg = base.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg';
                           return (
                             <picture>
                               <source srcSet={webp} type="image/webp" />
@@ -1082,7 +1088,7 @@ const SystemHome: React.FC = () => {
                         })()
                       ) : (
                         <img 
-                          src={getImagePath(room, viewMode === 'grid' ? 'medium' : 'large')} 
+                          src={getImagePath(room, 'medium')} 
                           alt={`${room.BranchName}`}
                           loading="lazy"
                           onLoad={(e) => {
