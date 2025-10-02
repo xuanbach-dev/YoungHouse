@@ -65,6 +65,14 @@ const SurroundingAreas: React.FC<SurroundingAreasProps> = ({
           { id: 'yh5-6', name: 'FPT Software', distance: '1.5km', type: 'other', description: 'Công ty FPT Software' }
         ];
 
+        case 6: // Young House 6
+        return [
+          { id: 'yh6-1', name: 'Trường Đại học FPT', distance: '3km', type: 'university', description: 'Trường chính' },
+          { id: 'yh6-2', name: 'Trường Đại học Quốc gia Hà Nội', distance: '5.5km', type: 'university', description: 'Trường chính' },
+          { id: 'yh6-3', name: 'Trường Học viện Tài chính', distance: '2km', type: 'university', description: 'Trường chính' },
+          { id: 'yh6-4', name: 'Chợ Hoà Lạc', distance: '200m', type: 'shopping', description: 'Mua sắm' },
+        ];
+
         case 7: // Young House 7
         return [
           { id: 'yh7-1', name: 'Trường Đại học FPT', distance: '3.5km', type: 'university', description: 'Trường chính' },

@@ -362,7 +362,27 @@ const SystemHome: React.FC = () => {
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
           RoomTypeID: 12,
           roomTypeId: 12
-        },{
+        },
+        {
+          RoomID: 20,
+         roomId: 20,
+         BranchID: 6,
+         branchId: 6,
+         BranchName: 'Young House 6',
+         branchName: 'Young House 6',
+         TypeName: 'Giường gác xép có ban công thoáng',
+         typeName: 'Giường gác xép có ban công thoáng',
+         Price: 1700000,
+         price: 1700000,
+         Status: 'Occupied',
+         isAvailable: false,
+         Address: 'Ngõ 902 đường 420 , thôn Thái Bình , Bình Yên ',
+         City: 'Hà Nội',
+         Media: [{ FilePath: '/rooms/branch-6/Type30/branch6-30-2.jpg' }],
+         RoomTypeID: 30,
+         roomTypeId: 30
+       },
+        {
           RoomID: 6,
           roomId: 6,
           BranchID: 9,
@@ -717,6 +737,16 @@ const SystemHome: React.FC = () => {
           case 1: {
             const i = Math.floor(Math.random() * 9) + 1;
             return `/rooms/branch-1/Type1/branch1-${i}.${i === 9 ? 'JPG' : 'jpg'}`;
+          }
+          case 6: {
+            // Branch 6 Type30 images; include known filenames (first has a typo in assets)
+            const candidates = [
+              '/rooms/branch-6/Type30/brranch6-30-1.jpg',
+              '/rooms/branch-6/Type30/branch6-30-2.jpg',
+              '/rooms/branch-6/Type30/branch6-30-3.jpg'
+            ];
+            const i = Math.floor(Math.random() * candidates.length);
+            return candidates[i];
           }
           case 5: {
             const typeId = (room.RoomTypeID ?? (room as any).roomTypeId) as number | undefined;

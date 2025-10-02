@@ -243,6 +243,25 @@ const RoomDetail: React.FC = () => {
       roomTypeId: 12
     },
     {
+      RoomID: 20,
+     roomId: 20,
+     BranchID: 6,
+     branchId: 6,
+     BranchName: 'Young House 6',
+     branchName: 'Young House 6',
+     TypeName: 'Giường gác xép có ban công thoáng',
+     typeName: 'Giường gác xép có ban công thoáng',
+     Price: 1700000,
+     price: 1700000,
+     Status: 'Occupied',
+     isAvailable: false,
+     Address: 'Ngõ 902 đường 420 , thôn Thái Bình , Bình Yên ',
+     City: 'Hà Nội',
+     Media: [{ FilePath: '/rooms/branch-6/Type30/branch6-30-2.jpg' }],
+     RoomTypeID: 30,
+     roomTypeId: 30
+   },
+    {
     
       RoomID: 18,
       roomId: 18,
@@ -581,6 +600,15 @@ const RoomDetail: React.FC = () => {
       return images;
     }
 
+    if (branchId === 6) {
+      // Branch 6 uses Type30; filenames available in public folder
+      // Note: first image file name has a typo in source assets (brranch6-30-1.jpg)
+      images.push('/rooms/branch-6/Type30/brranch6-30-1.jpg');
+      images.push('/rooms/branch-6/Type30/branch6-30-2.jpg');
+      images.push('/rooms/branch-6/Type30/branch6-30-3.jpg');
+      return images;
+    }
+
     if (branchId === 11) {
       for (let i = 1; i <= 7; i++) {
         images.push(`/rooms/branch-11/Type8/branch11-${i}.jpg`);
@@ -700,7 +728,7 @@ const RoomDetail: React.FC = () => {
       return (room as any).ServiceFee || (room as any).serviceFee || 0;
     }
     const b = room.BranchID || room.branchId;
-    if (b === 10 || b === 14) return 180000;
+    if (b === 10 || b === 14 || b === 6) return 180000;
     return 230000;
   };
 
@@ -743,6 +771,8 @@ const RoomDetail: React.FC = () => {
         ? '/rooms/branch-10/Type11/branch10-1.jpg'
         : branchId === 1
           ? '/rooms/branch-1/Type1/branch1-1.jpg'
+          : branchId === 6
+            ? '/rooms/branch-6/Type30/branch6-30-2.jpg'
           : branchId === 4
             ? '/rooms/branch-4/Type12/branch4-1.jpg'
             : branchId === 5
@@ -833,6 +863,20 @@ const RoomDetail: React.FC = () => {
         <div className="main-image-container">
           {(() => {
             const current = images[currentImageIndex] || '';
+            const isBranch6 = current.includes('/rooms/branch-6/');
+            if (isBranch6) {
+              return (
+                <img 
+                  src={current}
+                  alt={`${room.BranchName}`}
+                  className="main-image"
+                  loading="eager"
+                  decoding="async"
+                  onClick={() => setShowImageModal(true)}
+                  onError={handleImageError(currentImageIndex)}
+                />
+              );
+            }
             const webp = current.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.webp';
             return (
               <picture>
@@ -880,8 +924,28 @@ const RoomDetail: React.FC = () => {
         {images.length > 1 && (
           <div className="thumbnail-gallery">
             {images.map((image, index) => {
+              const isBranch6 = image.includes('/rooms/branch-6/');
               const thumb = image.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.thumb.jpg';
               const webp = image.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.webp';
+              if (isBranch6) {
+                return (
+                  <img
+                    key={index}
+                    src={thumb}
+                    alt={`Ảnh ${index + 1}`}
+                    className={`thumbnail ${index === currentImageIndex ? 'active' : ''}`}
+                    onClick={() => setCurrentImageIndex(index)}
+                    onError={(e) => {
+                      const img = e.currentTarget as HTMLImageElement;
+                      if (img.src.endsWith('.thumb.jpg')) {
+                        img.src = image;
+                      } else {
+                        img.src = image;
+                      }
+                    }}
+                  />
+                );
+              }
               return (
                 <picture key={index}>
                   <source srcSet={webp} type="image/webp" />

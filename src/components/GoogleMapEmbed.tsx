@@ -24,8 +24,12 @@ const GoogleMapEmbed: React.FC<GoogleMapEmbedProps> = ({
       case 4:
         return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.3812917275845!2d105.54630277471405!3d21.017424288168876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b41e87c01f3%3A0xd0059f09a8791280!2zTmjDoCBUcuG7jSBZb3VuZyBIb3VzZSA0!5e0!3m2!1svi!2s!4v1758164321713!5m2!1svi!2s";
       case 5:
+      
         return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1862.1759625870004!2d105.54905839839479!3d21.0186001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b0062f1995f%3A0x89ab20614a29c8c2!2sYoung%20House%205!5e0!3m2!1svi!2sus!4v1758166455214!5m2!1svi!2sus";
-      case 7:
+     
+     case 6:
+        return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d931.0242462886803!2d105.52869186453995!3d21.028805043814263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b005104fa6d%3A0x4eb17d2609273518!2zxJDhu6ljIFRow6BuaCBCdWlsZGluZw!5e0!3m2!1sen!2s!4v1759410345316!5m2!1sen!2s";
+        case 7:
         return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d232.76905804091237!2d105.55109415203336!3d21.020481670013293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345bd1ca96550f%3A0xba9059ecf0b7745b!2zTmjDoCB0cuG7jSBIw6AgTuG7mWkgMw!5e0!3m2!1svi!2sus!4v1758166537085!5m2!1svi!2sus";
       case 8:
         return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d232.76976362544352!2d105.55511007479933!3d21.0200297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b5ddf893bd3%3A0xc7e243a204cc7516!2sYoung%20House%208!5e0!3m2!1svi!2sus!4v1758166553964!5m2!1svi!2sus";
