@@ -13,6 +13,7 @@
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@types/react-router-dom": "^5.3.3",
+    "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "axios": "^1.6.8",
     "cors": "^2.8.5",
@@ -32,7 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "prebuild": "node scripts/generate-sitemap.mjs",
-    "build": "react-scripts build && mkdir -p build && cp public/_redirects build/_redirects",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "vercel-build": "npm run build"

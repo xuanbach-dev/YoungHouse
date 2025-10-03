@@ -3,8 +3,8 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "younghousehoalac.com" }],
-      "destination": "https://www.younghousehoalac.com/:path*",
+      "has": [{ "type": "host", "value": "www.younghousehoalac.com" }],
+      "destination": "https://younghousehoalac.com/:path*",
       "permanent": true
     }
   ],
