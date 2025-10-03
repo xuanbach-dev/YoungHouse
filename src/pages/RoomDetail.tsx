@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { 
-  ArrowLeft, 
-  MapPin, 
+import {
+  ArrowLeft,
+  MapPin,
   ChevronLeft,
   ChevronRight,
   Phone as PhoneIcon,
@@ -23,7 +23,7 @@ const RoomDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  
+
   const [room, setRoom] = useState<Room | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -69,7 +69,7 @@ const RoomDetail: React.FC = () => {
       return '';
     }
   };
-  
+
   // Local mock rooms (sync minimal fields with SystemHome local data)
   const localRooms: Room[] = [
     {
@@ -147,7 +147,7 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
       RoomTypeID: 3,
       roomTypeId: 3
-    },{
+    }, {
       RoomID: 4,
       roomId: 4,
       BranchID: 2,
@@ -181,7 +181,7 @@ const RoomDetail: React.FC = () => {
       isAvailable: false,
       Address: '64 Phú Hữu, xã Tân Xã',
       City: 'Hà Nội',
-      
+
       RoomTypeID: 20,
       roomTypeId: 20
     },
@@ -200,10 +200,10 @@ const RoomDetail: React.FC = () => {
       isAvailable: false,
       Address: '64 Phú Hữu, xã Tân Xã',
       City: 'Hà Nội',
-      
+
       RoomTypeID: 21,
       roomTypeId: 21
-    },{
+    }, {
       RoomID: 16,
       roomId: 16,
       BranchID: 2,
@@ -218,12 +218,11 @@ const RoomDetail: React.FC = () => {
       isAvailable: false,
       Address: '64 Phú Hữu, xã Tân Xã',
       City: 'Hà Nội',
-      
+
       RoomTypeID: 22,
       roomTypeId: 22
     },
     {
-    
       RoomID: 5,
       roomId: 5,
       BranchID: 4,
@@ -244,25 +243,24 @@ const RoomDetail: React.FC = () => {
     },
     {
       RoomID: 20,
-     roomId: 20,
-     BranchID: 6,
-     branchId: 6,
-     BranchName: 'Young House 6',
-     branchName: 'Young House 6',
-     TypeName: 'Giường gác xép có ban công thoáng',
-     typeName: 'Giường gác xép có ban công thoáng',
-     Price: 1700000,
-     price: 1700000,
-     Status: 'Occupied',
-     isAvailable: false,
-     Address: 'Ngõ 902 đường 420 , thôn Thái Bình , Bình Yên ',
-     City: 'Hà Nội',
-     Media: [{ FilePath: '/rooms/branch-6/Type30/branch6-30-2.jpg' }],
-     RoomTypeID: 30,
-     roomTypeId: 30
-   },
+      roomId: 20,
+      BranchID: 6,
+      branchId: 6,
+      BranchName: 'Young House 6',
+      branchName: 'Young House 6',
+      TypeName: 'Giường gác xép có ban công thoáng',
+      typeName: 'Giường gác xép có ban công thoáng',
+      Price: 1700000,
+      price: 1700000,
+      Status: 'Occupied',
+      isAvailable: false,
+      Address: 'Ngõ 902 đường 420 , thôn Thái Bình , Bình Yên ',
+      City: 'Hà Nội',
+      Media: [{ FilePath: '/rooms/branch-6/Type30/branch6-30-2.jpg' }],
+      RoomTypeID: 30,
+      roomTypeId: 30
+    },
     {
-    
       RoomID: 18,
       roomId: 18,
       BranchID: 5,
@@ -299,7 +297,7 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
       RoomTypeID: 10,
       roomTypeId: 10
-    },    {
+    }, {
       RoomID: 7,
       roomId: 7,
       BranchID: 10,
@@ -317,7 +315,7 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
       RoomTypeID: 11,
       roomTypeId: 11
-    },{
+    }, {
       RoomID: 8,
       roomId: 8,
       BranchID: 11,
@@ -335,7 +333,7 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
       RoomTypeID: 8,
       roomTypeId: 8
-    },{
+    }, {
       RoomID: 9,
       roomId: 9,
       BranchID: 12,
@@ -345,7 +343,7 @@ const RoomDetail: React.FC = () => {
       TypeName: 'Giường gác xép có ban công thoáng',
       typeName: 'Giường gác xép có ban công thoáng',
       Price: 2500000,
-      price:  2500000,
+      price: 2500000,
       Status: 'Occupied',
       isAvailable: false,
       Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
@@ -354,7 +352,7 @@ const RoomDetail: React.FC = () => {
       RoomTypeID: 7,
       roomTypeId: 7
     },
-    
+
     {
       RoomID: 19,
       roomId: 19,
@@ -365,7 +363,7 @@ const RoomDetail: React.FC = () => {
       TypeName: 'Giường đôi có ban công thoáng view FPT',
       typeName: 'Giường đôi có ban công thoáng view FPT',
       Price: 2300000,
-      price:  2300000,
+      price: 2300000,
       Status: 'Occupied',
       isAvailable: false,
       Address: 'Gần nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
@@ -392,7 +390,7 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
       RoomTypeID: 13,
       roomTypeId: 13
-    },{
+    }, {
       RoomID: 11,
       roomId: 11,
       BranchID: 5,
@@ -410,7 +408,7 @@ const RoomDetail: React.FC = () => {
       Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
       RoomTypeID: 15,
       roomTypeId: 15
-    },{
+    }, {
       RoomID: 12,
       roomId: 12,
       BranchID: 7,
@@ -439,7 +437,7 @@ const RoomDetail: React.FC = () => {
       TypeName: 'Giường đôi có ban công thoáng view FPT',
       typeName: 'Giường đôi có ban công thoáng view FPT',
       Price: 2300000,
-      price:  2300000,
+      price: 2300000,
       Status: 'Occupied',
       isAvailable: false,
       Address: 'Gần nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
@@ -468,7 +466,7 @@ const RoomDetail: React.FC = () => {
       roomTypeId: 17
     }
   ];
-  
+
   // Use public images under /public/rooms/branch-<branchId>/TypeX/<filename>
   const getRoomImages = (room: Room): string[] => {
     const branchId = room.BranchID || room.branchId || 1;
@@ -477,7 +475,7 @@ const RoomDetail: React.FC = () => {
     // Branch-specific patterns that match your public folder
     if (branchId === 1) {
       const roomTypeId = room.RoomTypeID || (room as any).roomTypeId;
-      
+
       // Handle Type25 for roomID 17
       if (roomTypeId === 25) {
         for (let i = 1; i <= 5; i++) {
@@ -485,7 +483,7 @@ const RoomDetail: React.FC = () => {
         }
         return images;
       }
-      
+
       // Default Type1 for other rooms in branch 1
       // branch-1/Type1/branch1-<i>.jpg (1..9), note last may be .JPG but onError will handle
       for (let i = 1; i <= 9; i++) {
@@ -502,8 +500,8 @@ const RoomDetail: React.FC = () => {
       let count = 7;
       if (roomTypeId === 3) { typeFolder = 'Type3'; prefix = 'branch2-2-'; count = 4; }
       if (roomTypeId === 4) { typeFolder = 'Type4'; prefix = 'branch2-3-'; count = 2; }
-      if (roomTypeId === 20) { 
-        typeFolder = 'Type20'; 
+      if (roomTypeId === 20) {
+        typeFolder = 'Type20';
         // Handle both naming patterns: branch2-20-X and branch-20-X
         images.push('/rooms/branch-2/Type20/branch2-20-1.JPG');
         images.push('/rooms/branch-2/Type20/branch2-20-2.JPG');
@@ -512,16 +510,16 @@ const RoomDetail: React.FC = () => {
         images.push('/rooms/branch-2/Type20/branch2-20-5.JPG');
         return images;
       }
-      if (roomTypeId === 21) { 
-        typeFolder = 'Type21'; 
+      if (roomTypeId === 21) {
+        typeFolder = 'Type21';
         // Type21: branch2-21-X (5 images)
         for (let i = 1; i <= 5; i++) {
           images.push(`/rooms/branch-2/Type21/branch2-21-${i}.JPG`);
         }
         return images;
       }
-      if (roomTypeId === 22) { 
-        typeFolder = 'Type22'; 
+      if (roomTypeId === 22) {
+        typeFolder = 'Type22';
         // Type22: branch2-22-X (3 images)
         for (let i = 1; i <= 3; i++) {
           images.push(`/rooms/branch-2/Type22/branch2-22-${i}.JPG`);
@@ -575,7 +573,7 @@ const RoomDetail: React.FC = () => {
 
     if (branchId === 5) {
       const roomTypeId = room.RoomTypeID || (room as any).roomTypeId;
-      
+
       // Handle Type26 for roomID 18
       if (roomTypeId === 26) {
         for (let i = 1; i <= 6; i++) {
@@ -583,7 +581,7 @@ const RoomDetail: React.FC = () => {
         }
         return images;
       }
-      
+
       // Handle Type15 for roomID 11
       if (roomTypeId === 15) {
         for (let i = 1; i <= 2; i++) {
@@ -591,9 +589,9 @@ const RoomDetail: React.FC = () => {
         }
         return images;
       }
-      
+
       // Default fallback for other rooms in branch 5
-      const available = [1,2];
+      const available = [1, 2];
       for (const i of available) {
         images.push(`/rooms/branch-5/Type15/branch5-${i}.jpg`);
       }
@@ -618,7 +616,7 @@ const RoomDetail: React.FC = () => {
 
     if (branchId === 12) {
       const roomTypeId = room.RoomTypeID || (room as any).roomTypeId;
-      
+
       // Handle Type27 for roomID 19
       if (roomTypeId === 27) {
         for (let i = 1; i <= 4; i++) {
@@ -626,7 +624,7 @@ const RoomDetail: React.FC = () => {
         }
         return images;
       }
-      
+
       // Default Type7 for other rooms in branch 12
       for (let i = 1; i <= 9; i++) {
         images.push(`/rooms/branch-12/Type7/branch12-${i}.jpg`);
@@ -747,7 +745,7 @@ const RoomDetail: React.FC = () => {
     // Generate next candidate based on attempt order
     const candidates: string[] = [];
     const swapFolder = (src: string) => src.includes('/rooms/') ? src.replace('/rooms/', '/room/') : src.replace('/room/', '/rooms/');
-    const swapExt = (src: string, to: string) => src.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.' + to;
+    const swapExt = (src: string, to: string) => src.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.' + to;
 
     // 1: try swap ext to JPG
     candidates.push(swapExt(currentSrc, 'JPG'));
@@ -773,23 +771,23 @@ const RoomDetail: React.FC = () => {
           ? '/rooms/branch-1/Type1/branch1-1.jpg'
           : branchId === 6
             ? '/rooms/branch-6/Type30/branch6-30-2.jpg'
-          : branchId === 4
-            ? '/rooms/branch-4/Type12/branch4-1.jpg'
-            : branchId === 5
-              ? '/rooms/branch-5/Type15/branch5-1.jpg'
-              : branchId === 7
-                ? '/rooms/branch-7/Type16/branch7-1.png'
-                : branchId === 8
-                  ? '/rooms/branch-8/Type17/branch8-1.jpg'
-                  : branchId === 9
-                    ? '/rooms/branch-9/Type10/branch9-1.jpg'
-                    : branchId === 11
-                      ? '/rooms/branch-11/Type8/branch11-1.jpg'
-                      : branchId === 12
-                        ? '/rooms/branch-12/Type7/branch12-1.jpg'
-                        : branchId === 14
-                          ? '/rooms/branch-14/Type13/branch14-1.png'
-                        : '/rooms/branch-1/Type1/branch1-1.jpg';
+            : branchId === 4
+              ? '/rooms/branch-4/Type12/branch4-1.jpg'
+              : branchId === 5
+                ? '/rooms/branch-5/Type15/branch5-1.jpg'
+                : branchId === 7
+                  ? '/rooms/branch-7/Type16/branch7-1.png'
+                  : branchId === 8
+                    ? '/rooms/branch-8/Type17/branch8-1.jpg'
+                    : branchId === 9
+                      ? '/rooms/branch-9/Type10/branch9-1.jpg'
+                      : branchId === 11
+                        ? '/rooms/branch-11/Type8/branch11-1.jpg'
+                        : branchId === 12
+                          ? '/rooms/branch-12/Type7/branch12-1.jpg'
+                          : branchId === 14
+                            ? '/rooms/branch-14/Type13/branch14-1.png'
+                            : '/rooms/branch-1/Type1/branch1-1.jpg';
       setImages(prev => prev.map((s, i) => (i === index ? safeSrc : s)));
     }
   };
@@ -847,9 +845,9 @@ const RoomDetail: React.FC = () => {
           <ArrowLeft size={20} />
           Quay lại
         </button>
-        
+
         <div className="header-actions">
-          <button 
+          <button
             className={`favorite-button ${isFavorite ? 'active' : ''}`}
             onClick={() => setIsFavorite(!isFavorite)}
           >
@@ -866,7 +864,7 @@ const RoomDetail: React.FC = () => {
             const isBranch6 = current.includes('/rooms/branch-6/');
             if (isBranch6) {
               return (
-                <img 
+                <img
                   src={current}
                   alt={`${room.BranchName}`}
                   className="main-image"
@@ -877,11 +875,11 @@ const RoomDetail: React.FC = () => {
                 />
               );
             }
-            const webp = current.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.webp';
+            const webp = current.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.webp';
             return (
               <picture>
                 <source srcSet={webp} type="image/webp" />
-                <img 
+                <img
                   src={current}
                   alt={`${room.BranchName}`}
                   className="main-image"
@@ -893,7 +891,7 @@ const RoomDetail: React.FC = () => {
               </picture>
             );
           })()}
-          
+
           {images.length > 1 && (
             <>
               <button className="image-nav prev" onClick={prevImage}>
@@ -902,7 +900,7 @@ const RoomDetail: React.FC = () => {
               <button className="image-nav next" onClick={nextImage}>
                 <ChevronRight size={24} />
               </button>
-              
+
               <div className="image-indicators">
                 {images.map((_, index) => (
                   <button
@@ -914,7 +912,7 @@ const RoomDetail: React.FC = () => {
               </div>
             </>
           )}
-          
+
           <div className="image-count">
             {currentImageIndex + 1} / {images.length}
           </div>
@@ -925,8 +923,8 @@ const RoomDetail: React.FC = () => {
           <div className="thumbnail-gallery">
             {images.map((image, index) => {
               const isBranch6 = image.includes('/rooms/branch-6/');
-              const thumb = image.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.thumb.jpg';
-              const webp = image.replace(/\.(jpg|JPG|png|PNG)$/,'') + '.webp';
+              const thumb = image.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg';
+              const webp = image.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.webp';
               if (isBranch6) {
                 return (
                   <img
@@ -982,9 +980,9 @@ const RoomDetail: React.FC = () => {
             <img src="/Zalo.png" alt="Zalo" style={{ width: 16, height: 16 }} />
             Zalo - CTV Xuân Bách
           </a>
-          
-          <button 
-            className="contact-btn book-viewing" 
+
+          <button
+            className="contact-btn book-viewing"
             onClick={() => setShowViewingAppointmentForm(true)}
           >
             <Calendar size={30} />
@@ -1005,7 +1003,7 @@ const RoomDetail: React.FC = () => {
                 <span>4.8 (124 đánh giá)</span>
               </div>
             </div>
-            
+
             <div className="room-price">
               <span className="price">{formatPrice(room.Price || 0)}</span>
               <span className="period">/tháng</span>
@@ -1019,9 +1017,9 @@ const RoomDetail: React.FC = () => {
 
           <div className="room-status">
             <span className={`status-badge ${room.Status === 'Occupied' ? 'occupied' : room.Status === 'Available' ? 'available' : room.Status === 'Reserved' ? 'reserved' : 'other'}`}>
-              {room.Status === 'Available' ? 'Còn trống' : 
-               room.Status === 'Occupied' ? 'Hết phòng' :
-               room.Status === 'Reserved' ? 'Đặt trước' : 'Bảo trì'}
+              {room.Status === 'Available' ? 'Còn trống' :
+                room.Status === 'Occupied' ? 'Hết phòng' :
+                  room.Status === 'Reserved' ? 'Đặt trước' : 'Bảo trì'}
             </span>
           </div>
 
@@ -1053,16 +1051,16 @@ const RoomDetail: React.FC = () => {
           <div className="room-offers">
             <h3>QUYỀN LỢI KHÁCH HÀNG MỚI 2025</h3>
             <ul className="offers-list">
-              
+
               <li>Quà tặng : Tặng Voucher sử dụng 10 sản phẩm bất kì của Young Food & Drink (các món ăn Việt, các món Âu như Pizza, Mỳ Ý… Và các loại nước ép, trà sữa, sinh tố…).
-                  Tại trụ sở địa điểm + Tặng 10 cốc nước/nước ép hoặc 01 bánh Pizza khi khách hàng tổ chức Sinh nhật tại Young Food & Drink.
+                Tại trụ sở địa điểm + Tặng 10 cốc nước/nước ép hoặc 01 bánh Pizza khi khách hàng tổ chức Sinh nhật tại Young Food & Drink.
               </li>
               <li>Chiết khấu : Giảm 4% tiền thuê nhà khi thanh toán 06 tháng, và giảm 8% tiền thuê nhà khi đóng 12 tháng… khi chuyển khoản trong 48h kể từ ngày kí hợp đồng.
-                 Lưu ý: Số tiền giảm không bao gồm phí dịch vụ.</li>
+                Lưu ý: Số tiền giảm không bao gồm phí dịch vụ.</li>
             </ul>
           </div>
 
-        
+
           {/* Branch video placed above the introduction, if provided */}
           {room.BranchID && branchVideoUrls[room.BranchID] && (
             <div className="branch-video">
@@ -1093,7 +1091,7 @@ const RoomDetail: React.FC = () => {
             </div>
           )}
 
-        
+
           {room.BranchID === 2 && (
             <div className="branch-intro">
               <h3>Giới thiệu Young House 2</h3>
@@ -1110,7 +1108,7 @@ const RoomDetail: React.FC = () => {
             </div>
           )}
 
-          
+
           {room.BranchID === 4 && (
             <div className="branch-intro">
               <h3>Giới thiệu Young House 4</h3>
@@ -1159,7 +1157,7 @@ const RoomDetail: React.FC = () => {
             </div>
           )}
 
-          
+
           {room.BranchID === 9 && (
             <div className="branch-intro">
               <h3>Giới thiệu Young House 9</h3>
@@ -1175,7 +1173,7 @@ const RoomDetail: React.FC = () => {
             </div>
           )}
 
-         
+
           {room.BranchID === 10 && (
             <div className="branch-intro">
               <h3>Giới thiệu Young House 10</h3>
@@ -1191,7 +1189,7 @@ const RoomDetail: React.FC = () => {
             </div>
           )}
 
-          
+
           {room.BranchID === 11 && (
             <div className="branch-intro">
               <h3>Giới thiệu Young House 11</h3>
@@ -1206,7 +1204,7 @@ const RoomDetail: React.FC = () => {
             </div>
           )}
 
-          
+
           {room.BranchID === 12 && (
             <div className="branch-intro">
               <h3>Giới thiệu Young House 12</h3>
@@ -1227,7 +1225,7 @@ const RoomDetail: React.FC = () => {
           {room && (
             <div className="map-section">
               <div className="container">
-                <GoogleMapEmbed 
+                <GoogleMapEmbed
                   branchId={room.BranchID || room.branchId}
                   branchName={room.BranchName || room.branchName || ''}
                   address={room.Address || room.address || ''}
@@ -1241,7 +1239,7 @@ const RoomDetail: React.FC = () => {
           {room && (
             <div className="surrounding-section">
               <div className="container">
-                <SurroundingAreas 
+                <SurroundingAreas
                   branchId={room.BranchID || room.branchId}
                   branchName={room.BranchName || room.branchName || ''}
                   className="room-surrounding"
@@ -1258,7 +1256,7 @@ const RoomDetail: React.FC = () => {
           <div className="contact-card-side">
             <h3>Liên hệ Xem phòng trực tiếp</h3>
             <div className="contact-actions">
-              
+
               <a className="contact-btn phone" href="tel:0372858098">
                 <PhoneIcon size={20} />
                 Gọi: 0372858098
@@ -1267,10 +1265,10 @@ const RoomDetail: React.FC = () => {
                 <img src="/Zalo.png" alt="Zalo" style={{ width: 18, height: 18 }} />
                 Zalo - CTV Xuân Bách
               </a>
-              
+
               {/* New button to open viewing appointment form */}
-              <button 
-                className="contact-btn book-viewing" 
+              <button
+                className="contact-btn book-viewing"
                 onClick={() => setShowViewingAppointmentForm(true)}
               >
                 <Calendar size={30} />
@@ -1279,10 +1277,10 @@ const RoomDetail: React.FC = () => {
             </div>
             <div className="contact-note">Hỗ trợ 24/7  (T2–CN)</div>
           </div>
-          </aside>
-        </div>
+        </aside>
+      </div>
 
-        {/* Similar Rooms Section */}
+      {/* Similar Rooms Section */}
       <div className="similar-rooms-section">
         <div className="container">
           <h2>Đề xuất cho bạn</h2>
@@ -1290,30 +1288,30 @@ const RoomDetail: React.FC = () => {
             {localRooms
               .filter(similarRoom => {
                 if (similarRoom.RoomID === room.RoomID) return false;
-                
+
                 // Show all rooms regardless of status
-                
+
                 // Same room type
                 const sameType = similarRoom.RoomTypeID === room.RoomTypeID;
-                
+
                 // Similar price range (within 1-2tr or 2-3tr range)
                 const currentPrice = room.Price || 0;
                 const similarPrice = similarRoom.Price || 0;
-                
+
                 let samePriceRange = false;
                 if (currentPrice <= 2000000 && similarPrice <= 2000000) {
                   samePriceRange = true; // Both in 1-2tr range
-                } else if (currentPrice > 2000000 && currentPrice <= 3000000 && 
-                          similarPrice > 2000000 && similarPrice <= 3000000) {
+                } else if (currentPrice > 2000000 && currentPrice <= 3000000 &&
+                  similarPrice > 2000000 && similarPrice <= 3000000) {
                   samePriceRange = true; // Both in 2-3tr range
                 }
-                
+
                 return sameType || samePriceRange;
               })
               .slice(0, 4)
               .map((similarRoom) => (
-                <div 
-                  key={similarRoom.RoomID} 
+                <div
+                  key={similarRoom.RoomID}
                   className="similar-room-card"
                   onClick={() => {
                     navigate(`/room/${buildRoomSlug(similarRoom as any)}`);
@@ -1321,8 +1319,8 @@ const RoomDetail: React.FC = () => {
                   }}
                 >
                   <div className="similar-room-image">
-                    <img 
-                      src={getRoomImages(similarRoom)[0]} 
+                    <img
+                      src={getRoomImages(similarRoom)[0]}
                       alt={`${similarRoom.BranchName}`}
                       onError={handleImageError(0)}
                     />
@@ -1333,9 +1331,9 @@ const RoomDetail: React.FC = () => {
                     <p className="similar-room-type">{similarRoom.TypeName}</p>
                     <p className="similar-room-price">{formatPrice(similarRoom.Price || 0)}/tháng</p>
                     <span className={`similar-room-status ${similarRoom.Status === 'Occupied' ? 'occupied' : similarRoom.Status === 'Available' ? 'available' : 'other'}`}>
-                      {similarRoom.Status === 'Available' ? 'Còn trống' : 
-                       similarRoom.Status === 'Occupied' ? 'Hết phòng' :
-                       similarRoom.Status === 'Reserved' ? 'Đặt trước' : 'Bảo trì'}
+                      {similarRoom.Status === 'Available' ? 'Còn trống' :
+                        similarRoom.Status === 'Occupied' ? 'Hết phòng' :
+                          similarRoom.Status === 'Reserved' ? 'Đặt trước' : 'Bảo trì'}
                     </span>
                   </div>
                 </div>
