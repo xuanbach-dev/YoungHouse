@@ -49,7 +49,7 @@ const SystemHome: React.FC = () => {
   const availableAreas = [
     { name: 'Tân Xã', branchIds: [1,4,5,7,8] }, // Young House 1, Young House 2
     { name: 'Phú Hữu', branchIds: [2,11, 12, 14] }, // Young House 4, Young House 9, Young House 10
-    { name: 'Bình Yên', branchIds: [9,10] } // Young House 11, Young House 12, Young House 14
+    { name: 'Bình Yên', branchIds: [6,9,10] } // Young House 11, Young House 12, Young House 14
   ];
 
   // Branch description type
@@ -213,25 +213,7 @@ const SystemHome: React.FC = () => {
           Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
           RoomTypeID: 1,
           roomTypeId: 1
-        },
-        {
-          RoomID: 17,
-          roomId: 17,
-          BranchID: 1,
-          branchId: 1,
-          BranchName: 'Young House 1',
-          branchName: 'Young House 1',
-          TypeName: 'Giường gác xép có ban công thoáng',
-          typeName: 'Giường gác xép có ban công thoáng',
-          Price: 2200000,
-          price: 2200000,
-          Status: 'Occupied',
-          isAvailable: true,
-          Address: '57 đường Xóm Quán – H10, xã Tân Xã',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 25,
-          roomTypeId: 25
+        
         },
         {
           RoomID: 2,
@@ -262,7 +244,7 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đơn có ban công thoáng',
           Price: 2600000,
           price: 2600000,
-          Status: 'Occupied',
+          Status: 'Available',
           isAvailable: false,
           Address: '64 Phú Hữu, xã Tân Xã',
           City: 'Hà Nội',
@@ -280,7 +262,7 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đơn có giếng trời thoáng',
           Price: 2400000,
           price: 2400000,
-          Status: 'Occupied',
+          Status: 'Available',
           isAvailable: false,
           Address: '64 Phú Hữu, xã Tân Xã',
           City: 'Hà Nội',
@@ -355,7 +337,7 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đôi có hành lang view hồ Tân Xã',
           Price: 2000000,
           price: 2000000,
-          Status: 'Occupied',
+          Status: 'Available',
           isAvailable: false,
           Address: '85 Mục Uyên – Công Nghệ, Tân Xã ',
           City: 'Hà Nội',
@@ -374,7 +356,7 @@ const SystemHome: React.FC = () => {
          typeName: 'Giường gác xép có ban công thoáng',
          Price: 1700000,
          price: 1700000,
-         Status: 'Occupied',
+         Status: 'Available',
          isAvailable: false,
          Address: 'Ngõ 902 đường 420 , thôn Thái Bình , Bình Yên ',
          City: 'Hà Nội',
@@ -393,7 +375,7 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đôi có ban công thoáng',
           Price: 2000000,
           price: 2000000,
-          Status: 'Occupied',
+          Status: 'Available',
           isAvailable: false,
           Address: 'D2 – Khu Tái định cư đường 420 xã Bình Yên – Thạch Thất ',
           City: 'Hà Nội',
@@ -411,7 +393,7 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đôi ',
           Price: 1400000,
           price: 1400000,
-          Status: 'Occupied',
+          Status: 'Available',
           isAvailable: false,
           Address: 'Nhà văn hóa thôn Thái Bình, xã Bình Yên.  ',
           City: 'Hà Nội',
@@ -449,7 +431,7 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường gác xép có ban công thoáng',
           Price: 2500000,
           price:  2500000,
-          Status: 'Occupied',
+          Status: 'Available',
           isAvailable: false,
           Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
           City: 'Hà Nội',
@@ -468,7 +450,7 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đôi có ban công thoáng view FPT',
           Price: 2300000,
           price:  2300000,
-          Status: 'Occupied',
+          Status: 'Available',
           isAvailable: false,
           Address: 'Gần nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
           City: 'Hà Nội',
@@ -488,7 +470,7 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đơn xép có cửa sổ thoáng',
           Price: 1700000,
           price: 1700000,
-          Status: 'Occupied',
+          Status: 'Available',
           isAvailable: false,
           Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
           City: 'Hà Nội',
@@ -526,9 +508,9 @@ const SystemHome: React.FC = () => {
           branchName: 'Young House 5',
           TypeName: 'Giường hai giường đôi có ban công thoáng',
           typeName: 'Giường hai giường đôi có ban công thoáng',
-          Price: 2800000,
-          price: 2800000,
-          Status: 'Occupied',
+          Price: 2500000,
+          price: 2500000,
+          Status: 'Available',
           isAvailable: false,
           Address: 'Địa chỉ Young House 4',
           City: 'Hà Nội',
@@ -547,7 +529,7 @@ const SystemHome: React.FC = () => {
           typeName: 'Giường đôi có ban công thoáng',
           Price: 2400000,
           price: 2400000,
-          Status: 'Occupied',
+          Status: 'Available',
           isAvailable: false,
           Address: 'Đối diện THPT Hai Bà Trưng - Tân Xã',
           City: 'Hà Nội',
@@ -1152,10 +1134,10 @@ const SystemHome: React.FC = () => {
                           }}
                         />
                       )}
-                      <div className={`availability-badge ${room.Status === 'Occupied' ? 'occupied' : room.Status === 'Available' ? 'available' : room.Status === 'Reserved' ? 'reserved' : 'other'}`}>
-                        {room.Status === 'Available' ? 'Còn trống' : 
-                         room.Status === 'Occupied' ? 'Hết phòng' :
-                         room.Status === 'Reserved' ? 'Đặt trước' : 'Bảo trì'}
+                      <div className={`availability-badge ${room.Status === 'Available' ? 'available' : room.Status === 'Reserved' ? 'reserved' : room.Status === 'Occupied' ? 'occupied' : 'other'}`}>
+                        {room.Status === 'Available' ? 'Còn phòng' : 
+                         room.Status === 'Reserved' ? 'Đặt trước' :
+                         room.Status === 'Occupied' ? 'Hết phòng' : 'Bảo trì'}
                       </div>
                     </div>
                     

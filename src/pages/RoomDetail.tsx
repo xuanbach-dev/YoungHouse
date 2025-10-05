@@ -102,7 +102,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường gác xép có ban công thoáng',
       Price: 2200000,
       price: 2200000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: true,
       Address: '57 đường Xóm Quán – H10, xã Tân Xã',
       City: 'Hà Nội',
@@ -140,7 +140,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường đôi căn góc thoáng',
       Price: 2600000,
       price: 2600000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: '64 Phú Hữu, xã Tân Xã',
       City: 'Hà Nội',
@@ -158,7 +158,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường đơn có giếng trời thoáng',
       Price: 2400000,
       price: 2400000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: '64 Phú Hữu, xã Tân Xã',
       City: 'Hà Nội',
@@ -233,7 +233,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường gác xép có hành lang view hồ Tân Xã',
       Price: 2000000,
       price: 2000000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: 'Địa chỉ Young House 4',
       City: 'Hà Nội',
@@ -252,7 +252,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường gác xép có ban công thoáng',
       Price: 1700000,
       price: 1700000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: 'Ngõ 902 đường 420 , thôn Thái Bình , Bình Yên ',
       City: 'Hà Nội',
@@ -269,9 +269,9 @@ const RoomDetail: React.FC = () => {
       branchName: 'Young House 5',
       TypeName: 'Giường hai giường đôi có ban công thoáng',
       typeName: 'Giường hai giường đôi có ban công thoáng',
-      Price: 2800000,
-      price: 2800000,
-      Status: 'Occupied',
+      Price: 2500000,
+      price: 2500000,
+      Status: 'Available',
       isAvailable: false,
       Address: 'Địa chỉ Young House 4',
       City: 'Hà Nội',
@@ -290,7 +290,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường đôi có ban công thoáng',
       Price: 2000000,
       price: 2000000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: ' D2 – Khu Tái định cư đường 420 xã Bình Yên – Thạch Thất – Hà Nội ',
       City: 'Hà Nội',
@@ -308,7 +308,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường đôi có ban công thoáng',
       Price: 1400000,
       price: 1400000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: 'Nhà văn hóa thôn Thái Bình, xã Bình Yên.  ',
       City: 'Hà Nội',
@@ -344,7 +344,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường gác xép có ban công thoáng',
       Price: 2500000,
       price: 2500000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
       City: 'Hà Nội',
@@ -364,7 +364,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường đôi có ban công thoáng view FPT',
       Price: 2300000,
       price: 2300000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: 'Gần nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
       City: 'Hà Nội',
@@ -383,7 +383,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường đôi có cửa sổ thoáng',
       Price: 1700000,
       price: 1700000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
       City: 'Hà Nội',
@@ -419,7 +419,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường đôi có ban công thoáng',
       Price: 2400000,
       price: 2400000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: 'Đối diện THPT Hai Bà Trưng - Tân Xã',
       City: 'Hà Nội',
@@ -438,7 +438,7 @@ const RoomDetail: React.FC = () => {
       typeName: 'Giường đôi có ban công thoáng view FPT',
       Price: 2300000,
       price: 2300000,
-      Status: 'Occupied',
+      Status: 'Available',
       isAvailable: false,
       Address: 'Gần nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
       City: 'Hà Nội',
@@ -1016,10 +1016,11 @@ const RoomDetail: React.FC = () => {
           </div>
 
           <div className="room-status">
-            <span className={`status-badge ${room.Status === 'Occupied' ? 'occupied' : room.Status === 'Available' ? 'available' : room.Status === 'Reserved' ? 'reserved' : 'other'}`}>
-              {room.Status === 'Available' ? 'Còn trống' :
+            <span className={`status-badge ${room.Status === 'Available' ? 'available' : room.Status === 'Reserved' ? 'reserved' : room.Status === 'Occupied' ? 'occupied' : room.Status === 'Maintenance' ? 'maintenance' : 'other'}`}>
+              {room.Status === 'Available' ? 'Còn phòng' :
+                room.Status === 'Reserved' ? 'Đặt trước' :
                 room.Status === 'Occupied' ? 'Hết phòng' :
-                  room.Status === 'Reserved' ? 'Đặt trước' : 'Bảo trì'}
+                room.Status === 'Maintenance' ? 'Bảo trì' : 'Khác'}
             </span>
           </div>
 
@@ -1330,10 +1331,11 @@ const RoomDetail: React.FC = () => {
                     <p className="similar-room-branch">{similarRoom.BranchName}</p>
                     <p className="similar-room-type">{similarRoom.TypeName}</p>
                     <p className="similar-room-price">{formatPrice(similarRoom.Price || 0)}/tháng</p>
-                    <span className={`similar-room-status ${similarRoom.Status === 'Occupied' ? 'occupied' : similarRoom.Status === 'Available' ? 'available' : 'other'}`}>
-                      {similarRoom.Status === 'Available' ? 'Còn trống' :
+                    <span className={`similar-room-status ${similarRoom.Status === 'Available' ? 'available' : similarRoom.Status === 'Reserved' ? 'reserved' : similarRoom.Status === 'Occupied' ? 'occupied' : similarRoom.Status === 'Maintenance' ? 'maintenance' : 'other'}`}>
+                      {similarRoom.Status === 'Available' ? 'Còn phòng' :
+                        similarRoom.Status === 'Reserved' ? 'Đặt trước' :
                         similarRoom.Status === 'Occupied' ? 'Hết phòng' :
-                          similarRoom.Status === 'Reserved' ? 'Đặt trước' : 'Bảo trì'}
+                        similarRoom.Status === 'Maintenance' ? 'Bảo trì' : 'Khác'}
                     </span>
                   </div>
                 </div>
