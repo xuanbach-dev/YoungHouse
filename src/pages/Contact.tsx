@@ -21,9 +21,8 @@ const Contact: React.FC = () => {
             internet tốc độ cao. Các tòa nhà được quản lý chuyên nghiệp, hỗ trợ 24/7, đảm bảo trải nghiệm ở ổn định, thân thiện và tiết kiệm cho cư dân.
           </p>
           <p>
-            Vị trí các cơ sở YoungHouse phân bố tại Tân Xã, Phú Hữu, Bình Yên… thuận tiện di chuyển tới Đại học FPT, khu Công nghệ cao Hoà Lạc 
-            và các tiện ích công cộng. Nhiều loại phòng linh hoạt: phòng đơn, phòng đôi, phòng gác xép, phòng có ban công hoặc hành lang thoáng, 
-            phù hợp nhu cầu cá nhân và nhóm bạn. Hệ thống an ninh sử dụng khóa vân tay, camera giám sát toàn tòa, quy trình vệ sinh định kỳ; khu để xe 
+            Vị trí các cơ sở YoungHouse phân bố tại Tân Xã, Phú Hữu, Bình Yên… thuận tiện di chuyển tới Đại học FPT,HVTC,ĐHQGHN , nhiều tiện ích công cộng.
+            Hệ thống an ninh sử dụng khóa vân tay, camera giám sát toàn tòa, quy trình vệ sinh định kỳ; khu để xe 
             rộng rãi; máy giặt chung; thang máy tại các tòa cao tầng; hành lang cây xanh và không gian sinh hoạt chung.
           </p>
           <p>
@@ -41,10 +40,10 @@ const Contact: React.FC = () => {
                 className="map-frame"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.999192714614!2d105.525!3d21.013366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313455c0b2b0b0b0%3A0x0!2zSOG7jWMgVMOibiBYw6E!5e0!3m2!1svi!2svi!4v${Date.now()}`}
+                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.3812917275845!2d105.54630277471405!3d21.01742428816887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b41e87c01f3%3A0xd0059f09a8791280!2zTmjDoCBUcuG7jSBZb3VuZyBIb3VzZSA0!5e0!3m2!1svi!2s!4v1759681081102!5m2!1svi!2s${Date.now()}`}
               />
             </div>
-            <div className="map-note">Khu vực Tân Xã – Phú Hữu – Bình Yên, Hòa Lạc (gần Đại học FPT)</div>
+            <div className="map-note">VP Young House Hoà Lạc : 85 Mục Uyên-Tân Xã(Young House 4)</div>
           </div>
 
           <div className="contact-card">
