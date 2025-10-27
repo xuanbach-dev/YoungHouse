@@ -17,9 +17,12 @@
   border-radius: 12px;
   width: 100%;
   max-width: 600px;
-  max-height: 90vh;
+  max-height: 80vh;
   overflow-y: auto;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  margin-bottom: 80px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 .appointment-header {
@@ -65,14 +68,14 @@
   border: none;
   padding: 8px;
   border-radius: 6px;
-  color: #6b7280;
+  color: #f63b3b;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .close-button:hover:not(:disabled) {
-  background: #f3f4f6;
-  color: #374151;
+  background: #dbeafe;
+  color: #1d4ed8;
 }
 
 .close-button:disabled {
@@ -81,7 +84,7 @@
 }
 
 .appointment-form {
-  padding: 0 24px 24px 24px;
+  padding: 0 24px 40px 24px;
 }
 
 .form-group {
@@ -272,10 +275,12 @@
 @media (max-width: 640px) {
   .appointment-modal-overlay {
     padding: 16px;
+    padding-bottom: 100px;
   }
   
   .appointment-modal {
-    max-height: 95vh;
+    max-height: 75vh;
+    margin-bottom: 0;
   }
   
   .appointment-header {
@@ -296,7 +301,7 @@
   }
   
   .appointment-form {
-    padding: 0 20px 20px 20px;
+    padding: 0 20px 40px 20px;
   }
   
   .form-row {

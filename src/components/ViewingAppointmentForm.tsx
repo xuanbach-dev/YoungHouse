@@ -392,13 +392,8 @@ const ViewingAppointmentForm: React.FC<ViewingAppointmentFormProps> = ({
               </div>
             )}
 
-            <div className="appointment-info">
-              <div className="info-item">
-                <Clock size={16} />
-                <span>Hãy điền chính xác các thông tin để YOUNG HOUSE có thể liên hệ với bạn sớm nhất có thể</span>
-              </div>
-              
-            </div>
+            
+           
 
             <div className="form-actions">
               <button 
