@@ -18,6 +18,7 @@ import SurroundingAreas from '../components/SurroundingAreas';
 import './RoomDetail.css';
 import Meta from '../components/Meta';
 import { toSlug, buildRoomSlug } from '../utils/slug';
+import { getCloudinaryUrl, getCloudinaryThumbnail, isCloudinaryConfigured } from '../utils/cloudinary';
 
 const RoomDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -861,6 +862,30 @@ const RoomDetail: React.FC = () => {
         <div className="main-image-container">
           {(() => {
             const current = images[currentImageIndex] || '';
+            const useCloudinary = isCloudinaryConfigured();
+            
+            // Sử dụng Cloudinary nếu đã cấu hình
+            if (useCloudinary) {
+              return (
+                <img
+                  src={getCloudinaryUrl(current, { width: 1200, quality: 'auto:good' })}
+                  alt={`${room.BranchName}`}
+                  className="main-image"
+                  loading="eager"
+                  decoding="async"
+                  onClick={() => setShowImageModal(true)}
+                  onError={(e) => {
+                    // Fallback to local image if Cloudinary fails
+                    const img = e.currentTarget as HTMLImageElement;
+                    if (!img.src.startsWith(window.location.origin)) {
+                      img.src = current;
+                    }
+                  }}
+                />
+              );
+            }
+            
+            // Fallback: sử dụng ảnh local với WebP
             const isBranch6 = current.includes('/rooms/branch-6/');
             if (isBranch6) {
               return (
@@ -922,6 +947,29 @@ const RoomDetail: React.FC = () => {
         {images.length > 1 && (
           <div className="thumbnail-gallery">
             {images.map((image, index) => {
+              const useCloudinary = isCloudinaryConfigured();
+              
+              // Sử dụng Cloudinary thumbnail nếu đã cấu hình
+              if (useCloudinary) {
+                return (
+                  <img
+                    key={index}
+                    src={getCloudinaryThumbnail(image, 150)}
+                    alt={`Ảnh ${index + 1}`}
+                    className={`thumbnail ${index === currentImageIndex ? 'active' : ''}`}
+                    loading="lazy"
+                    onClick={() => setCurrentImageIndex(index)}
+                    onError={(e) => {
+                      // Fallback to local thumbnail
+                      const img = e.currentTarget as HTMLImageElement;
+                      const thumb = image.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg';
+                      img.src = thumb;
+                    }}
+                  />
+                );
+              }
+              
+              // Fallback: sử dụng ảnh local
               const isBranch6 = image.includes('/rooms/branch-6/');
               const thumb = image.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg';
               const webp = image.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.webp';
@@ -1321,9 +1369,17 @@ const RoomDetail: React.FC = () => {
                 >
                   <div className="similar-room-image">
                     <img
-                      src={getRoomImages(similarRoom)[0]}
+                      src={isCloudinaryConfigured() 
+                        ? getCloudinaryUrl(getRoomImages(similarRoom)[0], { width: 400, quality: 'auto:good' })
+                        : getRoomImages(similarRoom)[0]
+                      }
                       alt={`${similarRoom.BranchName}`}
-                      onError={handleImageError(0)}
+                      loading="lazy"
+                      onError={(e) => {
+                        // Fallback to local image
+                        const img = e.currentTarget as HTMLImageElement;
+                        img.src = getRoomImages(similarRoom)[0];
+                      }}
                     />
                   </div>
                   <div className="similar-room-info">
