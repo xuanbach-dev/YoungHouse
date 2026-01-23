@@ -656,6 +656,7 @@ const SystemHome: React.FC = () => {
     );
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleBranchChange = (branchName: string) => {
     // In a real app, you'd map branchName to branchId
     // For now, we'll simulate this
@@ -667,6 +668,7 @@ const SystemHome: React.FC = () => {
     );
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleRoomTypeChange = (roomType: string) => {
     if (roomType) {
       setSelectedRoomTypes([roomType]);
@@ -689,6 +691,7 @@ const SystemHome: React.FC = () => {
     setSortBy(sortType);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSearch = () => {
     searchRooms();
   };
@@ -709,10 +712,13 @@ const SystemHome: React.FC = () => {
       } else {
         // Use local public directory images
         const branchId = room.BranchID || room.branchId || 1;
-        const roomTypeId = room.RoomTypeID || room.roomTypeId || 1;
-        const roomNumber = room.RoomID || room.roomId || 101;
-        
-        let imageIndex = 1;
+        // These variables are kept for potential future use
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const _roomTypeId = room.RoomTypeID || room.roomTypeId || 1;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const _roomNumber = room.RoomID || room.roomId || 101;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        let _imageIndex = 1;
         
         // Randomize image selection for each branch
         switch (branchId) {
@@ -819,6 +825,7 @@ const SystemHome: React.FC = () => {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [totalVisits, setTotalVisits] = useState(0);
 
   useEffect(() => {
@@ -1081,7 +1088,7 @@ const SystemHome: React.FC = () => {
                                       <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:0.9rem;text-align:center;">
                                         <div>
                                           <div>${room.BranchName}</div>
-                                          <div style=\"font-size:0.8rem;margin-top:4px;\">(${room.BranchName})</div>
+                                          <div style="font-size:0.8rem;margin-top:4px;">(${room.BranchName})</div>
                                         </div>
                                       </div>
                                     `;

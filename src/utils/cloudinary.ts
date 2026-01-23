@@ -200,7 +200,7 @@ export function isCloudinaryConfigured(): boolean {
 }
 
 // Export default object cho convenience
-export default {
+const cloudinaryUtils = {
   getUrl: getCloudinaryUrl,
   getThumbnail: getCloudinaryThumbnail,
   getPlaceholder: getCloudinaryPlaceholder,
@@ -208,3 +208,5 @@ export default {
   getImageProps: getCloudinaryImageProps,
   isConfigured: isCloudinaryConfigured,
 };
+
+export default cloudinaryUtils;
