@@ -1,0 +1,105 @@
+/* Optimized Room Image */
+.optimized-room-image {
+  position: relative;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  border-radius: inherit;
+}
+
+/* Skeleton Loader */
+.room-image-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skeleton-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-icon {
+  position: relative;
+  z-index: 1;
+  color: #d1d5db;
+  opacity: 0.5;
+}
+
+/* Actual Image */
+.room-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.room-img.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Error State */
+.room-image-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  color: #9ca3af;
+}
+
+.room-image-error svg {
+  opacity: 0.4;
+}
+
+.room-image-error span {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  text-align: center;
+  padding: 0 16px;
+}
+
+/* Hover effect for clickable images */
+.optimized-room-image[onclick]:hover .room-img.visible,
+.optimized-room-image:hover .room-img.visible {
+  transform: scale(1.05);
+}
+
+/* Loaded state - hide skeleton */
+.optimized-room-image.loaded .room-image-skeleton {
+  opacity: 0;
+  pointer-events: none;
+}

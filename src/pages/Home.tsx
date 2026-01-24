@@ -5,6 +5,7 @@ import { Post, Room } from '../types';
 import { Search, MapPin, Calendar, DollarSign, Eye, Loader2, Leaf, Lightbulb, Utensils, Shirt, Gift, Sofa, Briefcase, Bed, Shield, Building2, Users, MessageSquare, Headphones } from 'lucide-react';
 import ViewingAppointmentForm from '../components/ViewingAppointmentForm';
 import FAQ, { youngHouseFAQs } from '../components/FAQ';
+import OptimizedRoomImage from '../components/OptimizedRoomImage';
 import './Home.css';
 import Meta from '../components/Meta';
 import { VisitCounterService } from '../services/visitCounter';
@@ -408,10 +409,11 @@ const Home: React.FC = () => {
           <div className="video-gallery">
             {videoGalleryImages.map((src, idx) => (
               <div key={idx} className="gallery-item">
-                <img
+                <OptimizedRoomImage
                   src={src}
                   alt={`Hình ảnh ${idx + 1}`}
-                  onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/logo.png'; }}
+                  fallbackText="Young House"
+                  height="100%"
                 />
               </div>
             ))}
@@ -509,14 +511,11 @@ const Home: React.FC = () => {
                 {searchResults.map((room) => (
                   <div key={room.RoomID || (room as any).roomId} className="room-card" onClick={() => navigate(`/room/${buildRoomSlug(room as any)}`)}>
                     <div className="room-image">
-                      <img 
+                      <OptimizedRoomImage
                         src={getImagePath(room)}
-                        alt={`${room.BranchName}`}
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                          e.currentTarget.parentElement!.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
-                          e.currentTarget.parentElement!.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;">Hình ảnh phòng</div>';
-                        }}
+                        alt={room.BranchName || 'Phòng trọ'}
+                        fallbackText={room.BranchName}
+                        height="180px"
                       />
                     </div>
                     <div className="room-info">
@@ -570,14 +569,11 @@ const Home: React.FC = () => {
                   window.location.href = `/room/${buildRoomSlug(room)}`;
                 }}>
                   <div className="room-image">
-                    <img 
+                    <OptimizedRoomImage
                       src={getImagePath(room)}
-                      alt={`${room.BranchName}`}
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        e.currentTarget.parentElement!.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
-                        e.currentTarget.parentElement!.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;">Hình ảnh phòng</div>';
-                      }}
+                      alt={room.BranchName || 'Phòng trọ'}
+                      fallbackText={room.BranchName}
+                      height="180px"
                     />
                   </div>
                   <div className="room-info">

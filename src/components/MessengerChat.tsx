@@ -8,7 +8,7 @@ interface MessengerChatProps {
 }
 
 const MessengerChat: React.FC<MessengerChatProps> = ({ 
-  pageId = '100063714097270', // Young House Facebook Page ID - replace with actual
+  pageId = 'xuanback308', // Young House Facebook Page ID - replace with actual
   themeColor = '#2d7dd2'
 }) => {
   const [isOpen, setIsOpen] = useState(false);

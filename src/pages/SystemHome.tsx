@@ -5,6 +5,7 @@ import { Room, Branch } from '../types';
 import GoogleMapEmbed from '../components/GoogleMapEmbed';
 import SurroundingAreas from '../components/SurroundingAreas';
 import AdvancedFilter, { FilterState } from '../components/AdvancedFilter';
+import OptimizedRoomImage from '../components/OptimizedRoomImage';
 import './SystemHome.css';
 import { VisitCounterService } from '../services/visitCounter';
 import Meta from '../components/Meta';
@@ -1227,88 +1228,35 @@ const SystemHome: React.FC = () => {
                     style={{ cursor: 'pointer' }}
                   >
                     <div className="room-image">
-                      {((room.BranchID || (room as any).branchId) === 5 || ((room.BranchID || (room as any).branchId) === 2 && ((room.RoomTypeID || (room as any).roomTypeId) === 20 || (room.RoomTypeID || (room as any).roomTypeId) === 21 || (room.RoomTypeID || (room as any).roomTypeId) === 22))) ? (
-                        (() => {
+                      {(() => {
+                        const branchId = room.BranchID || (room as any).branchId;
+                        const roomTypeId = room.RoomTypeID || (room as any).roomTypeId;
+                        const hasWebP = branchId === 5 || (branchId === 2 && [20, 21, 22].includes(roomTypeId));
+                        
+                        if (hasWebP) {
                           const base = getImagePath(room, 'thumbnail');
                           const webp = base.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.webp';
                           const jpg = base.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg';
                           return (
-                            <picture>
-                              <source srcSet={webp} type="image/webp" />
-                              <img
-                                src={jpg}
-                                alt={`${room.BranchName}`}
-                                loading="lazy"
-                                decoding="async"
-                                onLoad={(e) => {
-                                  const imgElement = e.currentTarget as HTMLImageElement;
-                                  if (imgElement) {
-                                    imgElement.style.opacity = '1';
-                                  }
-                                }}
-                                onError={(e) => {
-                                  const imgElement = e.currentTarget as HTMLImageElement;
-                                  const parentElement = imgElement.parentElement as HTMLElement | null;
-                                  if (imgElement && parentElement) {
-                                    imgElement.style.display = 'none';
-                                    parentElement.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
-                                    parentElement.innerHTML = `
-                                      <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:0.9rem;text-align:center;">
-                                        <div>
-                                          <div>${room.BranchName}</div>
-                                          <div style="font-size:0.8rem;margin-top:4px;">(${room.BranchName})</div>
-                                        </div>
-                                      </div>
-                                    `;
-                                  }
-                                }}
-                                style={{
-                                  opacity: 1,
-                                  transition: 'opacity 0.3s ease',
-                                  width: '100%',
-                                  height: '200px',
-                                  objectFit: 'cover'
-                                }}
-                              />
-                            </picture>
+                            <OptimizedRoomImage
+                              src={jpg}
+                              webpSrc={webp}
+                              alt={room.BranchName || 'Phòng trọ'}
+                              fallbackText={room.BranchName}
+                              height="200px"
+                            />
                           );
-                        })()
-                      ) : (
-                        <img 
-                          src={getImagePath(room, 'medium')} 
-                          alt={`${room.BranchName}`}
-                          loading="lazy"
-                          onLoad={(e) => {
-                            const imgElement = e.currentTarget;
-                            if (imgElement) {
-                              imgElement.style.opacity = '1';
-                            }
-                          }}
-                          onError={(e) => {
-                            const imgElement = e.currentTarget;
-                            const parentElement = imgElement.parentElement;
-                            if (imgElement && parentElement) {
-                              imgElement.style.display = 'none';
-                              parentElement.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
-                              parentElement.innerHTML = `
-                                <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:0.9rem;text-align:center;">
-                                  <div>
-                                    <div>${room.BranchName}</div>
-                                    <div style="font-size:0.8rem;margin-top:4px;">(${room.BranchName})</div>
-                                  </div>
-                                </div>
-                              `;
-                            }
-                          }}
-                          style={{ 
-                            opacity: 1,
-                            transition: 'opacity 0.3s ease',
-                            width: '100%',
-                            height: '200px',
-                            objectFit: 'cover'
-                          }}
-                        />
-                      )}
+                        }
+                        
+                        return (
+                          <OptimizedRoomImage
+                            src={getImagePath(room, 'medium')}
+                            alt={room.BranchName || 'Phòng trọ'}
+                            fallbackText={room.BranchName}
+                            height="200px"
+                          />
+                        );
+                      })()}
                       <div className={`availability-badge ${room.Status === 'Available' ? 'available' : room.Status === 'Reserved' ? 'reserved' : room.Status === 'Occupied' ? 'occupied' : 'other'}`}>
                         {room.Status === 'Available' ? 'Còn phòng' : 
                          room.Status === 'Reserved' ? 'Đặt trước' :
