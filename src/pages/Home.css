@@ -909,3 +909,23 @@
   
   .value-item h3 { font-size: 0.9rem; max-width: none; }
 }
+
+/* Home FAQ Section */
+.home-faq-section {
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 60px 0 80px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .home-faq-section {
+    padding: 40px 0 100px; /* Extra padding for bottom navbar */
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-faq-section {
+    padding: 30px 0 100px;
+  }
+}

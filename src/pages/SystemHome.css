@@ -409,6 +409,138 @@
   font-weight: 600;
 }
 
+/* Advanced Filter Button */
+.advanced-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: white;
+  border: 2px solid #2d7dd2;
+  border-radius: 25px;
+  color: #2d7dd2;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.advanced-filter-btn:hover {
+  background: #2d7dd2;
+  color: white;
+}
+
+.advanced-filter-btn:hover svg {
+  color: white;
+}
+
+.advanced-filter-btn .filter-badge {
+  background: #2d7dd2;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.advanced-filter-btn:hover .filter-badge {
+  background: white;
+  color: #2d7dd2;
+}
+
+/* Floating Filter Button */
+.floating-filter-btn {
+  display: none;
+  position: fixed;
+  bottom: 100px; /* Cao hơn bottom navbar */
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background: #2d7dd2;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(45, 125, 210, 0.4);
+  cursor: pointer;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.floating-filter-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(45, 125, 210, 0.5);
+}
+
+.floating-filter-btn:active {
+  transform: scale(0.95);
+}
+
+.floating-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #dc3545;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+/* Show floating button on mobile */
+@media (max-width: 768px) {
+  .floating-filter-btn {
+    display: flex;
+    bottom: 90px; /* Cao hơn bottom navbar khoảng 20px */
+  }
+  
+  .advanced-filter-btn span {
+    display: none;
+  }
+  
+  .advanced-filter-btn {
+    padding: 10px;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    justify-content: center;
+  }
+  
+  .advanced-filter-btn .filter-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-filter-btn {
+    bottom: 85px; /* Điều chỉnh cho màn hình nhỏ, cao hơn bottom navbar */
+    right: 16px;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .floating-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+  }
+}
+
 /* Room Grid */
 .rooms-grid {
   display: grid;
@@ -681,6 +813,64 @@
   text-align: center;
   padding: 3rem;
   color: #666;
+}
+
+/* Active Filter Tags Bar */
+.active-filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 0;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.active-filter-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #1d4ed8;
+  font-weight: 500;
+}
+
+.active-filter-tag button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #1d4ed8;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 2px;
+  transition: color 0.2s ease;
+}
+
+.active-filter-tag button:hover {
+  color: #dc3545;
+}
+
+.clear-all-tags {
+  padding: 6px 12px;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #dc2626;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-all-tags:hover {
+  background: #dc2626;
+  color: white;
+  border-color: #dc2626;
 }
 
 .clear-filters-btn {

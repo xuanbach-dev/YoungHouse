@@ -190,6 +190,30 @@
     border-radius: 16px;
     font-size: 14px;
   }
+
+  /* Zoom indicator */
+  .zoom-indicator {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.8;
+  }
+
+  .zoom-indicator:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.85);
+    transform: scale(1.05);
+  }
   
   .thumbnail-gallery {
     display: grid;
@@ -405,85 +429,171 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
     padding: 20px;
+    animation: modalFadeIn 0.2s ease;
+  }
+
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
   
   .modal-content {
     position: relative;
     max-width: 90vw;
-    max-height: 90vh;
+    max-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .modal-image {
     max-width: 100%;
-    max-height: 90vh;
+    max-height: 70vh;
     object-fit: contain;
     border-radius: 8px;
+    animation: imageZoomIn 0.3s ease;
+  }
+
+  @keyframes imageZoomIn {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
   
   .modal-close {
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    background: rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.15);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: all 0.2s ease;
+    z-index: 1001;
   }
   
   .modal-close:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
   }
   
   .modal-nav {
-    position: absolute;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: all 0.2s ease;
+    z-index: 1001;
   }
   
   .modal-nav:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-50%) scale(1.1);
   }
   
   .modal-nav.prev {
-    left: -80px;
+    left: 20px;
   }
   
   .modal-nav.next {
-    right: -80px;
+    right: 20px;
   }
   
   .modal-counter {
-    position: absolute;
-    bottom: -40px;
+    position: fixed;
+    bottom: 130px;
     left: 50%;
     transform: translateX(-50%);
     color: white;
     font-size: 16px;
     font-weight: 500;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 6px 16px;
+    border-radius: 20px;
+    z-index: 1001;
+  }
+
+  /* Modal Thumbnails Strip */
+  .modal-thumbnails {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    max-width: 90vw;
+    overflow-x: auto;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.3) transparent;
+    z-index: 1001;
+  }
+
+  .modal-thumbnails::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .modal-thumbnails::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .modal-thumbnails::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 3px;
+  }
+
+  .modal-thumbnail {
+    width: 60px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .modal-thumbnail:hover {
+    opacity: 1;
+    border-color: rgba(255,255,255,0.5);
+  }
+
+  .modal-thumbnail.active {
+    opacity: 1;
+    border-color: white;
   }
   
   /* Responsive */
@@ -535,6 +645,11 @@
     .main-image {
       height: 250px;
     }
+
+    /* Ẩn thumbnail gallery trên mobile */
+    .thumbnail-gallery {
+      display: none;
+    }
     
     .amenities-grid {
       grid-template-columns: 1fr;
@@ -582,12 +697,7 @@
     .room-price .price { font-size: 24px; }
     .main-image { height: 220px; }
     .thumbnail-gallery {
-      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-      gap: 8px;
-    }
-    
-    .thumbnail {
-      height: 60px;
+      display: none;
     }
     
     .modal-nav {
@@ -606,6 +716,42 @@
     .modal-close {
       top: 10px;
       right: 10px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .modal-content {
+      max-height: 60vh;
+    }
+
+    .modal-image {
+      max-height: 60vh;
+    }
+
+    .modal-thumbnails {
+      bottom: 20px;
+      padding: 8px 12px;
+    }
+
+    .modal-thumbnail {
+      width: 50px;
+      height: 38px;
+    }
+
+    .modal-counter {
+      bottom: 100px;
+      font-size: 14px;
+    }
+
+    .zoom-indicator {
+      padding: 6px 12px;
+      font-size: 12px;
+      bottom: 12px;
+      right: 12px;
+    }
+
+    .zoom-indicator span {
+      display: none;
     }
   }
 

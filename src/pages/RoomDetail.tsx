@@ -8,7 +8,9 @@ import {
   Phone as PhoneIcon,
   Star,
   Heart,
-  Calendar // Add Calendar icon
+  Calendar, // Add Calendar icon
+  X,
+  ZoomIn
 } from 'lucide-react';
 // import { roomsAPI } from '../services/api';
 import { Room } from '../types';
@@ -31,6 +33,8 @@ const RoomDetail: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageModal, setShowImageModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [showViewingAppointmentForm, setShowViewingAppointmentForm] = useState(false);
   const [images, setImages] = useState<string[]>([]);
   const [imageAttempts, setImageAttempts] = useState<Record<number, number>>({});
@@ -645,6 +649,34 @@ const RoomDetail: React.FC = () => {
     return images;
   };
 
+  // Keyboard navigation for image modal
+  useEffect(() => {
+    if (!showImageModal) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case 'Escape':
+          setShowImageModal(false);
+          break;
+        case 'ArrowLeft':
+          prevImage();
+          break;
+        case 'ArrowRight':
+          nextImage();
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [showImageModal, images.length]);
+
   useEffect(() => {
     console.log('RoomDetail useEffect triggered:', { id, slug });
     if (!id && !slug) return;
@@ -711,6 +743,32 @@ const RoomDetail: React.FC = () => {
   const prevImage = () => {
     if (images.length > 0) {
       setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    }
+  };
+
+  // Touch swipe handlers for mobile
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      nextImage();
+    }
+    if (isRightSwipe) {
+      prevImage();
     }
   };
 
@@ -940,6 +998,12 @@ const RoomDetail: React.FC = () => {
 
           <div className="image-count">
             {currentImageIndex + 1} / {images.length}
+          </div>
+
+          {/* Zoom indicator */}
+          <div className="zoom-indicator" onClick={() => setShowImageModal(true)}>
+            <ZoomIn size={20} />
+            <span>Xem chi tiết</span>
           </div>
         </div>
 
@@ -1408,6 +1472,93 @@ const RoomDetail: React.FC = () => {
           onClose={() => setShowViewingAppointmentForm(false)}
           roomId={room.roomId || room.RoomID}
         />
+      )}
+
+      {/* Image Lightbox Modal */}
+      {showImageModal && (
+        <div 
+          className="image-modal" 
+          onClick={() => setShowImageModal(false)}
+        >
+          <div 
+            className="modal-content" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              className="modal-close" 
+              onClick={() => setShowImageModal(false)}
+              aria-label="Đóng"
+            >
+              <X size={24} />
+            </button>
+
+            {images.length > 1 && (
+              <button 
+                className="modal-nav prev" 
+                onClick={prevImage}
+                aria-label="Ảnh trước"
+              >
+                <ChevronLeft size={32} />
+              </button>
+            )}
+
+            <img
+              src={(() => {
+                const current = images[currentImageIndex] || '';
+                if (isCloudinaryConfigured()) {
+                  return getCloudinaryUrl(current, { width: 1600, quality: 'auto:best' });
+                }
+                return current;
+              })()}
+              alt={`${room.BranchName} - Ảnh ${currentImageIndex + 1}`}
+              className="modal-image"
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                const current = images[currentImageIndex] || '';
+                if (!img.src.startsWith(window.location.origin)) {
+                  img.src = current;
+                }
+              }}
+            />
+
+            {images.length > 1 && (
+              <button 
+                className="modal-nav next" 
+                onClick={nextImage}
+                aria-label="Ảnh tiếp theo"
+              >
+                <ChevronRight size={32} />
+              </button>
+            )}
+
+            <div className="modal-counter">
+              {currentImageIndex + 1} / {images.length}
+            </div>
+
+            {/* Thumbnail strip in modal */}
+            <div className="modal-thumbnails">
+              {images.map((image, index) => (
+                <img
+                  key={index}
+                  src={isCloudinaryConfigured() 
+                    ? getCloudinaryThumbnail(image, 80)
+                    : image.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg'
+                  }
+                  alt={`Ảnh ${index + 1}`}
+                  className={`modal-thumbnail ${index === currentImageIndex ? 'active' : ''}`}
+                  onClick={() => setCurrentImageIndex(index)}
+                  onError={(e) => {
+                    const img = e.currentTarget as HTMLImageElement;
+                    img.src = image;
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -4,6 +4,7 @@ import { postsAPI } from '../services/api';
 import { Post, Room } from '../types';
 import { Search, MapPin, Calendar, DollarSign, Eye, Loader2, Leaf, Lightbulb, Utensils, Shirt, Gift, Sofa, Briefcase, Bed, Shield, Building2, Users, MessageSquare, Headphones } from 'lucide-react';
 import ViewingAppointmentForm from '../components/ViewingAppointmentForm';
+import FAQ, { youngHouseFAQs } from '../components/FAQ';
 import './Home.css';
 import Meta from '../components/Meta';
 import { VisitCounterService } from '../services/visitCounter';
@@ -608,6 +609,15 @@ const Home: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* FAQ Section with Schema Markup */}
+      <div className="home-faq-section">
+        <FAQ 
+          faqs={youngHouseFAQs} 
+          title="Câu hỏi thường gặp về Young House"
+          showSchema={true}
+        />
+      </div>
 
       <ViewingAppointmentForm
         isOpen={isAppointmentFormOpen}

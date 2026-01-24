@@ -6,6 +6,8 @@ import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import BottomNavbar from './components/BottomNavbar';
 import Footer from './components/Footer';
+import BackToTop from './components/BackToTop';
+import MessengerChat from './components/MessengerChat';
 import './App.css';
 const Home = React.lazy(() => import('./pages/Home'));
 const PostDetail = React.lazy(() => import('./pages/PostDetail'));
@@ -38,6 +40,11 @@ function App() {
         </main>
         <BottomNavbar />
         <Footer />
+        
+        {/* Floating Widgets */}
+        <BackToTop />
+        <MessengerChat />
+        
         <SpeedInsights />
         <Analytics />
       </div>

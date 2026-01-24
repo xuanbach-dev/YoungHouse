@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Search, MapPin, Filter, X } from 'lucide-react';
+import { Search, MapPin, Filter, X, SlidersHorizontal } from 'lucide-react';
 import { roomsAPI, branchesAPI } from '../services/api';
 import { Room, Branch } from '../types';
 import GoogleMapEmbed from '../components/GoogleMapEmbed';
 import SurroundingAreas from '../components/SurroundingAreas';
+import AdvancedFilter, { FilterState } from '../components/AdvancedFilter';
 import './SystemHome.css';
 import { VisitCounterService } from '../services/visitCounter';
 import Meta from '../components/Meta';
@@ -44,6 +45,18 @@ const SystemHome: React.FC = () => {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 10000000 });
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const [sortBy, setSortBy] = useState<'default' | 'price-low' | 'price-high'>('default');
+  
+  // Advanced Filter States
+  const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
+  const [advancedFilters, setAdvancedFilters] = useState<FilterState>({
+    areas: [],
+    branches: [],
+    priceRange: { min: 0, max: 10000000 },
+    roomSizes: [],
+    amenities: [],
+    distanceToFPT: 'all',
+    status: 'All'
+  });
 
   // Available areas and their corresponding branch IDs
   const availableAreas = [
@@ -613,29 +626,77 @@ const SystemHome: React.FC = () => {
 
   useEffect(() => {
     filterRooms();
-  }, [selectedBranches, selectedAreas, selectedRoomTypes, priceRange, rooms, statusFilter, sortBy]);
+  }, [selectedBranches, selectedAreas, selectedRoomTypes, priceRange, rooms, statusFilter, sortBy, advancedFilters]);
+
+  // Get room size from branch ID
+  const getRoomSizeRange = (branchId: number): string => {
+    const sizeMapping: Record<number, string> = {
+      1: '25-30', 2: '20-25', 4: '16-20', 5: '20-25',
+      8: '25-30', 9: '20-25', 10: '20-25', 11: '25-30', 12: '30-40', 14: '20-25'
+    };
+    return sizeMapping[branchId] || '20-25';
+  };
+
+  // Get distance to FPT from branch ID (in km)
+  const getDistanceToFPT = (branchId: number): number => {
+    const distanceMapping: Record<number, number> = {
+      1: 3, 2: 2, 4: 3.5, 5: 3, 6: 3, 7: 3, 8: 3, 9: 3.5, 10: 3, 11: 2, 12: 3, 14: 3
+    };
+    return distanceMapping[branchId] || 3;
+  };
 
   const filterRooms = () => {
     let filtered = rooms.filter(room => {
-      // Filter by status if not 'All'
-      if (statusFilter === 'Available' && (room.Status !== 'Available' || !room.isAvailable)) {
+      const branchId = room.BranchID || room.branchId;
+      
+      // Filter by status (from advanced filter or basic filter)
+      const effectiveStatus = advancedFilters.status !== 'All' ? advancedFilters.status : statusFilter;
+      if (effectiveStatus === 'Available' && room.Status !== 'Available') {
+        return false;
+      }
+      if (effectiveStatus === 'Reserved' && room.Status !== 'Reserved') {
         return false;
       }
 
-      // Check if room matches selected areas
+      // Check if room matches selected areas (from advanced filter)
       let matchesArea = true;
-      if (selectedAreas.length > 0) {
-        matchesArea = selectedAreas.some(areaName => {
+      const effectiveAreas = advancedFilters.areas.length > 0 ? advancedFilters.areas : selectedAreas;
+      if (effectiveAreas.length > 0) {
+        matchesArea = effectiveAreas.some(areaName => {
           const area = availableAreas.find(a => a.name === areaName);
-          return area && area.branchIds.includes(room.BranchID || room.branchId);
+          return area && area.branchIds.includes(branchId);
         });
       }
 
-      const matchesBranch = selectedBranches.length === 0 || selectedBranches.includes(room.BranchID || room.branchId);
-      const matchesRoomType = selectedRoomTypes.length === 0 || selectedRoomTypes.includes(room.TypeName || room.typeName || '');
-      const matchesPrice = (room.Price || room.price || 0) >= priceRange.min && (room.Price || room.price || 0) <= priceRange.max;
+      // Filter by price range (from advanced filter)
+      const effectivePriceRange = (advancedFilters.priceRange.min > 0 || advancedFilters.priceRange.max < 10000000) 
+        ? advancedFilters.priceRange 
+        : priceRange;
+      const roomPrice = room.Price || room.price || 0;
+      const matchesPrice = roomPrice >= effectivePriceRange.min && roomPrice <= effectivePriceRange.max;
 
-      return matchesArea && matchesBranch && matchesRoomType && matchesPrice;
+      // Filter by room size (from advanced filter)
+      let matchesSize = true;
+      if (advancedFilters.roomSizes.length > 0) {
+        const roomSize = getRoomSizeRange(branchId);
+        matchesSize = advancedFilters.roomSizes.includes(roomSize);
+      }
+
+      // Filter by distance to FPT (from advanced filter)
+      let matchesDistance = true;
+      if (advancedFilters.distanceToFPT !== 'all') {
+        const maxDistance = parseInt(advancedFilters.distanceToFPT);
+        const roomDistance = getDistanceToFPT(branchId);
+        matchesDistance = roomDistance <= maxDistance;
+      }
+
+      // Filter by amenities (for now, all rooms have these amenities, so we skip this check)
+      // In a real app, you would check room.amenities
+
+      const matchesBranch = selectedBranches.length === 0 || selectedBranches.includes(branchId);
+      const matchesRoomType = selectedRoomTypes.length === 0 || selectedRoomTypes.includes(room.TypeName || room.typeName || '');
+
+      return matchesArea && matchesBranch && matchesRoomType && matchesPrice && matchesSize && matchesDistance;
     });
 
     // Apply sorting
@@ -646,6 +707,36 @@ const SystemHome: React.FC = () => {
     }
 
     setFilteredRooms(filtered);
+  };
+
+  // Handle advanced filter changes
+  const handleAdvancedFilterChange = (newFilters: FilterState) => {
+    setAdvancedFilters(newFilters);
+  };
+
+  // Clear all advanced filters
+  const clearAdvancedFilters = () => {
+    setAdvancedFilters({
+      areas: [],
+      branches: [],
+      priceRange: { min: 0, max: 10000000 },
+      roomSizes: [],
+      amenities: [],
+      distanceToFPT: 'all',
+      status: 'All'
+    });
+  };
+
+  // Get active filter count for badge
+  const getActiveFilterCount = () => {
+    let count = 0;
+    if (advancedFilters.areas.length > 0) count++;
+    if (advancedFilters.priceRange.min > 0 || advancedFilters.priceRange.max < 10000000) count++;
+    if (advancedFilters.roomSizes.length > 0) count++;
+    if (advancedFilters.amenities.length > 0) count++;
+    if (advancedFilters.distanceToFPT !== 'all') count++;
+    if (advancedFilters.status !== 'All') count++;
+    return count;
   };
 
   const handleAreaChange = (areaName: string) => {
@@ -685,6 +776,7 @@ const SystemHome: React.FC = () => {
     setSearchQuery('');
     setStatusFilter('All'); // Show all rooms
     setSortBy('default');
+    clearAdvancedFilters();
   };
 
   const handleSortChange = (sortType: 'default' | 'price-low' | 'price-high') => {
@@ -1035,7 +1127,83 @@ const SystemHome: React.FC = () => {
                 <Filter size={20} />
                 Lọc
               </button>
+
+              {/* Advanced Filter Button */}
+              <button 
+                className="advanced-filter-btn"
+                onClick={() => setShowAdvancedFilter(true)}
+              >
+                <SlidersHorizontal size={18} />
+                <span>Bộ lọc nâng cao</span>
+                {getActiveFilterCount() > 0 && (
+                  <span className="filter-badge">{getActiveFilterCount()}</span>
+                )}
+              </button>
             </div>
+
+            {/* Active Filter Tags */}
+            {getActiveFilterCount() > 0 && (
+              <div className="active-filters-bar">
+                {advancedFilters.areas.map(area => (
+                  <span key={area} className="active-filter-tag">
+                    {area}
+                    <button onClick={() => handleAdvancedFilterChange({
+                      ...advancedFilters,
+                      areas: advancedFilters.areas.filter(a => a !== area)
+                    })}>
+                      <X size={14} />
+                    </button>
+                  </span>
+                ))}
+                {(advancedFilters.priceRange.min > 0 || advancedFilters.priceRange.max < 10000000) && (
+                  <span className="active-filter-tag">
+                    {(advancedFilters.priceRange.min / 1000000).toFixed(1)}tr - {(advancedFilters.priceRange.max / 1000000).toFixed(1)}tr
+                    <button onClick={() => handleAdvancedFilterChange({
+                      ...advancedFilters,
+                      priceRange: { min: 0, max: 10000000 }
+                    })}>
+                      <X size={14} />
+                    </button>
+                  </span>
+                )}
+                {advancedFilters.roomSizes.map(size => (
+                  <span key={size} className="active-filter-tag">
+                    {size}m²
+                    <button onClick={() => handleAdvancedFilterChange({
+                      ...advancedFilters,
+                      roomSizes: advancedFilters.roomSizes.filter(s => s !== size)
+                    })}>
+                      <X size={14} />
+                    </button>
+                  </span>
+                ))}
+                {advancedFilters.distanceToFPT !== 'all' && (
+                  <span className="active-filter-tag">
+                    {'<'} {advancedFilters.distanceToFPT}km tới FPT
+                    <button onClick={() => handleAdvancedFilterChange({
+                      ...advancedFilters,
+                      distanceToFPT: 'all'
+                    })}>
+                      <X size={14} />
+                    </button>
+                  </span>
+                )}
+                {advancedFilters.status !== 'All' && (
+                  <span className="active-filter-tag">
+                    {advancedFilters.status === 'Available' ? 'Còn phòng' : 'Đặt trước'}
+                    <button onClick={() => handleAdvancedFilterChange({
+                      ...advancedFilters,
+                      status: 'All'
+                    })}>
+                      <X size={14} />
+                    </button>
+                  </span>
+                )}
+                <button className="clear-all-tags" onClick={clearAdvancedFilters}>
+                  Xóa tất cả
+                </button>
+              </div>
+            )}
 
             {/* Room Results */}
             {isLoading ? (
@@ -1215,6 +1383,28 @@ const SystemHome: React.FC = () => {
           </main>
         </div>
       </div>
+
+      {/* Floating Advanced Filter Button (Mobile) */}
+      <button 
+        className="floating-filter-btn"
+        onClick={() => setShowAdvancedFilter(true)}
+        aria-label="Mở bộ lọc nâng cao"
+      >
+        <SlidersHorizontal size={22} />
+        {getActiveFilterCount() > 0 && (
+          <span className="floating-badge">{getActiveFilterCount()}</span>
+        )}
+      </button>
+
+      {/* Advanced Filter Panel */}
+      <AdvancedFilter
+        isOpen={showAdvancedFilter}
+        onClose={() => setShowAdvancedFilter(false)}
+        filters={advancedFilters}
+        onFilterChange={handleAdvancedFilterChange}
+        onClearFilters={clearAdvancedFilters}
+        totalResults={filteredRooms.length}
+      />
     </div>
   );
 };
