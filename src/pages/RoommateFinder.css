@@ -392,24 +392,11 @@
   }
 }
 
-/* Animation for page load */
-.roommate-finder-page {
-  animation: fadeIn 0.5s ease-out;
-}
+/* Animation for page load - removed opacity to avoid React Router issues */
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Stagger animation for cards */
+/* Stagger animation for cards - use transform only, no opacity dependency */
 .feature-card {
-  animation: slideUp 0.5s ease-out forwards;
-  opacity: 0;
+  animation: slideUp 0.5s ease-out;
 }
 
 .feature-card:nth-child(1) { animation-delay: 0.1s; }
@@ -419,11 +406,9 @@
 
 @keyframes slideUp {
   from {
-    opacity: 0;
     transform: translateY(20px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }

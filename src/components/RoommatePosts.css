@@ -4,27 +4,27 @@
   padding: 0;
 }
 
-/* Section Header */
-.section-header {
+/* Section Header - Scoped to roommate-posts */
+.roommate-posts-container .roommate-section-header {
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.section-header h2 {
+.roommate-posts-container .roommate-section-header h2 {
   color: #1f2937;
   font-size: 2rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
-.section-header p {
+.roommate-posts-container .roommate-section-header p {
   color: #6b7280;
   font-size: 1rem;
   margin: 0;
 }
 
-/* Filters Section */
-.filters-section {
+/* Filters Section - Scoped to roommate-posts */
+.roommate-posts-container .roommate-filters-section {
   background: white;
   border-radius: 16px;
   padding: 1.5rem;
@@ -33,7 +33,7 @@
   border: 1px solid #e5e7eb;
 }
 
-.filters-header {
+.roommate-posts-container .roommate-filters-header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -43,31 +43,31 @@
   font-size: 1rem;
 }
 
-.filters-header svg {
+.roommate-posts-container .roommate-filters-header svg {
   color: #667eea;
 }
 
-.filters-grid {
+.roommate-posts-container .roommate-filters-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
   margin-bottom: 1rem;
 }
 
-.filter-group {
+.roommate-posts-container .roommate-filter-group {
   display: flex;
   flex-direction: column;
 }
 
-.filter-group label {
+.roommate-posts-container .roommate-filter-group label {
   font-weight: 500;
   color: #4b5563;
   margin-bottom: 0.4rem;
   font-size: 0.85rem;
 }
 
-.filter-group input,
-.filter-group select {
+.roommate-posts-container .roommate-filter-group input,
+.roommate-posts-container .roommate-filter-group select {
   padding: 0.65rem 0.9rem;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
@@ -77,25 +77,25 @@
   color: #1f2937;
 }
 
-.filter-group input:focus,
-.filter-group select:focus {
+.roommate-posts-container .roommate-filter-group input:focus,
+.roommate-posts-container .roommate-filter-group select:focus {
   outline: none;
   border-color: #667eea;
   background: white;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.filter-group input::placeholder {
+.roommate-posts-container .roommate-filter-group input::placeholder {
   color: #9ca3af;
 }
 
-.filters-actions {
+.roommate-posts-container .roommate-filters-actions {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
 
-.filter-btn {
+.roommate-posts-container .roommate-filter-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -108,30 +108,30 @@
   border: none;
 }
 
-.filter-btn.search {
+.roommate-posts-container .roommate-filter-btn.search {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
 }
 
-.filter-btn.search:hover {
+.roommate-posts-container .roommate-filter-btn.search:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
-.filter-btn.clear {
+.roommate-posts-container .roommate-filter-btn.clear {
   background: #f3f4f6;
   color: #4b5563;
   border: 1px solid #e5e7eb;
 }
 
-.filter-btn.clear:hover {
+.roommate-posts-container .roommate-filter-btn.clear:hover {
   background: #fee2e2;
   color: #dc2626;
   border-color: #fecaca;
 }
 
-/* Results Info */
-.results-info {
+/* Results Info - Scoped to roommate-posts */
+.roommate-posts-container .roommate-results-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -142,19 +142,19 @@
   color: white;
 }
 
-.results-count {
+.roommate-posts-container .roommate-results-count {
   font-weight: 600;
   font-size: 1rem;
 }
 
-.results-sort {
+.roommate-posts-container .roommate-results-sort {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
 }
 
-.results-sort select {
+.roommate-posts-container .roommate-results-sort select {
   padding: 0.4rem 0.8rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
@@ -164,7 +164,7 @@
   cursor: pointer;
 }
 
-.results-sort select option {
+.roommate-posts-container .roommate-results-sort select option {
   background: #667eea;
   color: white;
 }
@@ -449,30 +449,30 @@
     padding: 0;
   }
 
-  .section-header h2 {
+  .roommate-posts-container .roommate-section-header h2 {
     font-size: 1.6rem;
   }
 
-  .filters-section {
+  .roommate-posts-container .roommate-filters-section {
     padding: 1.25rem;
     border-radius: 12px;
   }
 
-  .filters-grid {
+  .roommate-posts-container .roommate-filters-grid {
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }
 
-  .filters-actions {
+  .roommate-posts-container .roommate-filters-actions {
     flex-direction: column;
   }
 
-  .filter-btn {
+  .roommate-posts-container .roommate-filter-btn {
     width: 100%;
     justify-content: center;
   }
 
-  .results-info {
+  .roommate-posts-container .roommate-results-info {
     flex-direction: column;
     gap: 0.75rem;
     text-align: center;
@@ -507,7 +507,7 @@
 }
 
 @media (max-width: 480px) {
-  .section-header h2 {
+  .roommate-posts-container .roommate-section-header h2 {
     font-size: 1.4rem;
   }
 
@@ -524,10 +524,9 @@
   }
 }
 
-/* Animation */
+/* Animation - no opacity dependency to avoid React Router issues */
 .post-card {
-  animation: fadeInUp 0.4s ease-out forwards;
-  opacity: 0;
+  animation: fadeInUp 0.4s ease-out;
 }
 
 .post-card:nth-child(1) { animation-delay: 0.05s; }
@@ -539,11 +538,9 @@
 
 @keyframes fadeInUp {
   from {
-    opacity: 0;
     transform: translateY(20px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }

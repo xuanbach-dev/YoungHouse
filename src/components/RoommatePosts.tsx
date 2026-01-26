@@ -149,22 +149,22 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
   return (
     <div className="roommate-posts-container">
       {/* Section Header */}
-      <div className="section-header">
+      <div className="roommate-section-header">
         <h2>Danh sách bài đăng</h2>
         <p>Tìm kiếm và lọc theo nhu cầu của bạn</p>
       </div>
 
       {/* Filters */}
-      <div className="filters-section">
-        <div className="filters-header">
+      <div className="roommate-filters-section">
+        <div className="roommate-filters-header">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"></polygon>
           </svg>
           Bộ lọc tìm kiếm
         </div>
         
-        <div className="filters-grid">
-          <div className="filter-group">
+        <div className="roommate-filters-grid">
+          <div className="roommate-filter-group">
             <label>📍 Địa điểm</label>
             <input
               type="text"
@@ -174,7 +174,7 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
             />
           </div>
 
-          <div className="filter-group">
+          <div className="roommate-filter-group">
             <label>🏠 Loại phòng</label>
             <select
               value={filters.roomType}
@@ -188,7 +188,7 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
             </select>
           </div>
 
-          <div className="filter-group">
+          <div className="roommate-filter-group">
             <label>👤 Giới tính</label>
             <select
               value={filters.gender}
@@ -200,7 +200,7 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
             </select>
           </div>
 
-          <div className="filter-group">
+          <div className="roommate-filter-group">
             <label>💰 Giá</label>
             <input
               type="text"
@@ -210,7 +210,7 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
             />
           </div>
 
-          <div className="filter-group">
+          <div className="roommate-filter-group">
             <label>📋 Trạng thái</label>
             <select
               value={filters.status}
@@ -223,16 +223,16 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
           </div>
         </div>
 
-        <div className="filters-actions">
-          <button onClick={clearFilters} className="filter-btn clear">
+        <div className="roommate-filters-actions">
+          <button onClick={clearFilters} className="roommate-filter-btn clear">
             ✕ Xóa bộ lọc
           </button>
         </div>
       </div>
 
       {/* Results Info */}
-      <div className="results-info">
-        <span className="results-count">
+      <div className="roommate-results-info">
+        <span className="roommate-results-count">
           🔍 Tìm thấy <strong>{filteredPosts.length}</strong> bài đăng
         </span>
       </div>

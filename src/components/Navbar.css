@@ -132,6 +132,203 @@
   white-space: nowrap;
 }
 
+/* Navbar Actions Container */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Admin Login/Logout Button */
+.admin-login-button,
+.admin-logout-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.admin-login-button {
+  background: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+}
+
+.admin-login-button:hover {
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+.admin-logout-button {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.admin-logout-button:hover {
+  background: #dc2626;
+  color: white;
+}
+
+.admin-button-text {
+  white-space: nowrap;
+}
+
+/* Admin Login Modal */
+.admin-login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
+}
+
+.admin-login-modal {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.admin-login-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-login-modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.admin-login-modal-close {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.admin-login-modal-close:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.admin-login-form {
+  padding: 1.5rem;
+}
+
+.admin-login-error {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  border: 1px solid #fecaca;
+}
+
+.admin-login-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.admin-login-form-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.admin-login-form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.admin-login-form-group input:focus {
+  outline: none;
+  border-color: #2d7dd2;
+  box-shadow: 0 0 0 3px rgba(45, 125, 210, 0.1);
+}
+
+.admin-login-form-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.admin-login-cancel,
+.admin-login-submit {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.admin-login-cancel {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.admin-login-cancel:hover {
+  background: #e5e7eb;
+}
+
+.admin-login-submit {
+  background: linear-gradient(135deg, #2d7dd2 0%, #1a5fa0 100%);
+  color: white;
+}
+
+.admin-login-submit:hover {
+  background: linear-gradient(135deg, #1a5fa0 0%, #2d7dd2 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 125, 210, 0.4);
+}
+
 /* Mobile drawer */
 .mobile-menu {
   position: fixed;
@@ -215,20 +412,59 @@
 @media (max-width: 768px) {
   .navbar-container { padding: 0 0.75rem; height: 64px; }
   .desktop-menu { display: none; }
+  
+  .navbar-actions {
+    gap: 0.5rem;
+  }
+  
+  .admin-login-button,
+  .admin-logout-button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .admin-button-text {
+    display: none;
+  }
+  
   .book-now-button { 
     display: inline-flex;
     padding: 10px 16px;
     font-size: 0.9rem;
   }
   .logo-image { height: 55px; }
+  
+  .admin-login-modal {
+    width: 95%;
+    margin: 1rem;
+  }
 }
 
 @media (max-width: 420px) {
   .navbar-container { padding: 0 0.5rem; height: 60px; }
   .logo-image { height: 55px; }
+  
+  .navbar-actions {
+    gap: 0.4rem;
+  }
+  
+  .admin-login-button,
+  .admin-logout-button {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+  
   .book-now-button { 
     display: inline-flex;
     padding: 8px 14px; 
     font-size: 0.8rem; 
+  }
+  
+  .admin-login-modal-header {
+    padding: 1.25rem;
+  }
+  
+  .admin-login-form {
+    padding: 1.25rem;
   }
 }
