@@ -10,6 +10,7 @@ import './SystemHome.css';
 import { VisitCounterService } from '../services/visitCounter';
 import Meta from '../components/Meta';
 import { buildRoomSlug } from '../utils/slug';
+import { fetchRooms as fetchRoomsFromService } from '../services/roomService';
 
 interface RoomSearchFilters {
   search?: string;
@@ -201,392 +202,27 @@ const SystemHome: React.FC = () => {
     }
   };
 
-  // Fetch rooms from local directory
+  // Fetch rooms from Supabase or local fallback via roomService
   const fetchRooms = async () => {
     try {
       setIsLoading(true);
       setError(null);
       
-      // Simulate room data from local directory
-      const localRooms: Room[] = [
-        {
-          RoomID: 1,
-          roomId: 1,
-          BranchID: 1,
-          branchId: 1,
-          BranchName: 'Young House 1',
-          branchName: 'Young House 1',
-          TypeName: 'Giường đôi',
-          typeName: 'Giường đôi',
-          Price: 1500000,
-          price: 1500000,
-          Status: 'Available',
-          isAvailable: true,
-          Address: '57 đường Xóm Quán – H10, xã Tân Xã',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 1,
-          roomTypeId: 1
-        
-        },
-        {
-          RoomID: 2,
-          roomId: 2,
-          BranchID: 2,
-          branchId: 2,
-          BranchName: 'Young House 2',
-          branchName: 'Young House 2',
-          TypeName: 'Giường đôi căn góc thoáng',
-          typeName: 'Giường đôi căn góc thoáng',
-          Price: 2600000,
-          price: 2600000,
-          Status: 'Available',
-          isAvailable: true,
-          Address: '64 Phú Hữu, xã Tân Xã',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 5,
-          roomTypeId: 5
-        },{
-          RoomID: 3,
-          roomId: 3,
-          BranchID: 2,
-          branchId: 2,
-          BranchName: 'Young House 2',
-          branchName: 'Young House 2',
-          TypeName: 'Giường đơn có ban công thoáng',
-          typeName: 'Giường đơn có ban công thoáng',
-          Price: 2600000,
-          price: 2600000,
-          Status: 'Available',
-          isAvailable: false,
-          Address: '64 Phú Hữu, xã Tân Xã',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 3,
-          roomTypeId: 3
-        },{
-          RoomID: 4,
-          roomId: 4,
-          BranchID: 2,
-          branchId: 2,
-          BranchName: 'Young House 2',
-          branchName: 'Young House 2',
-          TypeName: 'Giường đơn có giếng trời thoáng',
-          typeName: 'Giường đơn có giếng trời thoáng',
-          Price: 2400000,
-          price: 2400000,
-          Status: 'Available',
-          isAvailable: false,
-          Address: '64 Phú Hữu, xã Tân Xã',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 4,
-          roomTypeId: 4
-        },
-        {
-          RoomID: 14,
-          roomId: 14,
-          BranchID: 2,
-          branchId: 2,
-          BranchName: 'Young House 2',
-          branchName: 'Young House 2',
-          TypeName: 'Căn 2 ngủ căn góc có ban công thoáng',
-          typeName: 'Căn 2 ngủ căn góc có ban công thoáng',
-          Price: 4500000,
-          price: 4500000,
-          Status: 'Reserved',
-          isAvailable: false,
-          Address: '64 Phú Hữu, xã Tân Xã',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 20,
-          roomTypeId: 20
-        },
-        {
-          RoomID: 15,
-          roomId: 15,
-          BranchID: 2,
-          branchId: 2,
-          BranchName: 'Young House 2',
-          branchName: 'Young House 2',
-          TypeName: 'Căn 2 ngủ căn góc có giếng trời thoáng',
-          typeName: 'Căn 2 ngủ căn góc có giếng trời thoáng',
-          Price: 4500000,
-          price: 4500000,
-          Status: 'Reserved',
-          isAvailable: false,
-          Address: '64 Phú Hữu, xã Tân Xã',
-          City: 'Hà Nội',
-          
-          RoomTypeID: 21,
-          roomTypeId: 21
-        },{
-          RoomID: 16,
-          roomId: 16,
-          BranchID: 2,
-          branchId: 2,
-          BranchName: 'Young House 2',
-          branchName: 'Young House 2',
-          TypeName: 'Căn 2 ngủ có ban công thoáng',
-          typeName: 'Căn 2 ngủ có ban công thoáng',
-          Price: 4500000,
-          price: 4500000,
-          Status: 'Reserved',
-          isAvailable: false,
-          Address: '64 Phú Hữu, xã Tân Xã',
-          City: 'Hà Nội',
-          
-          RoomTypeID: 22,
-          roomTypeId: 22
-         },
-         {
-           RoomID: 5,
-          roomId: 5,
-          BranchID: 4,
-          branchId: 4,
-          BranchName: 'Young House 4',
-          branchName: 'Young House 4',
-          TypeName: 'Giường đôi có hành lang view hồ Tân Xã',
-          typeName: 'Giường đôi có hành lang view hồ Tân Xã',
-          Price: 2000000,
-          price: 2000000,
-          Status: 'Available',
-          isAvailable: false,
-          Address: '85 Mục Uyên – Công Nghệ, Tân Xã ',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 12,
-          roomTypeId: 12
-        },
-        {
-          RoomID: 20,
-         roomId: 20,
-         BranchID: 6,
-         branchId: 6,
-         BranchName: 'Young House 6',
-         branchName: 'Young House 6',
-         TypeName: 'Giường gác xép có ban công thoáng',
-         typeName: 'Giường gác xép có ban công thoáng',
-         Price: 1700000,
-         price: 1700000,
-         Status: 'Available',
-         isAvailable: false,
-         Address: 'Ngõ 902 đường 420 , thôn Thái Bình , Bình Yên ',
-         City: 'Hà Nội',
-         Media: [{ FilePath: '/rooms/branch-6/Type30/branch6-30-2.jpg' }],
-         RoomTypeID: 30,
-         roomTypeId: 30
-       },
-        {
-          RoomID: 6,
-          roomId: 6,
-          BranchID: 9,
-          branchId: 9,
-          BranchName: 'Young House 9',
-          branchName: 'Young House 9',
-          TypeName: 'Giường đôi có ban công thoáng',
-          typeName: 'Giường đôi có ban công thoáng',
-          Price: 2000000,
-          price: 2000000,
-          Status: 'Available',
-          isAvailable: false,
-          Address: 'D2 – Khu Tái định cư đường 420 xã Bình Yên – Thạch Thất ',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 10,
-          roomTypeId: 10
-        },{
-          RoomID: 7,
-          roomId: 7,
-          BranchID: 10,
-          branchId: 10,
-          BranchName: 'Young House 10',
-          branchName: 'Young House 10',
-          TypeName: 'Giường đôi ',
-          typeName: 'Giường đôi ',
-          Price: 1400000,
-          price: 1400000,
-          Status: 'Available',
-          isAvailable: false,
-          Address: 'Nhà văn hóa thôn Thái Bình, xã Bình Yên.  ',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 11,
-          roomTypeId: 11
-        },{
-          RoomID: 8,
-          roomId: 8,
-          BranchID: 11,
-          branchId: 11,
-          BranchName: 'Young House 11',
-          branchName: 'Young House 11',
-          TypeName: 'Giường gác xép có ban công thoáng',
-          typeName: 'Giường gác xép có ban công thoáng',
-          Price: 2200000,
-          price: 2200000,
-          Status: 'Available',
-          isAvailable: true,
-          Address: 'Số 6, đường Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 8,
-          roomTypeId: 8
-        },
-
-        {
-          RoomID: 9,
-          roomId: 9,
-          BranchID: 12,
-          branchId: 12,
-          BranchName: 'Young House 12',
-          branchName: 'Young House 12',
-          TypeName: 'Giường gác xép có ban công thoáng',
-          typeName: 'Giường gác xép có ban công thoáng',
-          Price: 2500000,
-          price:  2500000,
-          Status: 'Available',
-          isAvailable: false,
-          Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 7,
-          roomTypeId: 7
-        },
-        {
-          RoomID: 19,
-          roomId: 19,
-          BranchID: 12,
-          branchId: 12,
-          BranchName: 'Young House 12',
-          branchName: 'Young House 12',
-          TypeName: 'Giường đôi có ban công thoáng view FPT',
-          typeName: 'Giường đôi có ban công thoáng view FPT',
-          Price: 2300000,
-          price:  2300000,
-          Status: 'Available',
-          isAvailable: false,
-          Address: 'Gần nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 27,
-          roomTypeId: 27
-        },
-        
-        {
-          RoomID: 10,
-          roomId: 10,
-          BranchID: 14,
-          branchId: 14,
-          BranchName: 'Young House 14',
-          branchName: 'Young House 14',
-          TypeName: 'Giường đơn có cửa sổ thoáng',
-          typeName: 'Giường đơn xép có cửa sổ thoáng',
-          Price: 1700000,
-          price: 1700000,
-          Status: 'Available',
-          isAvailable: false,
-          Address: 'Nhà thờ Phú Hữu, xã Tân Xã, Thạch Thất, Hà Nội',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 13,
-          roomTypeId: 13
-        }
-        ,        {
-          RoomID: 11,
-          roomId: 11,
-          BranchID: 5,
-          branchId: 5,
-          BranchName: 'Young House 5',
-          branchName: 'Young House 5',
-          TypeName: 'Giường gác xép có ban công thoáng',
-          typeName: 'Giường gác xép có ban công thoáng',
-          Price: 2000000,
-          price: 2000000,
-          Status: 'Available',
-          isAvailable: true,
-          Address: '23 Mục Uyên – Công nghệ - Tân Xã',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 15,
-          roomTypeId: 15
-        }
-        ,
-        {
-    
-          RoomID: 18,
-          roomId: 18,
-          BranchID: 5,
-          branchId: 5,
-          BranchName: 'Young House 5',
-          branchName: 'Young House 5',
-          TypeName: 'Giường hai giường đôi có ban công thoáng',
-          typeName: 'Giường hai giường đôi có ban công thoáng',
-          Price: 2500000,
-          price: 2500000,
-          Status: 'Available',
-          isAvailable: false,
-          Address: 'Địa chỉ Young House 4',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch4/branch4-1.jpg' }],
-          RoomTypeID: 26,
-          roomTypeId: 26
-        },
-        {
-          RoomID: 12,
-          roomId: 12,
-          BranchID: 7,
-          branchId: 7,
-          BranchName: 'Young House 7',
-          branchName: 'Young House 7',
-          TypeName: 'Giường đôi có ban công thoáng',
-          typeName: 'Giường đôi có ban công thoáng',
-          Price: 2400000,
-          price: 2400000,
-          Status: 'Available',
-          isAvailable: false,
-          Address: 'Đối diện THPT Hai Bà Trưng - Tân Xã',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 16,
-          roomTypeId: 16
-        },{
-          RoomID: 13,
-          roomId: 13,
-          BranchID: 8,
-          branchId: 8,
-          BranchName: 'Young House 8',
-          branchName: 'Young House 8',
-          TypeName: 'Giường gác xép có ban công thoáng',
-          typeName: 'Giường gác xép có ban công thoáng',
-          Price: 2200000,
-          price: 2200000,
-          Status: 'Available',
-          isAvailable: true,
-          Address: ' 41 Mục Uyên 1, xã Tân Xã',
-          City: 'Hà Nội',
-          Media: [{ FilePath: '/room/branch1/branch1-1.jpg' }],
-          RoomTypeID: 17,
-          roomTypeId: 17
-        }
-        // Add more rooms as needed
-      ];
+      // Fetch rooms from roomService (Supabase or local fallback)
+      const roomsData = await fetchRoomsFromService();
       
-      // Show all rooms instead of filtering by status
-      const filteredLocalRooms = localRooms;
-      
-      setRooms(filteredLocalRooms);
-      setFilteredRooms(filteredLocalRooms);
+      setRooms(roomsData);
+      setFilteredRooms(roomsData);
       
       // Update pagination
       setPagination({
         page: 1,
         limit: 10,
-        totalPages: Math.ceil(filteredLocalRooms.length / 10),
-        totalItems: filteredLocalRooms.length
+        totalPages: Math.ceil(roomsData.length / 10),
+        totalItems: roomsData.length
       });
     } catch (err: any) {
-      console.error('Error fetching local rooms:', err);
+      console.error('Error fetching rooms:', err);
       setError('Không thể tải danh sách phòng. Vui lòng thử lại sau.');
     } finally {
       setIsLoading(false);
@@ -700,12 +336,26 @@ const SystemHome: React.FC = () => {
       return matchesArea && matchesBranch && matchesRoomType && matchesPrice && matchesSize && matchesDistance;
     });
 
-    // Apply sorting
-    if (sortBy === 'price-low') {
-      filtered.sort((a, b) => (a.Price || a.price || 0) - (b.Price || b.price || 0));
-    } else if (sortBy === 'price-high') {
-      filtered.sort((a, b) => (b.Price || b.price || 0) - (a.Price || a.price || 0));
-    }
+    // Apply sorting - Always show available rooms first
+    filtered.sort((a, b) => {
+      // Priority 1: Available rooms first
+      const aAvailable = a.Status === 'Available' ? 0 : 1;
+      const bAvailable = b.Status === 'Available' ? 0 : 1;
+      
+      if (aAvailable !== bAvailable) {
+        return aAvailable - bAvailable;
+      }
+      
+      // Priority 2: Apply price sorting if selected
+      if (sortBy === 'price-low') {
+        return (a.Price || a.price || 0) - (b.Price || b.price || 0);
+      } else if (sortBy === 'price-high') {
+        return (b.Price || b.price || 0) - (a.Price || a.price || 0);
+      }
+      
+      // Default: keep original order
+      return 0;
+    });
 
     setFilteredRooms(filtered);
   };

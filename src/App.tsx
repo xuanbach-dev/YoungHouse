@@ -15,6 +15,7 @@ const SystemHome = React.lazy(() => import('./pages/SystemHome'));
 const RoomDetail = React.lazy(() => import('./pages/RoomDetail'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 const RoommateFinder = React.lazy(() => import('./pages/RoommateFinder'));
+const Admin = React.lazy(() => import('./pages/Admin'));
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path="/posts/:id" element={<PostDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/roommate-finder" element={<RoommateFinder />} />
+              <Route path="/admin" element={<Admin />} />
               
               {/* Fallback */}
               <Route path="*" element={<Navigate to="/" replace />} />
