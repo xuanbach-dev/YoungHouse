@@ -17,6 +17,7 @@ import { Room } from '../types';
 import ViewingAppointmentForm from '../components/ViewingAppointmentForm'; // Re-import the form
 import GoogleMapEmbed from '../components/GoogleMapEmbed';
 import SurroundingAreas from '../components/SurroundingAreas';
+import RoomReviews from '../components/RoomReviews';
 import './RoomDetail.css';
 import Meta from '../components/Meta';
 import { toSlug, buildRoomSlug } from '../utils/slug';
@@ -958,6 +959,18 @@ const RoomDetail: React.FC = () => {
                   branchId={room.BranchID || room.branchId}
                   branchName={room.BranchName || room.branchName || ''}
                   className="room-surrounding"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Room Reviews Section */}
+          {room && (
+            <div className="reviews-section">
+              <div className="container">
+                <RoomReviews
+                  roomId={room.roomId || room.RoomID || 0}
+                  roomName={`${room.BranchName || room.branchName} - ${room.TypeName || room.typeName}`}
                 />
               </div>
             </div>

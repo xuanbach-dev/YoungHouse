@@ -94,3 +94,123 @@ ON CONFLICT (room_id) DO UPDATE SET
 
 -- Xem dữ liệu đã insert
 SELECT * FROM rooms ORDER BY room_id;
+
+-- ============================================================
+-- ROOMMATE POSTS TABLE (Tìm Người Ở Ghép)
+-- ============================================================
+
+-- Tạo bảng roommate_posts
+CREATE TABLE IF NOT EXISTS roommate_posts (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(200) NOT NULL,
+  description TEXT NOT NULL,
+  location VARCHAR(200),
+  price VARCHAR(100),
+  room_type VARCHAR(50),
+  gender VARCHAR(20),
+  age VARCHAR(50),
+  contact VARCHAR(100) NOT NULL,
+  status VARCHAR(20) DEFAULT 'active' CHECK (status IN ('active', 'inactive', 'closed')),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Tạo trigger để auto-update updated_at cho roommate_posts
+DROP TRIGGER IF EXISTS update_roommate_posts_updated_at ON roommate_posts;
+CREATE TRIGGER update_roommate_posts_updated_at
+  BEFORE UPDATE ON roommate_posts
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
+-- Tạo index cho các field thường query
+CREATE INDEX IF NOT EXISTS idx_roommate_posts_status ON roommate_posts(status);
+CREATE INDEX IF NOT EXISTS idx_roommate_posts_location ON roommate_posts(location);
+CREATE INDEX IF NOT EXISTS idx_roommate_posts_gender ON roommate_posts(gender);
+CREATE INDEX IF NOT EXISTS idx_roommate_posts_created_at ON roommate_posts(created_at DESC);
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE roommate_posts ENABLE ROW LEVEL SECURITY;
+
+-- Policy cho phép đọc public (ai cũng có thể xem bài đăng)
+CREATE POLICY "Allow public read roommate_posts" ON roommate_posts
+  FOR SELECT
+  USING (true);
+
+-- Policy cho phép insert (ai cũng có thể đăng bài)
+CREATE POLICY "Allow public insert roommate_posts" ON roommate_posts
+  FOR INSERT
+  WITH CHECK (true);
+
+-- Policy cho phép update (chỉ admin hoặc owner - hiện tại cho phép tất cả)
+CREATE POLICY "Allow public update roommate_posts" ON roommate_posts
+  FOR UPDATE
+  USING (true)
+  WITH CHECK (true);
+
+-- Policy cho phép delete (chỉ admin)
+CREATE POLICY "Allow public delete roommate_posts" ON roommate_posts
+  FOR DELETE
+  USING (true);
+
+-- Xem danh sách bài đăng tìm người ở ghép
+SELECT * FROM roommate_posts ORDER BY created_at DESC;
+
+-- ============================================================
+-- ROOM REVIEWS TABLE (Đánh giá phòng trọ)
+-- ============================================================
+
+-- Tạo bảng room_reviews
+CREATE TABLE IF NOT EXISTS room_reviews (
+  id SERIAL PRIMARY KEY,
+  room_id INTEGER NOT NULL,
+  reviewer_name VARCHAR(100) NOT NULL,
+  rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+  comment TEXT NOT NULL,
+  pros TEXT, -- Điểm tốt
+  cons TEXT, -- Điểm chưa tốt
+  stay_duration VARCHAR(50), -- Thời gian ở (VD: "6 tháng", "1 năm")
+  is_verified BOOLEAN DEFAULT false, -- Đã xác minh là khách thuê thực
+  is_approved BOOLEAN DEFAULT true, -- Admin duyệt hiển thị
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Tạo trigger để auto-update updated_at cho room_reviews
+DROP TRIGGER IF EXISTS update_room_reviews_updated_at ON room_reviews;
+CREATE TRIGGER update_room_reviews_updated_at
+  BEFORE UPDATE ON room_reviews
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
+-- Tạo index cho các field thường query
+CREATE INDEX IF NOT EXISTS idx_room_reviews_room_id ON room_reviews(room_id);
+CREATE INDEX IF NOT EXISTS idx_room_reviews_rating ON room_reviews(rating);
+CREATE INDEX IF NOT EXISTS idx_room_reviews_is_approved ON room_reviews(is_approved);
+CREATE INDEX IF NOT EXISTS idx_room_reviews_created_at ON room_reviews(created_at DESC);
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE room_reviews ENABLE ROW LEVEL SECURITY;
+
+-- Policy cho phép đọc public (chỉ những review đã được duyệt)
+CREATE POLICY "Allow public read approved reviews" ON room_reviews
+  FOR SELECT
+  USING (is_approved = true);
+
+-- Policy cho phép insert (ai cũng có thể viết review)
+CREATE POLICY "Allow public insert reviews" ON room_reviews
+  FOR INSERT
+  WITH CHECK (true);
+
+-- Policy cho phép update (admin)
+CREATE POLICY "Allow public update reviews" ON room_reviews
+  FOR UPDATE
+  USING (true)
+  WITH CHECK (true);
+
+-- Policy cho phép delete (admin)
+CREATE POLICY "Allow public delete reviews" ON room_reviews
+  FOR DELETE
+  USING (true);
+
+-- Xem danh sách reviews
+SELECT * FROM room_reviews ORDER BY created_at DESC;

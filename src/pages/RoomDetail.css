@@ -978,6 +978,28 @@
   }
 }
 
+/* Room Reviews Section */
+.reviews-section {
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.reviews-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .reviews-section {
+    margin: 1.5rem 0;
+  }
+  
+  .reviews-section .container {
+    padding: 0 0.5rem;
+  }
+}
+
 /* Similar Rooms Section */
 .similar-rooms-section {
   background: #f8f9fa;

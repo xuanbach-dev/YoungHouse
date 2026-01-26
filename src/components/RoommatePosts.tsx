@@ -103,15 +103,28 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now.getTime() - date.getTime());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) return 'Hôm nay';
+    if (diffDays === 1) return 'Hôm qua';
+    if (diffDays < 7) return `${diffDays} ngày trước`;
     return date.toLocaleDateString('vi-VN');
+  };
+
+  const getGenderIcon = (gender: string) => {
+    if (gender.toLowerCase() === 'nam') return '👨';
+    if (gender.toLowerCase() === 'nữ') return '👩';
+    return '👥';
   };
 
   if (loading) {
     return (
       <div className="roommate-posts-container">
-        <div className="loading-spinner">
+        <div className="loading-container">
           <div className="spinner"></div>
-          
+          <p className="loading-text">Đang tải danh sách...</p>
         </div>
       </div>
     );
@@ -120,11 +133,14 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
   if (error) {
     return (
       <div className="roommate-posts-container">
-        <div className="error-message">
-          <p>{error}</p>
-          <button onClick={loadPosts} className="retry-button">
-            Thử lại
-          </button>
+        <div className="error-container">
+          <div className="error-icon">⚠️</div>
+          <div className="error-message">
+            <p>{error}</p>
+            <button onClick={loadPosts} className="retry-button">
+              🔄 Thử lại
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -132,16 +148,24 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
 
   return (
     <div className="roommate-posts-container">
-      <div className="roommate-posts-header">
-        <h2>Tìm Người Ở Ghép</h2>
-        <p>Khám phá các cơ hội ở ghép phòng phù hợp với bạn</p>
+      {/* Section Header */}
+      <div className="section-header">
+        <h2>Danh sách bài đăng</h2>
+        <p>Tìm kiếm và lọc theo nhu cầu của bạn</p>
       </div>
 
       {/* Filters */}
       <div className="filters-section">
+        <div className="filters-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"></polygon>
+          </svg>
+          Bộ lọc tìm kiếm
+        </div>
+        
         <div className="filters-grid">
           <div className="filter-group">
-            <label>Địa điểm:</label>
+            <label>📍 Địa điểm</label>
             <input
               type="text"
               placeholder="Nhập địa điểm..."
@@ -151,7 +175,7 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
           </div>
 
           <div className="filter-group">
-            <label>Loại phòng:</label>
+            <label>🏠 Loại phòng</label>
             <select
               value={filters.roomType}
               onChange={(e) => handleFilterChange('roomType', e.target.value)}
@@ -165,7 +189,7 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
           </div>
 
           <div className="filter-group">
-            <label>Giới tính:</label>
+            <label>👤 Giới tính</label>
             <select
               value={filters.gender}
               onChange={(e) => handleFilterChange('gender', e.target.value)}
@@ -173,47 +197,51 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
               <option value="">Tất cả</option>
               <option value="Nam">Nam</option>
               <option value="Nữ">Nữ</option>
-              <option value="Không phân biệt">Không phân biệt</option>
             </select>
           </div>
 
           <div className="filter-group">
-            <label>Giá:</label>
+            <label>💰 Giá</label>
             <input
               type="text"
-              placeholder="Nhập giá..."
+              placeholder="VD: 2tr"
               value={filters.price}
               onChange={(e) => handleFilterChange('price', e.target.value)}
             />
           </div>
 
           <div className="filter-group">
-            <label>Trạng thái:</label>
+            <label>📋 Trạng thái</label>
             <select
               value={filters.status}
               onChange={(e) => handleFilterChange('status', e.target.value)}
             >
-              <option value="active">Đang hoạt động</option>
-              <option value="inactive">Không hoạt động</option>
+              <option value="active">Đang tìm</option>
               <option value="">Tất cả</option>
+              <option value="closed">Đã đóng</option>
             </select>
           </div>
         </div>
 
-        <button onClick={clearFilters} className="clear-filters-btn">
-          Xóa bộ lọc
-        </button>
+        <div className="filters-actions">
+          <button onClick={clearFilters} className="filter-btn clear">
+            ✕ Xóa bộ lọc
+          </button>
+        </div>
       </div>
 
-      {/* Results count */}
+      {/* Results Info */}
       <div className="results-info">
-        <p>Tìm thấy {filteredPosts.length} bài đăng</p>
+        <span className="results-count">
+          🔍 Tìm thấy <strong>{filteredPosts.length}</strong> bài đăng
+        </span>
       </div>
 
-      {/* Posts list */}
+      {/* Posts Grid */}
       <div className="posts-grid">
         {filteredPosts.length === 0 ? (
           <div className="no-posts">
+            <div className="no-posts-icon">📭</div>
             <p>Không tìm thấy bài đăng nào phù hợp với bộ lọc của bạn.</p>
           </div>
         ) : (
@@ -223,49 +251,64 @@ const RoommatePosts: React.FC<RoommatePostsProps> = ({ onPostClick }) => {
               className="post-card"
               onClick={() => onPostClick && onPostClick(post)}
             >
-              <div className="post-header">
+              {/* Card Header */}
+              <div className="post-card-header">
+                <div className="post-avatar">
+                  {getGenderIcon(post.gender)}
+                </div>
                 <h3 className="post-title">{post.title}</h3>
                 <span className={`post-status ${post.status}`}>
-                  {post.status === 'active' ? 'Đang hoạt động' : 'Không hoạt động'}
+                  {post.status === 'active' ? '🟢 Đang tìm' : '⚫ Đã đóng'}
                 </span>
               </div>
 
-              <div className="post-details">
-                <div className="detail-row">
-                  <span className="detail-label">📍 Địa điểm:</span>
-                  <span className="detail-value">{post.location || 'Chưa cập nhật'}</span>
+              {/* Card Body */}
+              <div className="post-card-body">
+                <div className="post-info-grid">
+                  <div className="post-info-item">
+                    <div className="post-info-icon">📍</div>
+                    <div className="post-info-content">
+                      <span className="post-info-label">Địa điểm</span>
+                      <span className="post-info-value">{post.location || 'Chưa cập nhật'}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="post-info-item">
+                    <div className="post-info-icon">💰</div>
+                    <div className="post-info-content">
+                      <span className="post-info-label">Giá</span>
+                      <span className="post-info-value">{post.price || 'Thỏa thuận'}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="post-info-item">
+                    <div className="post-info-icon">🏠</div>
+                    <div className="post-info-content">
+                      <span className="post-info-label">Loại phòng</span>
+                      <span className="post-info-value">{post.roomType || 'Chưa cập nhật'}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="post-info-item">
+                    <div className="post-info-icon">👤</div>
+                    <div className="post-info-content">
+                      <span className="post-info-label">Giới tính</span>
+                      <span className="post-info-value">{post.gender || 'Không yêu cầu'}</span>
+                    </div>
+                  </div>
                 </div>
-                
-                <div className="detail-row">
-                  <span className="detail-label">💰 Giá:</span>
-                  <span className="detail-value">{post.price || 'Thỏa thuận'}</span>
-                </div>
-                
-                <div className="detail-row">
-                  <span className="detail-label">🏠 Loại phòng:</span>
-                  <span className="detail-value">{post.roomType || 'Chưa cập nhật'}</span>
-                </div>
-                
-                <div className="detail-row">
-                  <span className="detail-label">👤 Giới tính:</span>
-                  <span className="detail-value">{post.gender || 'Không phân biệt'}</span>
-                </div>
-                
-                <div className="detail-row">
-                  <span className="detail-label">📅 Độ tuổi:</span>
-                  <span className="detail-value">{post.age || 'Không yêu cầu'}</span>
-                </div>
-              </div>
 
-              <p className="post-description">{post.description}</p>
+                <p className="post-description">{post.description}</p>
 
-              <div className="post-footer">
-                <span className="post-date">
-                  Đăng ngày: {formatDate(post.createdAt)}
-                </span>
-                <button className="view-details-btn">
-                  Xem chi tiết
-                </button>
+                {/* Card Footer */}
+                <div className="post-card-footer">
+                  <span className="post-date">
+                    🕐 {formatDate(post.createdAt)}
+                  </span>
+                  <button className="view-details-btn">
+                    Xem chi tiết →
+                  </button>
+                </div>
               </div>
             </div>
           ))
