@@ -80,7 +80,7 @@ function generateSitemap() {
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://younghousehoalac.com/roommate-finder</loc>
+    <loc>https://younghousehoalac.com/about</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

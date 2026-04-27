@@ -37,7 +37,6 @@ npm run build
 
 ### Trang phụ (Priority 0.8)
 - System Home: `https://younghousehoalac.com/system-home`
-- Roommate Finder: `https://younghousehoalac.com/roommate-finder`
 - Contact: `https://younghousehoalac.com/contact`
 
 ### Trang phòng (Priority 0.7)

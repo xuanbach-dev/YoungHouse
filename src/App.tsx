@@ -13,8 +13,8 @@ const Home = React.lazy(() => import('./pages/Home'));
 const PostDetail = React.lazy(() => import('./pages/PostDetail'));
 const SystemHome = React.lazy(() => import('./pages/SystemHome'));
 const RoomDetail = React.lazy(() => import('./pages/RoomDetail'));
+const About = React.lazy(() => import('./pages/About'));
 const Contact = React.lazy(() => import('./pages/Contact'));
-const RoommateFinder = React.lazy(() => import('./pages/RoommateFinder'));
 const Admin = React.lazy(() => import('./pages/Admin'));
 
 function App() {
@@ -31,8 +31,8 @@ function App() {
               <Route path="/rooms/:id" element={<RoomDetail />} />
               <Route path="/room/:slug" element={<RoomDetail />} />
               <Route path="/posts/:id" element={<PostDetail />} />
+              <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/roommate-finder" element={<RoommateFinder />} />
               <Route path="/admin" element={<Admin />} />
               
               {/* Fallback */}

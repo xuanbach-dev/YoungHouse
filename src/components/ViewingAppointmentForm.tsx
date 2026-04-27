@@ -244,7 +244,7 @@ const ViewingAppointmentForm: React.FC<ViewingAppointmentFormProps> = ({
               <Calendar size={24} />
             </div>
             <div>
-              <h2>Đặt lịch xem phòng</h2>
+              <h2>Đặt lịch xem phòng miễn phí</h2>
               {room && (
                 <p className="room-info">
                   <MapPin size={16} />

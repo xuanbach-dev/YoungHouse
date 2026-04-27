@@ -47,8 +47,8 @@ const Footer: React.FC = () => {
             <ul className="footer-links">
               <li><Link to="/">Trang chủ</Link></li>
               <li><Link to="/system-home">Hệ thống nhà trọ</Link></li>
-              <li><Link to="/younghouse">Về Young House</Link></li>
-              <li><Link to="/profile">Liên hệ</Link></li>
+              <li><Link to="/about">Về chúng tôi</Link></li>
+              <li><Link to="/contact">Liên hệ</Link></li>
             </ul>
           </div>
 

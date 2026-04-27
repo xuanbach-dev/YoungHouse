@@ -30,19 +30,8 @@ const BottomNavbar: React.FC = () => {
       )
     },
     {
-      path: '/roommate-finder',
-      label: 'Tìm bạn',
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 7c0-2.21-1.79-4-4-4S8 4.79 8 7s1.79 4 4 4 4-1.79 4-4zm-4 6c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z" fill="currentColor"/>
-          <circle cx="18.5" cy="10.5" r="2.5" fill="currentColor"/>
-          <path d="M24 16v2h-3v-2c0-1.24-2.09-2.23-4.52-2.72C17.34 14.09 18 15.46 18 17v3h6v-3c0-.35-.07-.69-.18-1H24z" fill="currentColor"/>
-        </svg>
-      )
-    },
-    {
-      path: '/contact',
-      label: 'Liên hệ',
+      path: '/about',
+      label: 'Về chúng tôi',
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z" fill="currentColor"/>

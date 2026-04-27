@@ -503,6 +503,14 @@ const RoomDetail: React.FC = () => {
       />
       {/* Header */}
       <div className="room-detail-header">
+        <div className="room-breadcrumb">
+          <button type="button" className="crumb" onClick={() => navigate('/')}>Trang chủ</button>
+          <span className="sep">›</span>
+          <button type="button" className="crumb" onClick={() => navigate('/system-home')}>Tìm phòng trọ</button>
+          <span className="sep">›</span>
+          <span className="current">{(room.BranchName || (room as any).branchName || '').toUpperCase()}</span>
+        </div>
+
         <button onClick={() => navigate(-1)} className="back-button">
           <ArrowLeft size={20} />
           Quay lại
@@ -520,167 +528,122 @@ const RoomDetail: React.FC = () => {
 
       {/* Image Gallery */}
       <div className="room-images">
-        <div className="main-image-container">
-          {(() => {
-            const current = images[currentImageIndex] || '';
-            const useCloudinary = isCloudinaryConfigured();
-            
-            // Sử dụng Cloudinary nếu đã cấu hình
+        {(() => {
+          const useCloudinary = isCloudinaryConfigured();
+          const openAt = (index: number) => {
+            setCurrentImageIndex(index);
+            setShowImageModal(true);
+          };
+
+          const renderMain = (src: string, index: number) => {
+            if (!src) return null;
             if (useCloudinary) {
               return (
                 <img
-                  src={getCloudinaryUrl(current, { width: 1200, quality: 'auto:good' })}
+                  src={getCloudinaryUrl(src, { width: 1400, quality: 'auto:good' })}
                   alt={`${room.BranchName}`}
-                  className="main-image"
+                  className="gallery-main-image"
                   loading="eager"
                   decoding="async"
-                  onClick={() => setShowImageModal(true)}
+                  onClick={() => openAt(index)}
                   onError={(e) => {
-                    // Fallback to local image if Cloudinary fails
                     const img = e.currentTarget as HTMLImageElement;
-                    if (!img.src.startsWith(window.location.origin)) {
-                      img.src = current;
-                    }
+                    if (!img.src.startsWith(window.location.origin)) img.src = src;
                   }}
                 />
               );
             }
-            
-            // Fallback: sử dụng ảnh local với WebP
-            const isBranch6 = current.includes('/rooms/branch-6/');
+
+            const isBranch6 = src.includes('/rooms/branch-6/');
             if (isBranch6) {
               return (
                 <img
-                  src={current}
+                  src={src}
                   alt={`${room.BranchName}`}
-                  className="main-image"
+                  className="gallery-main-image"
                   loading="eager"
                   decoding="async"
-                  onClick={() => setShowImageModal(true)}
-                  onError={handleImageError(currentImageIndex)}
+                  onClick={() => openAt(index)}
+                  onError={handleImageError(index)}
                 />
               );
             }
-            const webp = current.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.webp';
+
+            const webp = src.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.webp';
             return (
               <picture>
                 <source srcSet={webp} type="image/webp" />
                 <img
-                  src={current}
+                  src={src}
                   alt={`${room.BranchName}`}
-                  className="main-image"
+                  className="gallery-main-image"
                   loading="eager"
                   decoding="async"
-                  onClick={() => setShowImageModal(true)}
-                  onError={handleImageError(currentImageIndex)}
+                  onClick={() => openAt(index)}
+                  onError={handleImageError(index)}
                 />
               </picture>
             );
-          })()}
+          };
 
-          {images.length > 1 && (
-            <>
-              <button className="image-nav prev" onClick={prevImage}>
-                <ChevronLeft size={24} />
-              </button>
-              <button className="image-nav next" onClick={nextImage}>
-                <ChevronRight size={24} />
-              </button>
+          const renderTile = (src: string, index: number, isLast: boolean) => {
+            const thumb = useCloudinary
+              ? getCloudinaryThumbnail(src, 400)
+              : src.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg';
 
-              <div className="image-indicators">
-                {images.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`indicator ${index === currentImageIndex ? 'active' : ''}`}
-                    onClick={() => setCurrentImageIndex(index)}
-                  />
-                ))}
+            const remaining = Math.max(0, images.length - 5);
+
+            return (
+              <button
+                key={index}
+                type="button"
+                className="gallery-tile"
+                onClick={() => openAt(index)}
+                aria-label={`Xem ảnh ${index + 1}`}
+              >
+                <img
+                  src={thumb}
+                  alt={`Ảnh ${index + 1}`}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    const img = e.currentTarget as HTMLImageElement;
+                    img.src = src;
+                  }}
+                />
+                {isLast && (
+                  <span className="gallery-view-all">
+                    <ZoomIn size={18} />
+                    <span>Xem tất cả ảnh</span>
+                    <span className="gallery-view-all__count">
+                      {remaining > 0 ? `+${remaining}` : images.length}
+                    </span>
+                  </span>
+                )}
+              </button>
+            );
+          };
+
+          const mainSrc = images[0] || images[currentImageIndex] || '';
+          const side = images.slice(1, 5); // 4 ảnh bên phải
+
+          return (
+            <div className="gallery-grid">
+              <div className="gallery-main">
+                {renderMain(mainSrc, mainSrc === images[0] ? 0 : currentImageIndex)}
+                <div className="gallery-badge" onClick={() => openAt(mainSrc === images[0] ? 0 : currentImageIndex)}>
+                  <ZoomIn size={18} />
+                  <span>Xem tất cả ảnh</span>
+                  <span className="gallery-badge__count">{images.length}</span>
+                </div>
               </div>
-            </>
-          )}
 
-          <div className="image-count">
-            {currentImageIndex + 1} / {images.length}
-          </div>
-
-          {/* Zoom indicator */}
-          <div className="zoom-indicator" onClick={() => setShowImageModal(true)}>
-            <ZoomIn size={20} />
-            <span>Xem chi tiết</span>
-          </div>
-        </div>
-
-        {/* Thumbnail Gallery */}
-        {images.length > 1 && (
-          <div className="thumbnail-gallery">
-            {images.map((image, index) => {
-              const useCloudinary = isCloudinaryConfigured();
-              
-              // Sử dụng Cloudinary thumbnail nếu đã cấu hình
-              if (useCloudinary) {
-                return (
-                  <img
-                    key={index}
-                    src={getCloudinaryThumbnail(image, 150)}
-                    alt={`Ảnh ${index + 1}`}
-                    className={`thumbnail ${index === currentImageIndex ? 'active' : ''}`}
-                    loading="lazy"
-                    onClick={() => setCurrentImageIndex(index)}
-                    onError={(e) => {
-                      // Fallback to local thumbnail
-                      const img = e.currentTarget as HTMLImageElement;
-                      const thumb = image.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg';
-                      img.src = thumb;
-                    }}
-                  />
-                );
-              }
-              
-              // Fallback: sử dụng ảnh local
-              const isBranch6 = image.includes('/rooms/branch-6/');
-              const thumb = image.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.thumb.jpg';
-              const webp = image.replace(/\.(jpg|JPG|png|PNG)$/, '') + '.webp';
-              if (isBranch6) {
-                return (
-                  <img
-                    key={index}
-                    src={thumb}
-                    alt={`Ảnh ${index + 1}`}
-                    className={`thumbnail ${index === currentImageIndex ? 'active' : ''}`}
-                    onClick={() => setCurrentImageIndex(index)}
-                    onError={(e) => {
-                      const img = e.currentTarget as HTMLImageElement;
-                      if (img.src.endsWith('.thumb.jpg')) {
-                        img.src = image;
-                      } else {
-                        img.src = image;
-                      }
-                    }}
-                  />
-                );
-              }
-              return (
-                <picture key={index}>
-                  <source srcSet={webp} type="image/webp" />
-                  <img
-                    src={thumb}
-                    alt={`Ảnh ${index + 1}`}
-                    className={`thumbnail ${index === currentImageIndex ? 'active' : ''}`}
-                    onClick={() => setCurrentImageIndex(index)}
-                    onError={(e) => {
-                      const img = e.currentTarget as HTMLImageElement;
-                      if (img.src.endsWith('.thumb.jpg')) {
-                        img.src = image;
-                      } else {
-                        img.src = webp;
-                      }
-                    }}
-                  />
-                </picture>
-              );
-            })}
-          </div>
-        )}
+              <div className="gallery-side" aria-hidden={side.length === 0}>
+                {side.map((src, i) => renderTile(src, i + 1, i === side.length - 1))}
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* Mobile Top Contact Card (shown under images on mobile) */}
@@ -701,7 +664,7 @@ const RoomDetail: React.FC = () => {
             onClick={() => setShowViewingAppointmentForm(true)}
           >
             <Calendar size={30} />
-            ĐẶT LỊCH XEM PHÒNG NGAY
+            ĐẶT LỊCH XEM PHÒNG MIỄN PHÍ NGAY
           </button>
         </div>
         <div className="contact-note">Hỗ trợ 24/7  (T2–CN)</div>
@@ -765,12 +728,10 @@ const RoomDetail: React.FC = () => {
 
           {/* Offers */}
           <div className="room-offers">
-            <h3>QUYỀN LỢI KHÁCH HÀNG MỚI 2025</h3>
+            <h3>QUYỀN LỢI KHÁCH HÀNG MỚI 2026</h3>
             <ul className="offers-list">
 
-              <li>Quà tặng : Tặng Voucher sử dụng 10 sản phẩm bất kì của Young Food & Drink (các món ăn Việt, các món Âu như Pizza, Mỳ Ý… Và các loại nước ép, trà sữa, sinh tố…).
-                Tại trụ sở địa điểm + Tặng 10 cốc nước/nước ép hoặc 01 bánh Pizza khi khách hàng tổ chức Sinh nhật tại Young Food & Drink.
-              </li>
+              
               <li>Chiết khấu : Giảm 4% tiền thuê nhà khi thanh toán 06 tháng, và giảm 8% tiền thuê nhà khi đóng 12 tháng… khi chuyển khoản trong 48h kể từ ngày kí hợp đồng.
                 Lưu ý: Số tiền giảm không bao gồm phí dịch vụ.</li>
             </ul>
@@ -1000,7 +961,7 @@ const RoomDetail: React.FC = () => {
                 onClick={() => setShowViewingAppointmentForm(true)}
               >
                 <Calendar size={30} />
-                ĐẶT LỊCH XEM PHÒNG NGAY
+                ĐẶT LỊCH XEM PHÒNG MIỄN PHÍ
               </button>
             </div>
             <div className="contact-note">Hỗ trợ 24/7  (T2–CN)</div>

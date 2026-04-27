@@ -112,7 +112,6 @@ POST https://script.google.com/macros/s/AKfycbw4Sl55z3F3OLd7pD0b7z4to3lqkmOwmLFe
 
 ### 1. Truy Cập Chức Năng
 - Vào menu "Tìm người ở ghép" trên navbar
-- Hoặc truy cập trực tiếp: `/roommate-finder`
 
 ### 2. Xem Danh Sách Bài Đăng
 - Mặc định hiển thị danh sách tất cả bài đăng

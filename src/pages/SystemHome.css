@@ -544,12 +544,25 @@
 /* Room Grid */
 .rooms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* Use fixed columns per breakpoint to avoid column "jumping" */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
 }
 
 .rooms-grid.list {
   grid-template-columns: 1fr;
+}
+
+@media (max-width: 1100px) {
+  .rooms-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .rooms-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .room-card {
@@ -576,13 +589,15 @@
   height: 200px;
   position: relative;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
 }
 
 .rooms-grid.list .room-image {
   height: 150px;
+}
+
+.room-image .optimized-room-image {
+  width: 100%;
 }
 
 .room-image img {

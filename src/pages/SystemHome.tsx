@@ -597,7 +597,7 @@ const SystemHome: React.FC = () => {
           <div className="breadcrumb">
             <span>Trang chủ</span>
             <span className="separator">&gt;</span>
-            <span>Kết quả tìm kiếm</span>
+            <span>Tìm phòng trọ</span>
           </div>
           
           <div className="search-bar">

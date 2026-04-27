@@ -64,8 +64,9 @@ const Navbar: React.FC = () => {
             <Link to="/system-home" className={`navbar-item ${isActivePath('/system-home') ? 'active' : ''}`}>
               <span>Hệ thống nhà trọ</span>
             </Link>
-            <Link to="/roommate-finder" className={`navbar-item ${isActivePath('/roommate-finder') ? 'active' : ''}`}>
-              <span>Tìm người ở ghép</span>
+
+            <Link to="/about" className={`navbar-item ${isActivePath('/about') ? 'active' : ''}`}>
+              <span>Về chúng tôi</span>
             </Link>
 
             <Link to="/contact" className={`navbar-item ${isActivePath('/contact') ? 'active' : ''}`}>

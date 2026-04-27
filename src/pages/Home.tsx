@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { postsAPI } from '../services/api';
 import { Post, Room } from '../types';
-import { Search, MapPin, Calendar, DollarSign, Eye, Loader2, Leaf, Lightbulb, Utensils, Shirt, Gift, Sofa, Briefcase, Bed, Shield, Building2, Users, MessageSquare, Headphones } from 'lucide-react';
+import { Search, MapPin, Calendar, DollarSign, Eye, Loader2, Leaf, Lightbulb, Utensils, Shirt, Gift, Sofa, Briefcase, Bed, Shield, Building2, Users, MessageSquare, Headphones, Sparkles, Clock, ArrowRight } from 'lucide-react';
 import ViewingAppointmentForm from '../components/ViewingAppointmentForm';
 import FAQ, { youngHouseFAQs } from '../components/FAQ';
 import OptimizedRoomImage from '../components/OptimizedRoomImage';
@@ -265,17 +265,27 @@ const Home: React.FC = () => {
       <div className="hero-section">
         <div className="hero-content">
           <div className="hero-text">
-           
-            <h2>YoungHouse Hoà Lạc</h2>
-            <h1 style={{color: '#2d7dd2'}}>"Hơn cả mái nhà - Đó là mái ấm"</h1>
-            <p>
-            Hãy đến để cảm nhận chất lượng và dịch vụ khác biệt cũng như trải nghiệm cơ hội việc làm tuyệt vời tại Young House các bạn nhé.
-
+            <div className="hero-kicker">YoungHouse Hoà Lạc</div>
+            <h1 className="hero-title">Hơn cả mái nhà – đó là mái ấm.</h1>
+            <p className="hero-desc">
+              Hệ thống nhà trọ tiện nghi, an ninh, vận hành chuyên nghiệp tại Hoà Lạc.
+              Tìm phòng nhanh, xem ảnh/video rõ ràng và đặt lịch xem phòng chỉ trong vài phút.
             </p>
-            <p className="hero-subtitle">
-            Young House - Hệ thống nhà cho thuê Lớn và Uy tín nhất Hòa Lạc ❤️
 
-            </p>
+            <div className="hero-actions">
+              <button type="button" className="hero-cta primary" onClick={() => navigate('/system-home')}>
+                Tìm phòng ngay
+              </button>
+              <button type="button" className="hero-cta secondary" onClick={() => navigate('/about')}>
+                Về chúng tôi
+              </button>
+            </div>
+
+            <div className="hero-highlights" aria-label="Điểm nổi bật">
+              <div className="highlight-item"><Shield size={18} />An ninh & vận hành</div>
+              <div className="highlight-item"><Building2 size={18} />Nhiều cơ sở nhất Hoà Lạc</div>
+              <div className="highlight-item"><Headphones size={18} />Hỗ trợ 24/7</div>
+            </div>
             
             <div className="search-form">
               <div className="search-field">
@@ -352,15 +362,6 @@ const Home: React.FC = () => {
                 <button 
                   className="reset-button" 
                   onClick={resetSearch}
-                  style={{ 
-                    marginLeft: '10px',
-                    padding: '10px 15px',
-                    background: '#6c757d',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer'
-                  }}
                 >
                   Xóa bộ lọc
                 </button>
@@ -374,12 +375,7 @@ const Home: React.FC = () => {
                 <img 
                   src="/logo.png" 
                   alt="Young House Logo"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    objectPosition: 'center'
-                  }}
+                  className="hero-logo"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                   }}
@@ -393,7 +389,7 @@ const Home: React.FC = () => {
       {/* Intro Video Section */}
       <div className="video-section">
         <div className="container">
-          <h2 className="video-title"></h2>
+          <h2 className="video-title">Video & hình ảnh thực tế</h2>
           <div className="video-wrapper">
             <iframe
               src="https://www.youtube.com/embed/-yjQ9VfJzBg?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1"
@@ -421,55 +417,6 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* Amenities Section */}
-      <div className="amenities-section">
-        <div className="container">
-          <h2 className="amenities-title">Không gian sống tiện nghi</h2>
-          <p className="amenities-subtitle">
-            Môi trường sống phát triển, văn minh, hiện đại làm nên tăng sống cho mỗi người thức 
-            hiện mọi mục tiêu các nhân trong cuộc sống. Hãy đến để cảm nhận chất lượng và dịch vụ khác biệt cũng như trải nghiệm cơ hội việc làm tuyệt vời tại Young House các bạn nhé.
-
-          </p>
-        </div>
-      </div>
-
-      {/* Values Section */}
-      <div className="values-section">
-        <div className="container">
-          <h2 className="values-title">Giá trị Young House</h2>
-          
-          <div className="values-grid">
-            <div className="value-item">
-              <div className="value-icon">
-                <Building2 size={32} />
-              </div>
-              <h3>Nhà trọ sáng, thoáng, kết cấu chắc chắn</h3>
-            </div>
-            
-            <div className="value-item">
-              <div className="value-icon">
-                <Users size={32} />
-              </div>
-              <h3>Phòng trọ tiện nghi, thiết kế tối giản</h3>
-            </div>
-            
-            <div className="value-item">
-              <div className="value-icon">
-                <MessageSquare size={32} />
-              </div>
-              <h3>Cộng đồng sinh viên FPT hoà đồng, năng động</h3>
-            </div>
-            
-            <div className="value-item">
-              <div className="value-icon">
-                <Headphones size={32} />
-              </div>
-              <h3>Quản lý hỗ trợ 24/7, luôn có mặt hỗ trợ cư dân Young House</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Search Results Section */}
       {hasSearched && (
         <div id="search-results" className="search-results-section">
@@ -477,30 +424,18 @@ const Home: React.FC = () => {
             <h2>
               Kết quả tìm kiếm 
               {searchResults.length > 0 && (
-                <span style={{ color: '#666', fontSize: '0.9em', fontWeight: 'normal' }}>
-                  ({searchResults.length} phòng)
-                </span>
+                <span className="home-results-count">({searchResults.length} phòng)</span>
               )}
             </h2>
             
             {error && (
-              <div style={{ 
-                color: '#dc3545', 
-                background: '#f8d7da', 
-                padding: '10px', 
-                borderRadius: '5px', 
-                marginBottom: '20px' 
-              }}>
+              <div className="home-inline-error">
                 {error}
               </div>
             )}
             
             {searchResults.length === 0 && !isSearching && !error && (
-              <div style={{ 
-                textAlign: 'center', 
-                padding: '40px', 
-                color: '#666' 
-              }}>
+              <div className="home-empty-state">
                 <p>Không tìm thấy phòng nào phù hợp với tiêu chí tìm kiếm.</p>
                 <p>Vui lòng thử điều chỉnh bộ lọc tìm kiếm.</p>
               </div>
@@ -519,15 +454,18 @@ const Home: React.FC = () => {
                       />
                     </div>
                     <div className="room-info">
-                      <h3>{room.BranchName}</h3>
+                      <div className="room-card-header">
+                        <h3 className="room-title">{room.BranchName}</h3>
+                        <div className="room-price-chip">
+                          <span className="label">Từ</span>
+                          <span className="value">{(room.Price ?? 0).toLocaleString('vi-VN')}đ</span>
+                          <span className="suffix">/tháng</span>
+                        </div>
+                      </div>
                       <p className="room-type">{room.TypeName}</p>
                       <p className="room-location">
                         <MapPin size={14} />
-                        {room.BranchName}
-                      </p>
-                      <p className="room-price">
-                        <DollarSign size={14} />
-                        Từ {room.Price?.toLocaleString('vi-VN')} VND/tháng
+                        {room.Address || room.address || room.BranchName}
                       </p>
                       <p className={`room-status ${(room.Status || '').toLowerCase()}`}>
                         Trạng thái: {
@@ -557,54 +495,60 @@ const Home: React.FC = () => {
         </div>
       )}
 
-      {/* Featured rooms from local */}
-      {!isLoading && !error && rooms.length > 0 && !hasSearched && (
-        <div className="featured-rooms">
-          <div className="container">
-            <h2>Phòng nổi bật</h2>
-            <div className="rooms-grid">
-              {rooms.slice(0, 6).map((room) => (
-                <div key={room.RoomID} className="room-card" onClick={() => {
-                  console.log('Navigating to room:', buildRoomSlug(room));
-                  window.location.href = `/room/${buildRoomSlug(room)}`;
-                }}>
-                  <div className="room-image">
-                    <OptimizedRoomImage
-                      src={getImagePath(room)}
-                      alt={room.BranchName || 'Phòng trọ'}
-                      fallbackText={room.BranchName}
-                      height="180px"
-                    />
-                  </div>
-                  <div className="room-info">
-                   
-                    
-                    <p className="room-location">
-                      <MapPin size={14} />
-                      {room.BranchName}
-                      <p className="room-type">{room.TypeName}</p>
-                      
-                    </p>
-                    <p className="room-price">
-                     
-                      Từ {room.Price?.toLocaleString('vi-VN')} VND/tháng
-                    </p>
-                    <div className="room-actions">
-                      <button 
-                        className="appointment-button"
-                        onClick={() => navigate(`/room/${buildRoomSlug(room)}`)}
-                      >
-                        <Eye size={16} />
-                        Xem chi tiết
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+      {/* Why Choose Section */}
+      <section className="why-section" aria-label="Vì sao chọn YoungHouse">
+        <div className="container">
+          <div className="section-header">
+            <h2>Vì sao chọn YoungHouse?</h2>
+            <p>Chúng tôi tập trung vào trải nghiệm ở ổn định, minh bạch và an tâm mỗi ngày.</p>
+          </div>
+
+          <div className="why-grid">
+            <div className="why-card">
+              <div className="why-icon"><Shield size={22} /></div>
+              <h3>An ninh & vận hành</h3>
+              <p>Khóa vân tay, camera, quy trình vận hành rõ ràng để bạn yên tâm.</p>
+            </div>
+            <div className="why-card">
+              <div className="why-icon"><Sparkles size={22} /></div>
+              <h3>Chất lượng dịch vụ</h3>
+              <p>Vận hành theo quy trình hệ thống, đảm bảo chất lượng dịch vụ cho khách hàng.</p>
+            </div>
+            <div className="why-card">
+              <div className="why-icon"><Building2 size={22} /></div>
+              <h3>Nhiều cơ sở nhất Hoà Lạc</h3>
+              <p>Gồm 15 cơ sở phân bố tại Tân Xã, Phú Hữu, Bình Yên… thuận tiện di chuyển.</p>
+            </div>
+            <div className="why-card">
+              <div className="why-icon"><Clock size={22} /></div>
+              <h3>Hỗ trợ nhanh</h3>
+              <p>Tư vấn và đặt lịch xem phòng nhanh chóng, hỗ trợ 24/7.</p>
             </div>
           </div>
         </div>
-      )}
+      </section>
+
+      {/* CTA Banner before FAQ */}
+      <section className="home-cta" aria-label="Kêu gọi hành động">
+        <div className="container">
+          <div className="home-cta__card">
+            <div className="home-cta__text">
+              <div className="home-cta__title">Sẵn sàng chọn phòng phù hợp?</div>
+              <div className="home-cta__desc">
+                Lọc theo khu vực, mức giá và tình trạng phòng. Xem ảnh/video rõ ràng trước khi đặt lịch.
+              </div>
+            </div>
+            <div className="home-cta__actions">
+              <button type="button" className="home-cta__btn primary" onClick={() => navigate('/system-home')}>
+                Tìm phòng ngay <ArrowRight size={18} />
+              </button>
+              <button type="button" className="home-cta__btn secondary" onClick={() => navigate('/contact')}>
+                Liên hệ tư vấn
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* FAQ Section with Schema Markup */}
       <div className="home-faq-section">
